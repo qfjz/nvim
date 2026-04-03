@@ -1,7 +1,8 @@
 local M = {}
 
 function M.config_files()
-    local rg_cmd = "rg --files --follow -g '!plugin/' -g '*.lua'"
+    -- local rg_cmd = "rg --files --follow -g '!plugin/' -g '*.lua'"
+    local rg_cmd = "fd -I -t f -H -g '*.lua' | xargs eza --sort=modified --reverse"
     local cwd_dir = vim.fn.stdpath("config")
     local prompt = " NvimConfig > "
     require"fzf-lua".files({
