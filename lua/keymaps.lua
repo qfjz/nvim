@@ -1,3 +1,4 @@
+-- keymap.lua
 vim.keymap.set({ 'n', 'i' }, '<esc>', '<cmd>nohl<cr><cmd>NoiceDismiss<cr><esc>', { silent = true, desc = "wyłącza wyróżnianie szukanego tekstu" })
 -- vim.keymap.set('i', 'kj', '<cmd>nohl<cr><cmd>NoiceDismiss<cr><esc>', { silent = true, desc = "wyłącza wyróżnianie szukanego tekstu" })
 vim.keymap.set('n', '<leader>w', [[<cmd>lua require('functions').write_file()<cr>]], { desc = 'zapisuje plik' })
@@ -20,13 +21,16 @@ vim.keymap.set("n", [[<s-enter>]], "mzO<esc>`z", { desc = "dodaje pustą linię 
 vim.keymap.set("n", [[<enter>]], "mzo<esc>`z", { desc = "dodaje pustą linię poniżej bieżącej" })
 vim.keymap.set({ 'n', 'v' }, 'gh', '0', { desc = "początek linii" })  -- ^
 vim.keymap.set({ 'n', 'v' }, 'gl', '$', { desc = "koniec linii" })    -- g_
-vim.keymap.set('n', '<tab>', '<C-^>', { desc = 'przełączanie się pomiędzy dwoma ostatnimi buforami' })
 vim.keymap.set("n", [[<c-h>]], [[<c-w><c-h>]], { desc = "przechodzi do okna po lewej" })
 vim.keymap.set("n", [[<c-l>]], [[<c-w><c-l>]], { desc = "przechodzi do okna po prawej" })
 vim.keymap.set("n", [[<c-j>]], [[<c-w><c-j>]], { desc = "przechodzi do okna niżej" })
 vim.keymap.set("n", [[<c-k>]], [[<c-w><c-k>]], { desc = "przechodzi do okna wyżej" })
+vim.keymap.set('n', '<tab>', '<C-^>', { desc = 'przełączanie się pomiędzy dwoma ostatnimi buforami' })
+vim.keymap.set("n", [[<s-tab>]], "<cmd>FzfLua buffers winopts.fullscreen=true<cr>", { desc = "pozwala wybrać bufor zlisty" })
+vim.keymap.set("n", [[<leader>b]], "<cmd>Neotree source=buffers reveal_force_cwd=true position=right action=focus toggle<cr>", { desc = "NeoTree otwarte bufory" })
 vim.keymap.set('n', 'H', '<cmd>bprevious<cr>', { desc = 'poprzedni bufor' })
 vim.keymap.set('n', 'L', '<cmd>bnext<cr>', { desc = 'następny bufor' })
+vim.keymap.set("n", [[<leader>o]], "<cmd>only<cr>", { desc = "pozostawia otwarte tylko aktywne okno" })
 vim.keymap.set({ 'n' }, 'gg', 'gg', { desc = 'początek pliku' })
 vim.keymap.set({ 'n' }, 'go', 'go', { desc = 'początek pliku' })
 vim.keymap.set({ 'n' }, 'G', 'G', { desc = 'koniec pliku' })
