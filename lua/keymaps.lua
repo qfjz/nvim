@@ -1,11 +1,93 @@
-map = vim.keymap.set
-map('n', '<leader>w', [[<cmd>lua require('functions').write_file()<cr>]], { desc = 'zapisuje plik' })
-map('n', '<localleader>r', '<cmd>restart<cr>', { desc = 'restart NVim' })
-map('n', [[<leader>v]], [[<cmd>lua require('functions').config_files()<cr>]])
+vim.keymap.set({ 'n', 'i' }, '<esc>', '<cmd>nohl<cr><cmd>NoiceDismiss<cr><esc>', { silent = true, desc = "wyłącza wyróżnianie szukanego tekstu" })
+-- vim.keymap.set('i', 'kj', '<cmd>nohl<cr><cmd>NoiceDismiss<cr><esc>', { silent = true, desc = "wyłącza wyróżnianie szukanego tekstu" })
+vim.keymap.set('n', '<leader>w', [[<cmd>lua require('functions').write_file()<cr>]], { desc = 'zapisuje plik' })
+vim.keymap.set("n", [[gf]], [[<cmd>edit <cfile><cr>]], { desc = "otwiera plik pod kursorem" })
+vim.keymap.set('n', '<localleader>r', '<cmd>restart<cr>', { desc = 'restart NVim' })
+vim.keymap.set('n', '<localleader>w', '<cmd>set wrap!<cr>', { desc = 'toggle wrap' })
+vim.keymap.set('n', '<localleader><localleader>', 'ciw', { desc = 'ciw' })
+vim.keymap.set('n', [[<leader>v]], [[<cmd>lua require('functions').config_files()<cr>]])
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
+vim.keymap.set('n', 'U', '<c-r>', { desc = 'redo' })
 -- zamiana zn / zm
+vim.keymap.set('n', 'qq', '<cmd>qa<cr>', { desc = 'wychodzi z nvim' })
 vim.keymap.set("n", "zn", "zm", { noremap = true })
 vim.keymap.set("n", "zm", "zn", { noremap = true })
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "J", "mzJ`z", { desc = "pozostawia kursor po łączeniu linii" })
+vim.keymap.set("n", [[<s-enter>]], "mzO<esc>`z", { desc = "dodaje pustą linię powyżej bieżącej" })
+vim.keymap.set("n", [[<enter>]], "mzo<esc>`z", { desc = "dodaje pustą linię poniżej bieżącej" })
+vim.keymap.set({ 'n', 'v' }, 'gh', '0', { desc = "początek linii" })  -- ^
+vim.keymap.set({ 'n', 'v' }, 'gl', '$', { desc = "koniec linii" })    -- g_
+vim.keymap.set('n', '<tab>', '<C-^>', { desc = 'przełączanie się pomiędzy dwoma ostatnimi buforami' })
+vim.keymap.set("n", [[<c-h>]], [[<c-w><c-h>]], { desc = "przechodzi do okna po lewej" })
+vim.keymap.set("n", [[<c-l>]], [[<c-w><c-l>]], { desc = "przechodzi do okna po prawej" })
+vim.keymap.set("n", [[<c-j>]], [[<c-w><c-j>]], { desc = "przechodzi do okna niżej" })
+vim.keymap.set("n", [[<c-k>]], [[<c-w><c-k>]], { desc = "przechodzi do okna wyżej" })
+vim.keymap.set('n', 'H', '<cmd>bprevious<cr>', { desc = 'poprzedni bufor' })
+vim.keymap.set('n', 'L', '<cmd>bnext<cr>', { desc = 'następny bufor' })
+vim.keymap.set({ 'n' }, 'gg', 'gg', { desc = 'początek pliku' })
+vim.keymap.set({ 'n' }, 'go', 'go', { desc = 'początek pliku' })
+vim.keymap.set({ 'n' }, 'G', 'G', { desc = 'koniec pliku' })
+vim.keymap.set({ 'n', 'v' }, ';', ':', { desc = 'tryb Command' })
+-- poruszanie się w trybie COMMAND
+vim.keymap.set('c', '<c-j>', '<down>')
+vim.keymap.set('c', '<c-k>', '<up>')
+vim.keymap.set('c', '<c-h>', '<left>')
+vim.keymap.set('c', '<c-l>', '<right>')
+-- QuickFix
+vim.keymap.set("n", [[<c-q>]], [[<cmd>copen<cr>]], { desc = "Otwiera listę quickfix" })
+vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Przechodzi do następnego elementu na liście quickfix" })
+vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Przechodzi do poprzedniego elementu na liście quickfix" })
+vim.keymap.set('n', 'mm', 'mm', { desc = 'ustawia znacznik m' })
+vim.keymap.set('n', 'M', '`m', { desc = 'przejście do znacznika m' })
+-- zmiana wielkości okna <shift-alt-h,j,k,l>
+vim.keymap.set("n", "<s-m-h>", "<cmd>vertical resize -2<cr>")
+vim.keymap.set("n", "<s-m-j>", "<cmd>resize +2<cr>")
+vim.keymap.set("n", "<s-m-k>", "<cmd>resize -2<cr>")
+vim.keymap.set("n", "<s-m-l>", "<cmd>vertical resize +2<cr>")
+vim.keymap.set("n", "<leader>sv", function()
+    local alt_buf = vim.fn.bufnr('#')
+    if alt_buf ~= -1 and vim.fn.buflisted(alt_buf) == 1 then
+        vim.cmd('vsplit #')
+    else
+        vim.cmd('vsplit')
+    end
+end, { silent = true, desc = "dzieli okno w pionie" })
+vim.keymap.set("n", "<leader>sp", function()
+    local alt_buf = vim.fn.bufnr('#')
+    if alt_buf ~= -1 and vim.fn.buflisted(alt_buf) == 1 then
+        vim.cmd('split #')
+    else
+        vim.cmd('split')
+    end
+end, { silent = true, desc = "dzieli okno w poziomie" })
+vim.keymap.set('i', '<cr>', function()
+    return vim.fn.pumvisible() == 1 and '<c-y>' or '<cr>'
+end, { expr = true, desc = 'potwierdź lub nowa linia' })
 -- tworzy nowy punkt undo po wprowadzeniu jednego ze znaków { " ", ".", ",", "!", "?" }
 for _, key in ipairs({ " ", ".", ",", "!", "?" }) do
-    map("i", key, key .. "<c-g>u", { silent = true })
+    vim.keymap.set("i", key, key .. "<c-g>u", { silent = true })
 end
+-- plugin flash.nvim wyszukiwanie za pomocą "s"
+vim.keymap.set({ "n", "o", "x" }, "s", function()
+    require("flash").jump({
+        search = {
+            -- forward = true,
+            wrap = true,
+            multi_window = false,
+            -- wyszukuje tylko początek wyrazu
+            mode = function(str)
+                return "\\<" .. str
+            end,
+        },
+    })
+end)
+-- plugin flash.nvim Remote Flash
+vim.keymap.set("o", "R", function()
+    require("flash").remote()
+end)
+vim.keymap.set({'o', 'n', 'x'}, 'S', function()
+    require('flash').treesitter()
+end)

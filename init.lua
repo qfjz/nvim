@@ -15,5 +15,6 @@ require('functions')
 
 require('config.oil')
 require('config.noice')
+require('config.flash')
 
 vim.cmd.colorscheme[[catppuccin-mocha]]
