@@ -11,7 +11,9 @@ require('options')
 require('pack-plugins')
 require('catppuccin-gruvbox')
 require('keymaps')
+require('functions')
 
-require('oil').setup()
+require('config.oil')
+require('config.noice')
 
 vim.cmd.colorscheme[[catppuccin-mocha]]
