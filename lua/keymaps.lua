@@ -1,6 +1,12 @@
 -- keymap.lua
+vim.keymap.set('n', '<leader>tn', '<cmd>enew<cr>', { desc = 'nowy bufor' })
+vim.keymap.set('n', '<leader>tf', [[<cmd>lua require('functions').f_terminal()<cr>]], { desc = 'terminal'})
+vim.keymap.set("n", "<leader>tT", [[<cmd>lua require('.functions').t_term()<cr>]], { desc = 'terminal'})
+vim.keymap.set("n", "<leader>tt", [[<cmd>lua require('.functions').terminal()<cr>]], { desc = 'terminal'})
 vim.keymap.set({ 'n', 'i' }, '<esc>', '<cmd>nohl<cr><cmd>NoiceDismiss<cr><esc>', { silent = true, desc = "wyłącza wyróżnianie szukanego tekstu" })
 -- vim.keymap.set('i', 'kj', '<cmd>nohl<cr><cmd>NoiceDismiss<cr><esc>', { silent = true, desc = "wyłącza wyróżnianie szukanego tekstu" })
+vim.keymap.set('n', [[']], '<cmd>FzfLua marks<cr>', { desc = 'marks' })
+vim.keymap.set('n', [["]], '<cmd>FzfLua registers<cr>', { desc = 'rejestry' })
 vim.keymap.set('n', '<leader>w', [[<cmd>lua require('functions').write_file()<cr>]], { desc = 'zapisuje plik' })
 vim.keymap.set("n", [[gf]], [[<cmd>edit <cfile><cr>]], { desc = "otwiera plik pod kursorem" })
 vim.keymap.set('n', '<localleader>r', '<cmd>restart<cr>', { desc = 'restart NVim' })
@@ -21,32 +27,29 @@ vim.keymap.set("n", [[<s-enter>]], "mzO<esc>`z", { desc = "dodaje pustą linię 
 vim.keymap.set("n", [[<enter>]], "mzo<esc>`z", { desc = "dodaje pustą linię poniżej bieżącej" })
 vim.keymap.set({ 'n', 'v' }, 'gh', '0', { desc = "początek linii" })  -- ^
 vim.keymap.set({ 'n', 'v' }, 'gl', '$', { desc = "koniec linii" })    -- g_
-vim.keymap.set("n", [[<c-h>]], [[<c-w><c-h>]], { desc = "przechodzi do okna po lewej" })
-vim.keymap.set("n", [[<c-l>]], [[<c-w><c-l>]], { desc = "przechodzi do okna po prawej" })
-vim.keymap.set("n", [[<c-j>]], [[<c-w><c-j>]], { desc = "przechodzi do okna niżej" })
-vim.keymap.set("n", [[<c-k>]], [[<c-w><c-k>]], { desc = "przechodzi do okna wyżej" })
 vim.keymap.set('n', '<tab>', '<C-^>', { desc = 'przełączanie się pomiędzy dwoma ostatnimi buforami' })
 vim.keymap.set("n", [[<s-tab>]], "<cmd>FzfLua buffers winopts.fullscreen=true<cr>", { desc = "pozwala wybrać bufor zlisty" })
 vim.keymap.set("n", [[<leader>b]], "<cmd>Neotree source=buffers reveal_force_cwd=true position=right action=focus toggle<cr>", { desc = "NeoTree otwarte bufory" })
 vim.keymap.set('n', 'H', '<cmd>bprevious<cr>', { desc = 'poprzedni bufor' })
 vim.keymap.set('n', 'L', '<cmd>bnext<cr>', { desc = 'następny bufor' })
-vim.keymap.set("n", [[<leader>o]], "<cmd>only<cr>", { desc = 'pozostawia otwarte tylko aktywne okno' })
 vim.keymap.set('n', [[<leader>d]], '<cmd>bdelete<cr>', { desc = 'usuwa bufor' })
+vim.keymap.set('n', [[<leader>c]], '<cmd>close<cr>', { desc = 'zamyka okno' })
+vim.keymap.set("n", [[<leader>o]], "<cmd>only<cr>", { desc = 'pozostawia otwarte tylko aktywne okno' })
 vim.keymap.set({ 'n' }, 'gg', 'gg', { desc = 'początek pliku' })
 vim.keymap.set({ 'n' }, 'go', 'go', { desc = 'początek pliku' })
 vim.keymap.set({ 'n' }, 'G', 'G', { desc = 'koniec pliku' })
 vim.keymap.set({ 'n', 'v' }, ';', ':', { desc = 'tryb Command' })
--- poruszanie się w trybie COMMAND
-vim.keymap.set('c', '<c-j>', '<down>')
-vim.keymap.set('c', '<c-k>', '<up>')
-vim.keymap.set('c', '<c-h>', '<left>')
-vim.keymap.set('c', '<c-l>', '<right>')
 -- QuickFix
 vim.keymap.set("n", [[<c-q>]], [[<cmd>copen<cr>]], { desc = "Otwiera listę quickfix" })
 vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Przechodzi do następnego elementu na liście quickfix" })
 vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Przechodzi do poprzedniego elementu na liście quickfix" })
 vim.keymap.set('n', 'mm', 'mm', { desc = 'ustawia znacznik m' })
 vim.keymap.set('n', 'M', '`m', { desc = 'przejście do znacznika m' })
+-- okna
+vim.keymap.set("n", [[<c-h>]], [[<c-w><c-h>]], { desc = "przechodzi do okna po lewej" })
+vim.keymap.set("n", [[<c-l>]], [[<c-w><c-l>]], { desc = "przechodzi do okna po prawej" })
+vim.keymap.set("n", [[<c-j>]], [[<c-w><c-j>]], { desc = "przechodzi do okna niżej" })
+vim.keymap.set("n", [[<c-k>]], [[<c-w><c-k>]], { desc = "przechodzi do okna wyżej" })
 -- zmiana wielkości okna <shift-alt-h,j,k,l>
 vim.keymap.set("n", "<s-m-h>", "<cmd>vertical resize -2<cr>")
 vim.keymap.set("n", "<s-m-j>", "<cmd>resize +2<cr>")
@@ -68,9 +71,6 @@ vim.keymap.set("n", "<leader>sp", function()
         vim.cmd('split')
     end
 end, { silent = true, desc = "dzieli okno w poziomie" })
-vim.keymap.set('i', '<cr>', function()
-    return vim.fn.pumvisible() == 1 and '<c-y>' or '<cr>'
-end, { expr = true, desc = 'potwierdź lub nowa linia' })
 -- tworzy nowy punkt undo po wprowadzeniu jednego ze znaków { " ", ".", ",", "!", "?" }
 for _, key in ipairs({ " ", ".", ",", "!", "?" }) do
     vim.keymap.set("i", key, key .. "<c-g>u", { silent = true })
@@ -96,3 +96,14 @@ end)
 vim.keymap.set({'o', 'n', 'x'}, 'S', function()
     require('flash').treesitter()
 end)
+-- Insert
+local auto_complete = require('functions').auto_complete()
+vim.keymap.set('i', '<c-Space>', auto_complete, { expr = true, desc = 'autouzupełnianie z bufora' })
+vim.keymap.set('i', '<cr>', function()
+    return vim.fn.pumvisible() == 1 and '<c-y>' or '<cr>'
+end, { expr = true, desc = 'potwierdź lub nowa linia' })
+-- poruszanie się w trybie COMMAND
+vim.keymap.set('c', '<c-j>', '<down>')
+vim.keymap.set('c', '<c-k>', '<up>')
+vim.keymap.set('c', '<c-h>', '<left>')
+vim.keymap.set('c', '<c-l>', '<right>')

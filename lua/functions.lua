@@ -104,4 +104,72 @@ function M.mk_dir()
     end
 end
 
+-- floating terminal
+function M.f_terminal(cmd)
+    local max_height = vim.api.nvim_win_get_height(0)
+    local max_width = vim.api.nvim_win_get_width(0)
+    local height = math.floor(max_height * 0.8)
+    local width = math.floor(max_width * 0.8)
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_open_win(buf, true, {
+        relative = 'editor',
+        height = height,
+        width = width,
+        col = (max_width - width) / 2,
+        row = (max_height - height) / 2,
+        style = 'minimal',
+        border = 'rounded',
+    })
+    vim.cmd.term(cmd or nil)
+    vim.cmd('startinsert')
+end
+
+function M.terminal()
+    vim.cmd.vnew()
+    vim.cmd.term()
+    vim.cmd.wincmd("J")
+    vim.cmd('startinsert')
+    vim.api.nvim_win_set_height(0, 9)
+end
+
+-- otwiera terminal podążając za linkiem symbolicznym otwartego pliku
+function M.t_term()
+    local file_path = vim.api.nvim_buf_get_name(0)
+    if file_path ~= "" then
+        local resolved_path = vim.fn.resolve(file_path)
+        local dir_path = vim.fn.fnamemodify(resolved_path, ":h")
+        vim.cmd("ToggleTerm dir=" .. dir_path)
+    else
+        print("brak pliku w bieżącym buforze")
+    end
+end
+
+-- wyświetla informacje o pliku
+function M.file_info()
+    local git_root = ''
+    local filename=vim.fn.resolve(vim.fn.expand("%:p"))
+    vim.fn.setreg([[*]], filename, 'c')
+    local result = vim.fn.system("git rev-parse --is-inside-work-tree")
+    if vim.v.shell_error == 0 and result:find("true") then
+        git_root = (vim.fn.system("git rev-parse --show-toplevel"))
+    end
+    local msg = ""
+    msg = msg .. filename .. "\nMod: " .. vim.fn.strftime("%F %T",vim.fn.getftime(filename)) .. "\nGit: "  .. git_root
+    vim.notify(msg, "info", {
+        timeout = 6000,
+        title = "Informacje o pliku",
+    })
+end
+
+-- funkcja do wywoływania autouzupełniania
+function M.auto_complete()
+    if vim.fn.pumvisible() == 1 then
+        return vim.api.nvim_replace_termcodes('<C-n>', true, false, true)
+    elseif vim.fn.match(vim.fn.getline('.'), '\\w\\+$') >= 0 then
+        return vim.api.nvim_replace_termcodes('<C-x><C-n>', true, false, true)
+    else
+        return vim.api.nvim_replace_termcodes('<C-n>', true, false, true)
+    end
+end
+
 return M

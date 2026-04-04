@@ -16,5 +16,8 @@ require('functions')
 require('config.oil')
 require('config.noice')
 require('config.flash')
+require('config.gitsigns')
+
+require('toggleterm').setup()
 
 vim.cmd.colorscheme[[catppuccin-mocha]]
