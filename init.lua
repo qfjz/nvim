@@ -24,6 +24,7 @@ require('config.noice')
 require('config.flash')
 require('config.gitsigns')
 require('config.blink')
+require('config.lualine')
 
 require('toggleterm').setup()
 
