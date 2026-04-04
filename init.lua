@@ -9,8 +9,8 @@ vim.g.maplocalleader = ","
 
 -- config.WinBar
 vim.g.projects_dir = vim.env.HOME .. '/workspace/git'
-vim.g.personal_projects_dir = vim.g.projects_dir .. '/github'
-vim.g.work_projects_dir = vim.env.HOME .. '/workspace/git/qfjz'
+vim.g.personal_projects_dir = vim.g.projects_dir .. 'qfjz'
+vim.g.work_projects_dir = vim.env.HOME .. '/workspace/git/work'
 
 require('options')
 require('pack-plugins')
