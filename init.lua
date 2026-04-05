@@ -25,7 +25,10 @@ require('config.flash')
 require('config.gitsigns')
 require('config.blink')
 require('config.lualine')
+require('config.lsp')
 
 require('toggleterm').setup()
+require('mason').setup()
+require('nvim-treesitter').setup()
 
 vim.cmd.colorscheme[[catppuccin-mocha]]

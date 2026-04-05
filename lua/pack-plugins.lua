@@ -1,4 +1,5 @@
 vim.pack.add({
+    { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
     { src = 'https://github.com/folke/flash.nvim' },
     { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
     { src = 'https://github.com/stevearc/oil.nvim' },
@@ -15,5 +16,7 @@ vim.pack.add({
     { src = 'https://github.com/L3MON4D3/LuaSnip' },
     { src = 'https://github.com/neovim/nvim-lspconfig' },
     { src = "https://github.com/mason-org/mason.nvim" },
+    { src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
+    { src = 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' },
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
 })
