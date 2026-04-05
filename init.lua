@@ -26,6 +26,7 @@ require('config.gitsigns')
 require('config.blink')
 require('config.lualine')
 require('config.lsp')
+require('config.autopairs')
 
 require('toggleterm').setup()
 require('mason').setup()

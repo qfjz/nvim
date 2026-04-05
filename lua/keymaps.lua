@@ -1,4 +1,5 @@
 -- keymap.lua
+vim.keymap.set("n", [[<leader>n]], function() vim.cmd[[Neotree reveal_force_cwd toggle]] end, { desc = "Neotree" })
 vim.keymap.set('n', '<leader>tn', '<cmd>enew<cr>', { desc = 'nowy bufor' })
 vim.keymap.set('n', '<leader>tf', [[<cmd>lua require('functions').f_terminal()<cr>]], { desc = 'terminal'})
 vim.keymap.set("n", "<leader>tT", [[<cmd>lua require('.functions').t_term()<cr>]], { desc = 'terminal'})
