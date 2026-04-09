@@ -14,9 +14,11 @@ autocmd({ "RecordingLeave", }, {
     end,
 })
 
-autocmd({ "FileType", "BufEnter" }, {
+autocmd("FileType", {
     pattern = "oil",
     callback = function()
-        vim.opt.number = false
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
+        vim.opt_local.signcolumn = "no"
     end,
 })

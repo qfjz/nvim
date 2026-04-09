@@ -172,4 +172,45 @@ function M.auto_complete()
     end
 end
 
+-- live grep
+function M.live_grep()
+    local filename = vim.api.nvim_buf_get_name(0)
+    local cwd = nil
+    local prompt = " Grep > "
+    local rg_cmd = "rg --line-number --column --multiline"
+    if filename and filename ~= "" then
+        cwd = vim.uv.fs_realpath(filename)
+        if cwd then
+            cwd = vim.fn.fnamemodify(cwd, ":h")
+        end
+    end
+    if not cwd or cwd == "" then
+        cwd = vim.fn.getcwd()
+        print("Brak ścieżki pliku, używam bieżącego katalogu: " .. cwd)
+    end
+    require"fzf-lua".live_grep({
+        prompt = prompt,
+        cwd = cwd,
+        cmd = rg_cmd,
+        winopts = {
+            fullscreen = true,
+            title = " Grep "
+        }
+    })
+end
+
+function M.fzf_files()
+    local rg_cmd = "rg --files --hidden --follow"
+    require"fzf-lua".files({
+        cmd = rg_cmd,
+        winopts = {
+            preview = { hidden = "nohidden" },
+            title = " Wyszukiwarka plików ",
+            fullscreen = true,
+        },
+        -- wyszukuje dokładnie tego co wprowadzimy w prompt
+        fzf_opts = { ['--exact'] = '', ['--no-sort'] = '' },
+    })
+end
+
 return M

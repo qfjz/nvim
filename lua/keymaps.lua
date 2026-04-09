@@ -1,4 +1,8 @@
 -- keymap.lua
+vim.keymap.set('n', '<leader>tg', [[<cmd>lua require('functions').live_grep()<cr>]], { desc = 'Live Grep' })
+vim.keymap.set('n', '<leader>th', '<cmd>FzfLua helptags<cr>', { desc = 'Pomoc' })
+vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "Menadżer plików Oil" })
+vim.keymap.set('n', '<leader>f', [[<cmd>lua require('functions').fzf_files()<cr>]], { desc = 'FZF Files' })
 vim.keymap.set('n', '<leader>if', [[<cmd>lua require('functions').file_info()<cr>]], { desc = 'FileInfo'})
 vim.keymap.set("n", [[<leader>n]], function() vim.cmd[[Neotree reveal_force_cwd toggle]] end, { desc = "Neotree" })
 -- Otwiera Neotree podążając za linkiem symbolicznym
