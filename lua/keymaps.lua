@@ -1,5 +1,17 @@
 -- keymap.lua
+vim.keymap.set('n', '<leader>if', [[<cmd>lua require('functions').file_info()<cr>]], { desc = 'FileInfo'})
 vim.keymap.set("n", [[<leader>n]], function() vim.cmd[[Neotree reveal_force_cwd toggle]] end, { desc = "Neotree" })
+-- Otwiera Neotree podążając za linkiem symbolicznym
+vim.keymap.set("n", [[<leader>N]], function()
+    local file_path = vim.api.nvim_buf_get_name(0)
+    if file_path ~= "" then
+        local resolved_path = vim.fn.resolve(file_path)
+        local dir_path = vim.fn.fnamemodify(resolved_path, ":h")
+        vim.cmd("Neotree dir=" .. dir_path .. " toggle")
+    else
+        print("Brak pliku w bieżącym buforze")
+    end
+end, { desc = 'Neotree (resolve symlink)' })
 vim.keymap.set('n', '<leader>tn', '<cmd>enew<cr>', { desc = 'nowy bufor' })
 vim.keymap.set('n', '<leader>tf', [[<cmd>lua require('functions').f_terminal()<cr>]], { desc = 'terminal'})
 vim.keymap.set("n", "<leader>tT", [[<cmd>lua require('.functions').t_term()<cr>]], { desc = 'terminal'})

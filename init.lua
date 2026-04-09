@@ -18,6 +18,7 @@ require('catppuccin-gruvbox')
 require('keymaps')
 require('functions')
 require('winbar')
+require('autocmd')
 
 require('config.oil')
 require('config.noice')
