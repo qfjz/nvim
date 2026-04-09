@@ -6,6 +6,7 @@ vim.pack.add({
     { src = 'https://github.com/nvim-neo-tree/neo-tree.nvim' },
     { src = "https://github.com/ibhagwan/fzf-lua" },
     { src = "https://github.com/folke/noice.nvim" },
+    { src = "https://github.com/NvChad/showkeys" },
     { src = "https://github.com/windwp/nvim-autopairs" },
     { src = "https://github.com/MunifTanjim/nui.nvim" },
     { src = "https://github.com/nvim-lua/plenary.nvim" },
@@ -21,3 +22,11 @@ vim.pack.add({
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
     { src = "https://github.com/windwp/nvim-autopairs" },
 })
+
+local enable_which_key = vim.env.NVIM_WK == "1"
+if enable_which_key then
+  vim.pack.add({
+    { src = "https://github.com/folke/which-key.nvim" },
+  })
+  require("which-key").setup()
+end

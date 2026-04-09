@@ -25,7 +25,7 @@ vim.keymap.set("n", [[gf]], [[<cmd>edit <cfile><cr>]], { desc = "otwiera plik po
 vim.keymap.set('n', '<localleader>r', '<cmd>restart<cr>', { desc = 'restart NVim' })
 vim.keymap.set('n', '<localleader>w', '<cmd>set wrap!<cr>', { desc = 'toggle wrap' })
 vim.keymap.set('n', '<localleader><localleader>', 'ciw', { desc = 'ciw' })
-vim.keymap.set('n', [[<leader>v]], [[<cmd>lua require('functions').config_files()<cr>]])
+vim.keymap.set('n', [[<leader>v]], [[<cmd>lua require('functions').config_files()<cr>]], { desc = 'nvim configs' })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 vim.keymap.set('n', 'U', '<c-r>', { desc = 'redo' })
