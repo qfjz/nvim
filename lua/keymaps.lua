@@ -1,4 +1,17 @@
 -- keymap.lua
+vim.keymap.set('n', '<leader>ts0', '<cmd>set scrolloff=0<cr>', { desc = "Scrolloff 0" })
+vim.keymap.set('n', '<leader>ts3', '<cmd>set scrolloff=3<cr>', { desc = "Scrolloff 3" })
+vim.keymap.set('n', '<leader>ts9', '<cmd>set scrolloff=999<cr>', { desc = "Scrolloff 999" })
+-- kiedy przeszukujemy historię komend, to możemy szybko zatwierdzić komendę za pomocą Ctrl-;
+vim.keymap.set('c', '<c-;>', [[<cr>]])
+vim.keymap.set('n', '<leader>s.', function()
+    require('fzf-lua').oldfiles({
+        winopts = {
+            preview = { hidden = 'nohidden' },
+            fullscreen = true,
+        },
+    })
+end, { desc = 'ostatnio edytowane pliki' })
 vim.keymap.set("v", [[<enter>]], "ygv<esc>", { desc = "Kopiuje zaznaczony tekst" })
 -- vim.keymap.set('v', '<cr>', '"+y', { noremap = true, silent = true })
 vim.keymap.set("n", "yA", "<cmd>%yank<cr>", { desc = "Kopiuje całą zawartość pliku do rejestru" })
