@@ -1,4 +1,8 @@
 -- keymap.lua
+vim.keymap.set("v", [[//]], [[y/\V<C-r>=escape(@",'/\')<CR><CR>]], {
+    silent = true,
+    desc = "wyszukuje zaznaczonego tekstu"
+})
 vim.keymap.set('n', '<leader>ts0', '<cmd>set scrolloff=0<cr>', { desc = "Scrolloff 0" })
 vim.keymap.set('n', '<leader>ts3', '<cmd>set scrolloff=3<cr>', { desc = "Scrolloff 3" })
 vim.keymap.set('n', '<leader>ts9', '<cmd>set scrolloff=999<cr>', { desc = "Scrolloff 999" })
