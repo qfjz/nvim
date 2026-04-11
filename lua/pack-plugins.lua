@@ -34,12 +34,13 @@ vim.pack.add({
     { src = 'https://github.com/sainnhe/sonokai' },
     { src = 'https://github.com/AlexvZyl/nordic.nvim' },
     { src = 'https://github.com/ribru17/bamboo.nvim' },
+    { src = 'https://github.com/maxmx03/solarized.nvim' },
 })
 
 local enable_which_key = vim.env.NVIM_WK == "1"
 if enable_which_key then
-  vim.pack.add({
-    { src = "https://github.com/folke/which-key.nvim" },
-  })
-  require("which-key").setup()
+    vim.pack.add({
+        { src = "https://github.com/folke/which-key.nvim" },
+    })
+    require("which-key").setup()
 end
