@@ -20,6 +20,7 @@ vim.pack.add({
     { src = 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' },
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
     { src = "https://github.com/windwp/nvim-autopairs" },
+    { src = 'https://github.com/romgrk/barbar.nvim' },
 })
 
 -- kolory
@@ -32,6 +33,7 @@ vim.pack.add({
     { src = 'https://github.com/neanias/everforest-nvim' },
     { src = 'https://github.com/sainnhe/sonokai' },
     { src = 'https://github.com/AlexvZyl/nordic.nvim' },
+    { src = 'https://github.com/ribru17/bamboo.nvim' },
 })
 
 local enable_which_key = vim.env.NVIM_WK == "1"
