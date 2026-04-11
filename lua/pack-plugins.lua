@@ -1,7 +1,6 @@
 vim.pack.add({
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
     { src = 'https://github.com/folke/flash.nvim' },
-    { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
     { src = 'https://github.com/stevearc/oil.nvim' },
     { src = 'https://github.com/nvim-neo-tree/neo-tree.nvim' },
     { src = "https://github.com/ibhagwan/fzf-lua" },
@@ -21,6 +20,18 @@ vim.pack.add({
     { src = 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' },
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
     { src = "https://github.com/windwp/nvim-autopairs" },
+})
+
+-- kolory
+vim.pack.add({
+    { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
+    { src = 'https://github.com/folke/tokyonight.nvim' },
+    { src = 'https://github.com/rebelot/kanagawa.nvim' },
+    { src = 'https://github.com/rose-pine/neovim', name = 'rose-pine' },
+    { src = 'https://github.com/EdenEast/nightfox.nvim' },
+    { src = 'https://github.com/neanias/everforest-nvim' },
+    { src = 'https://github.com/sainnhe/sonokai' },
+    { src = 'https://github.com/AlexvZyl/nordic.nvim' },
 })
 
 local enable_which_key = vim.env.NVIM_WK == "1"
