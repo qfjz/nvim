@@ -2,7 +2,6 @@
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
-local api = vim.api
 
 autocmd({ "RecordingLeave", }, {
     group = augroup("NotifyMacroStop", { clear = true }),
@@ -15,7 +14,7 @@ autocmd({ "RecordingLeave", }, {
 })
 
 autocmd("FileType", {
-    pattern = "oil",
+    pattern = { 'oil', 'nvim-undotree' },
     callback = function()
         vim.opt_local.number = false
         vim.opt_local.relativenumber = false
