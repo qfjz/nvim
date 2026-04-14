@@ -213,4 +213,43 @@ function M.fzf_files()
     })
 end
 
+function M.create_floating_scratch(content)
+    -- Get editor dimensions
+    local width = vim.api.nvim_get_option_value("columns", {})
+    local height = vim.api.nvim_get_option_value("lines", {})
+    -- Calculate the floating window size
+    local win_height = math.ceil(height * 0.8) + 2 -- Adding 2 for the border
+    local win_width = math.ceil(width * 0.8) + 2 -- Adding 2 for the border
+    -- Calculate window's starting position
+    local row = math.ceil((height - win_height) / 2)
+    local col = math.ceil((width - win_width) / 2)
+    -- Create a buffer and set it as a scratch buffer
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_set_option_value("buftype", "nofile", { buf = buf })
+    vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf })
+    vim.api.nvim_set_option_value("filetype", "sh", { buf = buf })
+    -- Create the floating window with a border and set some options
+    local win = vim.api.nvim_open_win(buf, true, {
+        relative = "editor",
+        row = row,
+        col = col,
+        width = win_width,
+        height = win_height,
+        border = "single", -- You can also use 'double', 'rounded', or 'solid'
+    })
+    -- Check if we've got content to populate the buffer with
+    if content then
+        vim.api.nvim_buf_set_lines(buf, 0, -1, true, content)
+    else
+        vim.api.nvim_buf_set_lines(buf, 0, -1, true, { "This is a scratch buffer in a floating window." })
+    end
+    vim.api.nvim_set_option_value("wrap", false, { scope = "local", win = win })
+    vim.api.nvim_set_option_value("number", false, { scope = "local", win = win })
+    vim.api.nvim_set_option_value("cursorline", false, { scope = "local", win = win })
+    -- Map 'q' to close the buffer in this window
+    vim.api.nvim_buf_set_keymap(buf, "n", "q", ":q!<CR>", { nowait = true, noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(buf, "n", "d", "<c-d>", { nowait = true, noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(buf, "n", "u", "<c-u>", { nowait = true, noremap = true, silent = true })
+end
+
 return M
