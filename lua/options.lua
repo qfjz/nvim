@@ -29,6 +29,7 @@ vim.opt.breakindent = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.winborder = 'rounded'
+vim.opt.laststatus = 3
 local patterns = {
     "*/.git/*",
     "*/.DS_Store",
