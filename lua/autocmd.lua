@@ -86,3 +86,17 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.cmd.wincmd("=")
     end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("help_shortcuts", { clear = true }),
+    desc = "Help Shortcuts",
+    pattern = {
+        "help",
+    },
+    callback = function(args)
+        vim.keymap.set("n", "d", "<c-d>", { nowait = true, buffer = args.buf })
+        vim.keymap.set("n", "u", "<c-u>", { nowait = true, buffer = args.buf })
+        vim.api.nvim_buf_set_keymap(0, "n", "<leader>l", "<c-]>", { noremap = true })
+        vim.api.nvim_buf_set_keymap(0, "n", "<leader>h", "<c-t>", { noremap = true })
+    end,
+})
