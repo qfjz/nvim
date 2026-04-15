@@ -1,7 +1,7 @@
 -- keymap.lua
 vim.keymap.set('v', [[//]], [[y/\V<C-r>=escape(@",'/\')<CR><CR>]], {
     silent = true,
-    desc = 'wyszukuje zaznaczonego tekstu'
+    desc = '// - wyszukuje zaznaczonego tekstu'
 })
 vim.keymap.set('n', '<leader>ts0', '<cmd>set scrolloff=0<cr>', { desc = 'Scrolloff 0' })
 vim.keymap.set('n', '<leader>ts3', '<cmd>set scrolloff=3<cr>', { desc = 'Scrolloff 3' })
@@ -60,6 +60,9 @@ vim.keymap.set("n", [[gf]], [[<cmd>edit <cfile><cr>]], { desc = "otwiera plik po
 vim.keymap.set('n', '<localleader>r', '<cmd>restart<cr>', { desc = 'restart NVim' })
 vim.keymap.set('n', '<localleader>w', '<cmd>set wrap!<cr>', { desc = 'toggle wrap' })
 vim.keymap.set('n', '<localleader><localleader>', 'ciw', { desc = 'ciw' })
+vim.keymap.set('n', '<localleader>c', 'ciw', { desc = 'ciw' })
+vim.keymap.set('n', '<localleader>d', 'diw', { desc = 'diw' })
+vim.keymap.set('n', '<localleader>y', 'yiw', { desc = 'yiw' })
 vim.keymap.set('n', [[<leader>v]], [[<cmd>lua require('functions').config_files()<cr>]], { desc = 'nvim configs' })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
@@ -160,3 +163,7 @@ vim.keymap.set('t', [[<c-h>]], [[<c-\><c-n><c-w>h]])
 vim.keymap.set('t', [[<c-j>]], [[<c-\><c-n><c-w>j]])
 vim.keymap.set('t', [[<c-k>]], [[<c-\><c-n><c-w>k]])
 vim.keymap.set('t', [[<c-l>]], [[<c-\><c-n><c-w>l]])
+--  QuickFix
+vim.keymap.set('n', [[<c-q>]], [[<cmd>copen<cr>]], { desc = 'Otwiera listę quickfix' })
+vim.keymap.set('n', ']q', vim.cmd.cnext, { desc = 'Przechodzi do następnego elementu na liście quickfix' })
+vim.keymap.set('n', '[q', vim.cmd.cprev, { desc = 'Przechodzi do poprzedniego elementu na liście quickfix' })
