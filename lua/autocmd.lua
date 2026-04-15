@@ -53,3 +53,27 @@ autocmd('FileType', {
         vim.keymap.set('n', 'q', '<cmd>bd!<cr>', { nowait = true, buffer = event.buf, silent = true })
     end,
 })
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+    desc = 'Wyróżnia skopiowany tekst',
+    group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+    callback = function()
+        vim.highlight.on_yank({
+            higroup = "IncSearch",  -- :h highlight-groups
+            timeout = 100,
+        })
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("vertical_help", { clear = true }),
+    desc = "Vertial Help",
+    pattern = {
+        "help",
+    },
+    callback = function()
+        vim.bo.bufhidden = "unload"
+        vim.cmd.wincmd("L")
+        vim.cmd.wincmd("=")
+    end,
+})

@@ -38,3 +38,9 @@ vim.cmd.packadd[[nvim.difftool]]
 vim.cmd.packadd[[nvim.undotree]]
 
 vim.cmd.colorscheme[[catppuccin-mocha]]
+
+-- source ~/.config/nvim/lua/user-settings.lua
+local status_ok, _ = pcall(require, "user-settings")
+if not status_ok then
+    return
+end
