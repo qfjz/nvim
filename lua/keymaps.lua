@@ -155,3 +155,8 @@ vim.keymap.set('c', '<c-j>', '<down>')
 vim.keymap.set('c', '<c-k>', '<up>')
 vim.keymap.set('c', '<c-h>', '<left>')
 vim.keymap.set('c', '<c-l>', '<right>')
+-- terminal
+vim.keymap.set('t', [[<c-h>]], [[<c-\><c-n><c-w>h]])
+vim.keymap.set('t', [[<c-j>]], [[<c-\><c-n><c-w>j]])
+vim.keymap.set('t', [[<c-k>]], [[<c-\><c-n><c-w>k]])
+vim.keymap.set('t', [[<c-l>]], [[<c-\><c-n><c-w>l]])
