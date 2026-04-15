@@ -3,6 +3,15 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
+-- wyłącza parametry `cro`, nie wstawia automatycznie komentarza w kolejnej linii
+vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+    pattern = "*",
+    callback = function()
+        vim.cmd[[setlocal formatoptions-=cro]]
+        vim.cmd[[checktime]]
+    end,
+})
+
 autocmd({ "RecordingLeave", }, {
     group = augroup("NotifyMacroStop", { clear = true }),
     callback = function()
