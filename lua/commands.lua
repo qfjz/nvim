@@ -24,3 +24,8 @@ vim.api.nvim_create_user_command("Scratch", function()
     end
     vim.cmd[[startinsert]]
 end, { desc = 'Open a scratch buffer', nargs = 0 })
+
+vim.api.nvim_create_user_command("CopyFileName", function()
+    Filename=vim.fn.resolve(vim.fn.expand("%:p"))
+    vim.fn.setreg([["]], Filename, '')
+end, { desc = 'Kopiuje pełną ścieżkę i nazwę pliku' })

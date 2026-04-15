@@ -1,11 +1,11 @@
 -- keymap.lua
-vim.keymap.set("v", [[//]], [[y/\V<C-r>=escape(@",'/\')<CR><CR>]], {
+vim.keymap.set('v', [[//]], [[y/\V<C-r>=escape(@",'/\')<CR><CR>]], {
     silent = true,
-    desc = "wyszukuje zaznaczonego tekstu"
+    desc = 'wyszukuje zaznaczonego tekstu'
 })
-vim.keymap.set('n', '<leader>ts0', '<cmd>set scrolloff=0<cr>', { desc = "Scrolloff 0" })
-vim.keymap.set('n', '<leader>ts3', '<cmd>set scrolloff=3<cr>', { desc = "Scrolloff 3" })
-vim.keymap.set('n', '<leader>ts9', '<cmd>set scrolloff=999<cr>', { desc = "Scrolloff 999" })
+vim.keymap.set('n', '<leader>ts0', '<cmd>set scrolloff=0<cr>', { desc = 'Scrolloff 0' })
+vim.keymap.set('n', '<leader>ts3', '<cmd>set scrolloff=3<cr>', { desc = 'Scrolloff 3' })
+vim.keymap.set('n', '<leader>ts9', '<cmd>set scrolloff=999<cr>', { desc = 'Scrolloff 999' })
 -- kiedy przeszukujemy historię komend, to możemy szybko zatwierdzić komendę za pomocą Ctrl-;
 vim.keymap.set('c', '<c-;>', [[<cr>]])
 vim.keymap.set('n', '<leader>s.', function()
@@ -16,12 +16,12 @@ vim.keymap.set('n', '<leader>s.', function()
         },
     })
 end, { desc = 'ostatnio edytowane pliki' })
-vim.keymap.set("v", [[<enter>]], "ygv<esc>", { desc = "Kopiuje zaznaczony tekst" })
+vim.keymap.set('v', [[<enter>]], 'ygv<esc>', { desc = 'Kopiuje zaznaczony tekst' })
 -- vim.keymap.set('v', '<cr>', '"+y', { noremap = true, silent = true })
-vim.keymap.set("n", "yA", "<cmd>%yank<cr>", { desc = "Kopiuje całą zawartość pliku do rejestru" })
-vim.keymap.set("n", "dA", "<cmd>%delete<cr>", { desc = "Usuwa całą zawartość pliku" })
-vim.keymap.set("n", [[dh]], "xd0", { desc = "Usuwa od kursora do początku linii" })
-vim.keymap.set("n", [[dl]], "d$", { desc = "Usuwa od kursora do końca linii" })
+vim.keymap.set('n', 'yA', '<cmd>%yank<cr>', { desc = 'Kopiuje całą zawartość pliku do rejestru' })
+vim.keymap.set('n', 'dA', '<cmd>%delete<cr>', { desc = 'Usuwa całą zawartość pliku' })
+vim.keymap.set('n', [[dh]], 'xd0', { desc = 'Usuwa od kursora do początku linii' })
+vim.keymap.set('n', [[dl]], 'd$', { desc = 'Usuwa od kursora do końca linii' })
 vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y', { desc = 'kopiuje do rejestru "+"' })
 vim.keymap.set({ 'n', 'x' }, '<leader>p', '"+p')
 vim.keymap.set({ 'n', 'x' }, '<leader>P', '"+P')
@@ -94,31 +94,31 @@ vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Przechodzi do poprzedniego el
 vim.keymap.set('n', 'mm', 'mm', { desc = 'ustawia znacznik m' })
 vim.keymap.set('n', 'M', '`m', { desc = 'przejście do znacznika m' })
 -- okna
-vim.keymap.set("n", [[<c-h>]], [[<c-w><c-h>]], { desc = "przechodzi do okna po lewej" })
-vim.keymap.set("n", [[<c-l>]], [[<c-w><c-l>]], { desc = "przechodzi do okna po prawej" })
-vim.keymap.set("n", [[<c-j>]], [[<c-w><c-j>]], { desc = "przechodzi do okna niżej" })
-vim.keymap.set("n", [[<c-k>]], [[<c-w><c-k>]], { desc = "przechodzi do okna wyżej" })
+vim.keymap.set('n', [[<c-h>]], [[<c-w><c-h>]], { desc = 'przechodzi do okna po lewej' })
+vim.keymap.set('n', [[<c-l>]], [[<c-w><c-l>]], { desc = 'przechodzi do okna po prawej' })
+vim.keymap.set('n', [[<c-j>]], [[<c-w><c-j>]], { desc = 'przechodzi do okna niżej' })
+vim.keymap.set('n', [[<c-k>]], [[<c-w><c-k>]], { desc = 'przechodzi do okna wyżej' })
 -- zmiana wielkości okna <shift-alt-h,j,k,l>
-vim.keymap.set("n", "<s-m-h>", "<cmd>vertical resize -2<cr>")
-vim.keymap.set("n", "<s-m-j>", "<cmd>resize +2<cr>")
-vim.keymap.set("n", "<s-m-k>", "<cmd>resize -2<cr>")
-vim.keymap.set("n", "<s-m-l>", "<cmd>vertical resize +2<cr>")
-vim.keymap.set("n", "<leader>sv", function()
+vim.keymap.set('n', '<s-m-h>', '<cmd>vertical resize -2<cr>')
+vim.keymap.set('n', '<s-m-j>', '<cmd>resize +2<cr>')
+vim.keymap.set('n', '<s-m-k>', '<cmd>resize -2<cr>')
+vim.keymap.set('n', '<s-m-l>', '<cmd>vertical resize +2<cr>')
+vim.keymap.set('n', '<leader>sv', function()
     local alt_buf = vim.fn.bufnr('#')
     if alt_buf ~= -1 and vim.fn.buflisted(alt_buf) == 1 then
         vim.cmd('vsplit #')
     else
         vim.cmd('vsplit')
     end
-end, { silent = true, desc = "dzieli okno w pionie" })
-vim.keymap.set("n", "<leader>sp", function()
+end, { silent = true, desc = 'dzieli okno w pionie' })
+vim.keymap.set('n', '<leader>sp', function()
     local alt_buf = vim.fn.bufnr('#')
     if alt_buf ~= -1 and vim.fn.buflisted(alt_buf) == 1 then
         vim.cmd('split #')
     else
         vim.cmd('split')
     end
-end, { silent = true, desc = "dzieli okno w poziomie" })
+end, { silent = true, desc = 'dzieli okno w poziomie' })
 -- tworzy nowy punkt undo po wprowadzeniu jednego ze znaków { " ", ".", ",", "!", "?" }
 for _, key in ipairs({ " ", ".", ",", "!", "?" }) do
     vim.keymap.set("i", key, key .. "<c-g>u", { silent = true })

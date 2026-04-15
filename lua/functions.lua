@@ -39,6 +39,7 @@ function M.input_filename()
         vim.cmd("silent write" .. input)
         vim.notify("Utworzyłem" .. " " .. vim.fn.expand("%:p"))
         M.cdfd()
+        -- vim.cmd("cd " .. dir)
     end)
 end
 
