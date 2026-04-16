@@ -4,8 +4,8 @@ vim.keymap.set({ 'n', 'i' }, '<M-D-r>', '<nop>')
 vim.keymap.set({ 'n', 'i' }, '<M-D-p>', '<nop>')
 vim.keymap.set({ 'n', 'x' }, '<c-d>', '<c-d>zz')
 vim.keymap.set({ 'n', 'x' }, '<c-u>', '<c-u>zz')
-vim.keymap.set({'n', 'x'}, 'gj', '<cmd>Gitsign next_hunk<cr>', { desc = 'następna zmiana' })
-vim.keymap.set({'n', 'x'}, 'gk', '<cmd>Gitsign prev_hunk<cr>', { desc = 'poprzednia zmiana' })
+vim.keymap.set({'n', 'x'}, '<m-j>', '<cmd>Gitsign next_hunk<cr>', { desc = 'następna zmiana' })
+vim.keymap.set({'n', 'x'}, '<m-k>', '<cmd>Gitsign prev_hunk<cr>', { desc = 'poprzednia zmiana' })
 vim.keymap.set('v', [[//]], [[y/\V<C-r>=escape(@",'/\')<CR><CR>]], {
     silent = true,
     desc = '// - wyszukuje zaznaczonego tekstu'
@@ -97,9 +97,6 @@ vim.keymap.set({ 'n', 'x' }, 'gg', 'gg', { desc = 'początek pliku' })
 vim.keymap.set({ 'n', 'x' }, 'go', 'go', { desc = 'początek pliku' })
 vim.keymap.set({ 'n', 'x' }, 'G', 'G', { desc = 'koniec pliku' })
 vim.keymap.set({ 'n', 'v' }, ';', ':', { desc = 'tryb Command' })
--- QuickFix
-vim.keymap.set('n', 'mm', 'mm', { desc = 'ustawia znacznik m' })
-vim.keymap.set('n', 'M', '`m', { desc = 'przejście do znacznika m' })
 -- okna
 vim.keymap.set('n', [[<c-h>]], [[<c-w><c-h>]], { desc = 'przechodzi do okna po lewej' })
 vim.keymap.set('n', [[<c-l>]], [[<c-w><c-l>]], { desc = 'przechodzi do okna po prawej' })
@@ -183,6 +180,9 @@ end, { desc = "Przechodzi do wybranego katalogu z pliku bmfiles i otwiera katalo
 vim.keymap.set("n", "<leader>cds", function()
     require("functions").CDS()
 end, { desc = "Otwiera wyszukiwanie fzf-lua.files w wybranym katalogu z bmdirs" })
+-- marks
+-- vim.keymap.set('n', 'mm', 'mm', { desc = 'ustawia znacznik m' })
+-- vim.keymap.set('n', 'M', '`m', { desc = 'przejście do znacznika m' })
 local bm = require "bookmarks"
 vim.keymap.set("n","mm",bm.bookmark_toggle)     -- add or remove bookmark at current line
 vim.keymap.set("n","mi",bm.bookmark_ann)        -- add or edit mark annotation at current line
