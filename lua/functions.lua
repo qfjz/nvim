@@ -470,7 +470,7 @@ function M.select_scratchpad()
     local cwd_dir = vim.fs.normalize(sp_dir)
     require('fzf-lua').files({
         prompt       = "Search " .. cwd_dir .. ": ",
-        cmd          = "fd -t f -H -g '*.md' | xargs eza --sort=modified --reverse",   -- najnowsze na górze
+        cmd          = "fd -t f -H -g 'sp-*.md' | xargs eza --sort=modified --reverse",
         cwd          = cwd_dir,
         cwd_prompt   = false,
         cwd_header   = false,
