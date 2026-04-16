@@ -4,6 +4,7 @@ local config_dir = vim.fn.stdpath("config")
 local BmDirs = os.getenv("BM_DIRS")
 local BmFiles = os.getenv("BM_FILES")
 local SPDirENV = os.getenv("SPDir")
+local OBS_SP = os.getenv("OBS_SP")
 
 function M.config_files()
     -- local rg_cmd = "rg --files --follow -g '!plugin/' -g '*.lua'"
@@ -486,6 +487,24 @@ function M.select_scratchpad()
                 end
             end
         }
+    })
+end
+
+-- otwiera wybrany plik Scratchpad*.md jako normalny bufor
+function M.obsidian_scratchpad()
+    local sp = OBS_SP or vim.fn.resolve(vim.fn.expand('$HOME/Obsidian/SP'))
+    local cwd_dir = vim.fs.normalize(sp)
+    require('fzf-lua').files({
+        prompt       = "Obsidian/SP: ",
+        cmd          = "fd -t f -H -g 'Scratchpad*.md' | xargs eza --sort=modified --reverse",
+        cwd          = cwd_dir,
+        cwd_prompt   = false,
+        cwd_header   = false,
+        winopts = {
+            preview    = { hidden = "nohidden" },
+            title      = " Scratchpad ",
+            fullscreen = true,
+        },
     })
 end
 

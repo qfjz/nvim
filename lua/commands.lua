@@ -54,6 +54,10 @@ vim.api.nvim_create_user_command('SP', function()
     require('functions').select_scratchpad()
 end, { desc = 'Wybiera notatnik tymczasowy do edycji' })
 
+vim.api.nvim_create_user_command('ObsSP', function()
+    require('functions').obsidian_scratchpad()
+end, { desc = 'Wybór tymczasowego notatnika z katalogu Obsidian' })
+
 vim.api.nvim_create_user_command('Kolory', function()
     require('functions').kolory()
 end, { desc = 'Zmina schematu kolorystycznego' })
