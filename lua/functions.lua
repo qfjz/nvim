@@ -1,10 +1,11 @@
 local M = {}
 
 local config_dir = vim.fn.stdpath("config")
-local BmDirs = os.getenv("BM_DIRS")
-local BmFiles = os.getenv("BM_FILES")
-local SPDirENV = os.getenv("SPDir")
-local OBS_SP = os.getenv("OBS_SP")
+
+local BmDirs = os.getenv("BM_DIRS")     -- plik z ulubionymi katalogami ($HOME/.config/bmdirs)
+local BmFiles = os.getenv("BM_FILES")   -- plik z ulubionymi plikami ($HOME/.config/bmfiles)
+local SPDirENV = os.getenv("SPDir")     -- katalog z tymczasowymi notatkami ($HOME/Notes/SP)
+local OBS_SP = os.getenv("OBS_SP")      -- katalog z tymczasowymi notatkami w Obsidian.md ($HOME/Obsidian/SP)
 
 function M.config_files()
     -- local rg_cmd = "rg --files --follow -g '!plugin/' -g '*.lua'"
