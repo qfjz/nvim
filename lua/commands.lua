@@ -53,3 +53,7 @@ end, { desc = 'Tworzy nowy notatnnik tymczasowy' })
 vim.api.nvim_create_user_command('SP', function()
     require('functions').select_scratchpad()
 end, { desc = 'Wybiera notatnik tymczasowy do edycji' })
+
+vim.api.nvim_create_user_command('Kolory', function()
+    require('functions').kolory()
+end, { desc = 'Zmina schematu kolorystycznego' })

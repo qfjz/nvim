@@ -489,4 +489,43 @@ function M.select_scratchpad()
     })
 end
 
+-- pobiera obecny schemat kolorystyczny
+function M.get_current_colorscheme()
+    if vim.g.colors_name then
+        return vim.g.colors_name
+    else
+        return "default"
+    end
+end
+
+-- wybór schematu kolorystycznego
+function M.kolory()
+    local current_colorscheme = M.get_current_colorscheme()
+    local kolory = {
+        'bamboo',
+        'everforest',
+        'habamax',
+        'kanagawa-wave',
+        'nordic',
+        'rose-pine-main',
+        'rose-pine-moon',
+        'tokyonight-moon',
+        'tokyonight-storm',
+    }
+    local opts = {}
+    vim.notify("Kolor: " .. current_colorscheme, vim.log.levels.INFO)
+    table.insert(kolory, 1, current_colorscheme)
+    opts.prompt = " Wyszukaj > "
+    opts.preview = function(selected)
+        if not selected or selected == "" then
+            return
+        end
+        vim.cmd.colorscheme(selected)
+        vim.o.background = "dark"
+    end
+    opts.winopts = { title = " Kolory ", width = 33, height = 22, backdrop = 100 }
+    opts.fzf_opts = { ["--preview-window"] = "nohidden:right:0" }
+    require "fzf-lua".fzf_exec(kolory, opts)
+end
+
 return M
