@@ -161,10 +161,10 @@ vim.keymap.set('n', '[q', vim.cmd.cprev, { desc = 'Przechodzi do poprzedniego el
 -- Bookmarks
 vim.keymap.set("n", "<leader>cdd", function()
     require("functions").CD()
-end, { desc = "Przechodzi do wybranego katalogu z pliku bmfiles" })
+end, { desc = "Przechodzi do wybranego katalogu z pliku bmdirs" })
 vim.keymap.set("n", "<leader>cde", function()
     require("functions").CDE()
-end, { desc = "Przechodzi do wybranego katalogu z pliku bmfiles i otwiera katalog w menadżerze plików" })
+end, { desc = "Przechodzi do wybranego katalogu z pliku bmdirs i otwiera katalog w menadżerze plików" })
 vim.keymap.set("n", "<leader>cds", function()
     require("functions").CDS()
 end, { desc = "Otwiera wyszukiwanie fzf-lua.files w wybranym katalogu z bmdirs" })
