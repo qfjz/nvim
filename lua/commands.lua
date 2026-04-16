@@ -45,3 +45,11 @@ end, { desc = 'Otwiera listę BmFiles' })
 vim.api.nvim_create_user_command("EditBmFiles", function()
     require('functions').EditBmFiles()
 end, { desc = 'Edycja pliku BmFiles' })
+
+vim.api.nvim_create_user_command('NewSP', function()
+    require('functions').scratchpad()
+end, { desc = 'Tworzy nowy notatnnik tymczasowy' })
+
+vim.api.nvim_create_user_command('SP', function()
+    require('functions').select_scratchpad()
+end, { desc = 'Wybiera notatnik tymczasowy do edycji' })

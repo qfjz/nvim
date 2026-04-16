@@ -3,6 +3,7 @@ local M = {}
 local config_dir = vim.fn.stdpath("config")
 local BmDirs = os.getenv("BM_DIRS")
 local BmFiles = os.getenv("BM_FILES")
+local SPDirENV = os.getenv("SPDir")
 
 function M.config_files()
     -- local rg_cmd = "rg --files --follow -g '!plugin/' -g '*.lua'"
@@ -416,6 +417,76 @@ function M.EditBmFiles()
         BmFiles = vim.fn.resolve(vim.fn.expand("$HOME/.config/bmfiles"))
     end
     vim.cmd("e" .. BmFiles)
+end
+
+function M.scratchpad(raw_args)
+    local SP = SPDirENV or vim.fn.resolve(vim.fn.expand('$HOME/Notes/SP'))
+    local sp_dir = vim.fn.expand(SP)
+    if vim.fn.isdirectory(sp_dir) == 0 then
+        vim.fn.mkdir(sp_dir, "p")
+    end
+    local words = {}
+    if raw_args and raw_args ~= "" then
+        for word in raw_args:gmatch("%S+") do
+            table.insert(words, word)
+        end
+    end
+    local name = words[1]
+    local size = tonumber(words[2]) or 12
+    local position = words[3] or "belowright"
+    local full_path
+    if name == nil or name == "" then
+        local filename = string.format("sp-%s-%s.md", os.date("%Y-%m-%d"), os.time())
+        full_path = sp_dir .. "/" .. filename
+    else
+        local expanded = vim.fn.expand(name)
+        if expanded:find("/") then
+            full_path = expanded
+        else
+            local clean_name = expanded:gsub("%.md$", "")
+            full_path = sp_dir .. "/" .. clean_name .. ".md"
+        end
+    end
+    local cmd = string.format("%s %dnew %s", position, size, vim.fn.fnameescape(full_path))
+    vim.cmd(cmd)
+    local buf = vim.api.nvim_get_current_buf()
+    vim.bo[buf].filetype   = "scratch"
+    vim.bo[buf].buftype    = ""
+    vim.bo[buf].bufhidden  = "wipe"
+    vim.bo[buf].swapfile   = false
+    if vim.fn.filereadable(full_path) == 0 then
+        vim.cmd("w")
+    end
+    vim.cmd("startinsert")
+end
+
+function M.select_scratchpad()
+    local SP = SPDirENV or vim.fn.resolve(vim.fn.expand('$HOME/Notes/SP'))
+    local sp_dir = vim.fn.expand(SP)
+    if vim.fn.isdirectory(sp_dir) == 0 then
+        vim.fn.mkdir(sp_dir, "p")
+    end
+    local cwd_dir = vim.fs.normalize(sp_dir)
+    require('fzf-lua').files({
+        prompt       = "Search " .. cwd_dir .. ": ",
+        cmd          = "fd -t f -H -g '*.md' | xargs eza --sort=modified --reverse",   -- najnowsze na górze
+        cwd          = cwd_dir,
+        cwd_prompt   = false,
+        cwd_header   = false,
+        winopts = {
+            preview    = { hidden = "nohidden" },
+            title      = " Scratchpad ",
+            fullscreen = true,
+        },
+        actions = {
+            ["default"] = function(selected, opts)
+                if selected and selected[1] then
+                    local entry = require('fzf-lua.path').entry_to_file(selected[1], opts)
+                    require('functions').scratchpad(entry.path)
+                end
+            end
+        }
+    })
 end
 
 return M
