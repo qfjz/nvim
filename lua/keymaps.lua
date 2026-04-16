@@ -134,8 +134,11 @@ vim.keymap.set({ "n", "o", "x" }, "s", function()
             -- forward = true,
             wrap = true,
             multi_window = false,
-            -- wyszukuje tylko początek wyrazu
             mode = function(str)
+                if str == " " then
+                    return str
+                end
+                -- wyszukuje tylko poczƒÖtku wyrazu
                 return "\\<" .. str
             end,
         },
@@ -196,3 +199,13 @@ vim.keymap.set('n', '<leader>u', function()
     vim.cmd.packadd[[nvim.undotree]]
     require('undotree').open()
 end, { desc = 'UndoTree' })
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'przenosi zaznaczenie w dół' })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'przenosi zaznaczenie w górę' })
+vim.keymap.set("n", "<leader>s.", function()
+    require('fzf-lua').oldfiles({
+        winopts = {
+            preview = { hidden = "nohidden" },
+            fullscreen = true,
+        },
+    })
+end, { desc = "Ostatnio edytowane pliki" })
