@@ -37,7 +37,7 @@ require('bookmarks').setup()
 require('telescope').setup()
 
 vim.cmd.packadd[[nvim.difftool]]
-vim.cmd.packadd[[nvim.undotree]]
+-- vim.cmd.packadd[[nvim.undotree]]
 
 vim.cmd.colorscheme[[catppuccin-mocha]]
 

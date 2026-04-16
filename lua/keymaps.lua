@@ -2,6 +2,10 @@
 -- wyłączenie Super-Alt-[r,p] / CMD-Option-[r,p]
 vim.keymap.set({ 'n', 'i' }, '<M-D-r>', '<nop>')
 vim.keymap.set({ 'n', 'i' }, '<M-D-p>', '<nop>')
+vim.keymap.set({ 'n', 'x' }, '<c-d>', '<c-d>zz')
+vim.keymap.set({ 'n', 'x' }, '<c-u>', '<c-u>zz')
+vim.keymap.set({'n', 'x'}, 'gj', '<cmd>Gitsign next_hunk<cr>', { desc = 'następna zmiana' })
+vim.keymap.set({'n', 'x'}, 'gk', '<cmd>Gitsign prev_hunk<cr>', { desc = 'poprzednia zmiana' })
 vim.keymap.set('v', [[//]], [[y/\V<C-r>=escape(@",'/\')<CR><CR>]], {
     silent = true,
     desc = '// - wyszukuje zaznaczonego tekstu'
@@ -187,3 +191,8 @@ vim.keymap.set("n","mn",bm.bookmark_next)       -- jump to next mark in local bu
 vim.keymap.set("n","mp",bm.bookmark_prev)       -- jump to previous mark in local buffer
 vim.keymap.set("n","ml",bm.bookmark_list)       -- show marked file list in quickfix window
 vim.keymap.set("n","mx",bm.bookmark_clear_all)  -- removes all bookmarks
+vim.keymap.set("n", "vv", "^vg_", { desc = "Zaznacza linię pomijając puste znaki na początku i znak końca linii" })
+vim.keymap.set('n', '<leader>u', function()
+    vim.cmd.packadd[[nvim.undotree]]
+    require('undotree').open()
+end, { desc = 'UndoTree' })
