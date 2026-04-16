@@ -33,6 +33,8 @@ require('config.autopairs')
 require('toggleterm').setup()
 require('mason').setup()
 require('nvim-treesitter').setup()
+require('bookmarks').setup()
+require('telescope').setup()
 
 vim.cmd.packadd[[nvim.difftool]]
 vim.cmd.packadd[[nvim.undotree]]

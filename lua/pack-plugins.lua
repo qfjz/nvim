@@ -21,6 +21,8 @@ vim.pack.add({
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
     { src = "https://github.com/windwp/nvim-autopairs" },
     { src = 'https://github.com/romgrk/barbar.nvim' },
+    { src = 'https://github.com/tomasky/bookmarks.nvim' },
+    { src = 'https://github.com/nvim-telescope/telescope.nvim' },
 })
 
 -- kolory
