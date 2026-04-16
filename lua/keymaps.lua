@@ -1,4 +1,7 @@
 -- keymap.lua
+-- wyłączenie Super-Alt-[r,p] / CMD-Option-[r,p]
+vim.keymap.set({ 'n', 'i' }, '<M-D-r>', '<nop>')
+vim.keymap.set({ 'n', 'i' }, '<M-D-p>', '<nop>')
 vim.keymap.set('v', [[//]], [[y/\V<C-r>=escape(@",'/\')<CR><CR>]], {
     silent = true,
     desc = '// - wyszukuje zaznaczonego tekstu'
@@ -84,11 +87,11 @@ vim.keymap.set("n", [[<leader>b]], "<cmd>Neotree source=buffers reveal_force_cwd
 vim.keymap.set('n', 'H', '<cmd>bprevious<cr>', { desc = 'poprzedni bufor' })
 vim.keymap.set('n', 'L', '<cmd>bnext<cr>', { desc = 'następny bufor' })
 vim.keymap.set('n', [[<leader>d]], '<cmd>bdelete<cr>', { desc = 'usuwa bufor' })
-vim.keymap.set('n', [[<leader>c]], '<cmd>close<cr>', { desc = 'zamyka okno' })
+vim.keymap.set('n', [[<leader>cc]], '<cmd>close<cr>', { desc = 'zamyka okno' })
 vim.keymap.set("n", [[<leader>o]], "<cmd>only<cr>", { desc = 'pozostawia otwarte tylko aktywne okno' })
-vim.keymap.set({ 'n' }, 'gg', 'gg', { desc = 'początek pliku' })
-vim.keymap.set({ 'n' }, 'go', 'go', { desc = 'początek pliku' })
-vim.keymap.set({ 'n' }, 'G', 'G', { desc = 'koniec pliku' })
+vim.keymap.set({ 'n', 'x' }, 'gg', 'gg', { desc = 'początek pliku' })
+vim.keymap.set({ 'n', 'x' }, 'go', 'go', { desc = 'początek pliku' })
+vim.keymap.set({ 'n', 'x' }, 'G', 'G', { desc = 'koniec pliku' })
 vim.keymap.set({ 'n', 'v' }, ';', ':', { desc = 'tryb Command' })
 -- QuickFix
 vim.keymap.set('n', 'mm', 'mm', { desc = 'ustawia znacznik m' })
@@ -155,6 +158,8 @@ vim.keymap.set('c', '<c-j>', '<down>')
 vim.keymap.set('c', '<c-k>', '<up>')
 vim.keymap.set('c', '<c-h>', '<left>')
 vim.keymap.set('c', '<c-l>', '<right>')
+--
+vim.keymap.set("c", "<c-p>", [[<c-r>"]], { desc = "Wkleja w linii komend"})
 -- terminal
 vim.keymap.set('t', [[<c-h>]], [[<c-\><c-n><c-w>h]])
 vim.keymap.set('t', [[<c-j>]], [[<c-\><c-n><c-w>j]])
@@ -164,3 +169,13 @@ vim.keymap.set('t', [[<c-l>]], [[<c-\><c-n><c-w>l]])
 vim.keymap.set('n', [[<c-q>]], [[<cmd>copen<cr>]], { desc = 'Otwiera listę quickfix' })
 vim.keymap.set('n', ']q', vim.cmd.cnext, { desc = 'Przechodzi do następnego elementu na liście quickfix' })
 vim.keymap.set('n', '[q', vim.cmd.cprev, { desc = 'Przechodzi do poprzedniego elementu na liście quickfix' })
+-- Bookmarks
+vim.keymap.set("n", "<leader>cdd", function()
+    require("functions").CD()
+end, { desc = "Przechodzi do wybranego katalogu z pliku bmfiles" })
+vim.keymap.set("n", "<leader>cde", function()
+    require("functions").CDE()
+end, { desc = "Przechodzi do wybranego katalogu z pliku bmfiles i otwiera katalog w menadżerze plików" })
+vim.keymap.set("n", "<leader>cds", function()
+    require("functions").CDS()
+end, { desc = "Otwiera wyszukiwanie fzf-lua.files w wybranym katalogu z bmdirs" })

@@ -29,3 +29,19 @@ vim.api.nvim_create_user_command("CopyFileName", function()
     Filename=vim.fn.resolve(vim.fn.expand("%:p"))
     vim.fn.setreg([["]], Filename, '')
 end, { desc = 'Kopiuje pełną ścieżkę i nazwę pliku' })
+
+vim.api.nvim_create_user_command("EditCDDirs", function()
+    require('functions').EditCDDirs()
+end, { desc = 'Edycja pliku BmDirs' })
+
+vim.api.nvim_create_user_command("AddBmFile", function()
+    require('functions').AddBmFile()
+end, { desc = 'Dodaje bieżący plik do BmFiles' })
+
+vim.api.nvim_create_user_command("BmFiles", function()
+    require('functions').BmFiles()
+end, { desc = 'Otwiera listę BmFiles' })
+
+vim.api.nvim_create_user_command("EditBmFiles", function()
+    require('functions').EditBmFiles()
+end, { desc = 'Edycja pliku BmFiles' })
