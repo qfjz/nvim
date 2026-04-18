@@ -29,8 +29,8 @@
 | `Leader-e`    | uruchamia Oil                                                                           |
 | `Leader-f`    | uruchamia funkcję `fzf_file()`                                                          |
 | `Leader-if`   | uruchamia funkcję `file_info()`                                                         |
-| `Leader-n`    | uruchamia Neotree                                                                       |
-| `Leader-N`    | uruchamia Neotree podążając za linkiem symbolicznym                                     |
+| `Leader-N`    | uruchamia Neotree                                                                       |
+| `Leader-n`    | uruchamia Neotree podążając za linkiem symbolicznym                                     |
 | `Leader-tf`   | uruchamia funkcję `f_terminal()`                                                        |
 | `Leader-tt`   | uruchamia funkcję `terminal()`                                                          |
 | `Leader-tT`   | uruchamia funkcję `t_term()`                                                            |

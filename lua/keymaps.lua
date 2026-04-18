@@ -37,9 +37,9 @@ vim.keymap.set('n', '<leader>th', '<cmd>FzfLua helptags<cr>', { desc = 'Pomoc' }
 vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "Menadżer plików Oil" })
 vim.keymap.set('n', '<leader>f', [[<cmd>lua require('functions').fzf_files()<cr>]], { desc = 'FZF Files' })
 vim.keymap.set('n', '<leader>if', [[<cmd>lua require('functions').file_info()<cr>]], { desc = 'FileInfo'})
-vim.keymap.set("n", [[<leader>n]], function() vim.cmd[[Neotree reveal_force_cwd toggle]] end, { desc = "Neotree" })
+vim.keymap.set("n", [[<leader>N]], function() vim.cmd[[Neotree reveal_force_cwd toggle]] end, { desc = "Neotree" })
 -- Otwiera Neotree podążając za linkiem symbolicznym
-vim.keymap.set("n", [[<leader>N]], function()
+vim.keymap.set("n", [[<leader>n]], function()
     local file_path = vim.api.nvim_buf_get_name(0)
     if file_path ~= "" then
         local resolved_path = vim.fn.resolve(file_path)
@@ -206,3 +206,4 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "pozostawia kursor po łączeniu lini
 vim.keymap.set({ 'n', 'x' }, 'gg', 'gg', { desc = 'początek pliku' })
 vim.keymap.set({ 'n', 'x' }, 'go', 'go', { desc = 'początek pliku' })
 vim.keymap.set({ 'n', 'x' }, 'G', 'G', { desc = 'koniec pliku' })
+vim.keymap.set('n', '<leader>k', [[<cmd>lua require('.functions').komendy()<cr>]], { desc = 'menu komend' })
