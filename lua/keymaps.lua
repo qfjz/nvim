@@ -71,14 +71,13 @@ vim.keymap.set('n', '<localleader>d', 'diw', { desc = 'diw' })
 vim.keymap.set('n', '<localleader>y', 'yiw', { desc = 'yiw' })
 vim.keymap.set('n', [[<leader>v]], [[<cmd>lua require('functions').config_files()<cr>]], { desc = 'nvim configs' })
 vim.keymap.set('n', 'U', '<c-r>', { desc = 'redo' })
--- zamiana zn / zm
 vim.keymap.set('n', 'qq', '<cmd>qa<cr>', { desc = 'wychodzi z nvim' })
 vim.keymap.set("n", [[<s-enter>]], "mzO<esc>`z", { desc = "dodaje pustą linię powyżej bieżącej" })
 vim.keymap.set("n", [[<enter>]], "mzo<esc>`z", { desc = "dodaje pustą linię poniżej bieżącej" })
 vim.keymap.set({ 'n', 'v' }, 'gh', '0', { desc = "początek linii" })  -- ^
 vim.keymap.set({ 'n', 'v' }, 'gl', '$', { desc = "koniec linii" })    -- g_
 vim.keymap.set('n', '<tab>', '<C-^>', { desc = 'przełączanie się pomiędzy dwoma ostatnimi buforami' })
-vim.keymap.set("n", [[<s-tab>]], "<cmd>FzfLua buffers winopts.fullscreen=true<cr>", { desc = "pozwala wybrać bufor zlisty" })
+vim.keymap.set("n", [[<s-tab>]], "<cmd>FzfLua buffers winopts.fullscreen=true<cr>", { desc = "pozwala wybrać bufor z listy" })
 vim.keymap.set("n", [[<leader>b]], "<cmd>Neotree source=buffers reveal_force_cwd=true position=right action=focus toggle<cr>", { desc = "NeoTree otwarte bufory" })
 vim.keymap.set('n', 'H', '<cmd>bprevious<cr>', { desc = 'poprzedni bufor' })
 vim.keymap.set('n', 'L', '<cmd>bnext<cr>', { desc = 'następny bufor' })
@@ -205,6 +204,7 @@ vim.keymap.set({ 'n', 'x' }, '<c-u>', '<c-u>zz')
 vim.keymap.set("n", [[gf]], [[<cmd>edit <cfile><cr>]], { desc = "otwiera plik pod kursorem" })
 vim.keymap.set('n', 'j', [[v:count == 0 ? 'gj' : 'j']], { expr = true })
 vim.keymap.set('n', 'k', [[v:count == 0 ? 'gk' : 'k']], { expr = true })
+-- zamiana zn / zm
 vim.keymap.set("n", "zn", "zm", { noremap = true })
 vim.keymap.set("n", "zm", "zn", { noremap = true })
 vim.keymap.set("n", "n", "nzzzv")

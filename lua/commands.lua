@@ -61,3 +61,10 @@ end, { desc = 'Wybór tymczasowego notatnika z katalogu Obsidian' })
 vim.api.nvim_create_user_command('Kolory', function()
     require('functions').kolory()
 end, { desc = 'Zmina schematu kolorystycznego' })
+
+vim.api.nvim_create_user_command('WhichKeyEnable', function()
+    vim.pack.add({
+        { src = "https://github.com/folke/which-key.nvim" },
+    })
+    require("which-key").setup()
+end, { desc = 'Uruchamia WhichKey' })

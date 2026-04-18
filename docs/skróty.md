@@ -2,32 +2,59 @@
 
 ## Tryb NORMAL
 
-| Skrót        | Opis                                                |
-|--------------|-----------------------------------------------------|
-| `Leader-w`   | zapisuje zmiany                                     |
-| `zh`         | zastępuje `%`                                       |
-| `Alt-j`      | następna zmiana w repozytorium Git                  |
-| `Alt-k`      | poprzednia zmiana w repozytorium Git                |
-| `Leader-ts0` | ustawia `scrolloff=0`                               |
-| `Leader-ts3` | ustawia `scrolloff=3`                               |
-| `Leader-ts9` | ustawia `scrolloff=999`                             |
-| `Leader-tss` | uruchamia sprawdzanie pisownii w języku polskim     |
-| `Leader-s.`  | wyszukiwanie ostatnio edytowanych plików            |
-| `yA`         | kopiuje całą zawartość pliku                        |
-| `dA`         | usuwa całą zawartość pliku                          |
-| `dh`         | usuwa od kursora do początku linii                  |
-| `dl`         | usuwa od kursora do końca linii                     |
-| `Leader-y`   | kopiuje do rejestru `+`                             |
-| `Leader-p`   | wkleja z rejestru `+` za obecną pozycją             |
-| `Leader-P`   | wkleja z rejestru `+` przed obecną pozycją          |
-| `Leader-tg`  | uruchamia `FzfLua live_grep`                        |
-| `Leader-th`  | uruchamia `FzfLua helptags`                         |
-| `Leader-tn`  | otwiera nowy pusty bufor                            |
-| `Leader-e`   | uruchamia Oil                                       |
-| `Leader-f`   | uruchamia funkcję `fzf_file()`                      |
-| `Leader-if`  | uruchamia funkcję `file_info()`                     |
-| `Leader-n`   | uruchamia Neotree                                   |
-| `Leader-N`   | uruchamia Neotree podążając za linkiem symbolicznym |
+| Skrót         | Opis                                                |
+|---------------|-----------------------------------------------------|
+| `Leader-w`    | zapisuje zmiany                                     |
+| `Backspace`   | zapisuje zmiany                                     |
+| `Leader-q`    | zapisanie zmian i wyjście                           |
+| `qq`          | wyjście                                             |
+| `zh`          | zastępuje `%`                                       |
+| `Alt-j`       | następna zmiana w repozytorium Git                  |
+| `Alt-k`       | poprzednia zmiana w repozytorium Git                |
+| `Leader-ts0`  | ustawia `scrolloff=0`                               |
+| `Leader-ts3`  | ustawia `scrolloff=3`                               |
+| `Leader-ts9`  | ustawia `scrolloff=999`                             |
+| `Leader-tss`  | uruchamia sprawdzanie pisownii w języku polskim     |
+| `Leader-s.`   | wyszukiwanie ostatnio edytowanych plików            |
+| `yA`          | kopiuje całą zawartość pliku                        |
+| `dA`          | usuwa całą zawartość pliku                          |
+| `dh`          | usuwa od kursora do początku linii                  |
+| `dl`          | usuwa od kursora do końca linii                     |
+| `Leader-y`    | kopiuje do rejestru `+`                             |
+| `Leader-p`    | wkleja z rejestru `+` za obecną pozycją             |
+| `Leader-P`    | wkleja z rejestru `+` przed obecną pozycją          |
+| `Leader-tg`   | uruchamia `FzfLua live_grep`                        |
+| `Leader-th`   | uruchamia `FzfLua helptags`                         |
+| `Leader-tn`   | otwiera nowy pusty bufor                            |
+| `Leader-e`    | uruchamia Oil                                       |
+| `Leader-f`    | uruchamia funkcję `fzf_file()`                      |
+| `Leader-if`   | uruchamia funkcję `file_info()`                     |
+| `Leader-n`    | uruchamia Neotree                                   |
+| `Leader-N`    | uruchamia Neotree podążając za linkiem symbolicznym |
+| `Leader-tf`   | uruchamia funkcję `f_terminal()`                    |
+| `Leader-tt`   | uruchamia funkcję `terminal()`                      |
+| `Leader-tT`   | uruchamia funkcję `t_term()`                        |
+| `'`           | uruchamia `FzfLua marks`                            |
+| `"`           | uruchamia `FzfLua registers`                        |
+| `Leader-v`    | uruchamia funkcję `config_files()`                  |
+| `gh`          | początek linii                                      |
+| `gl`          | koniec linii                                        |
+| `U`           | przywrócenie zmiany                                 |
+| `Shift-Enter` | dodaje pustą linię powyżej bieżącej                 |
+| `Enter`       | dodaje pustą linię poniżej bieżącej                 |
+| `Tab`         | przełącza się pomiędzy dwoma ostatnimi buforami     |
+| `Shift-Tab`   | pozwala wybrać bufor z listy                        |
+| `Leader-b`    | uruchamia Neotree z listą buforów                   |
+| `H`           | poprzedni bufor                                     |
+| `L`           | następny bufor                                      |
+| `Leader-d`    | usuwa bufor                                         |
+| `Leader-cc`   | zamyka okno                                         |
+| `Leader-o`    | pozostawia otwarte tylko aktywne okno               |
+| `;`           | wchodzi do trybu COMMAND                            |
+| `Ctrl-h`      | przechodzi do okna po lewej                         |
+| `Ctrl-l`      | przechodzi do okna po prawej                        |
+| `Ctrl-j`      | przechodzi do okna niżej                            |
+| `Ctrl-k`      | przechodzi do okna wyżej                            |
 
 ## Tryb VISUAL
 
@@ -38,48 +65,12 @@
 | `Leader-y`   | kopiuje do rejestru `+`                            |
 | `Leader-p`   | wkleja z rejestru `+` za obecną pozycją            |
 | `Leader-P`   | wkleja z rejestru `+` przed obecną pozycją         |
+| `gh`         | początek linii                                     |
+| `gl`         | koniec linii                                       |
+| `;`          | wchodzi do trybu COMMAND                           |
 
 ```lua
-vim.keymap.set('n', '<leader>tf', [[<cmd>lua require('functions').f_terminal()<cr>]], { desc = 'terminal'})
-vim.keymap.set("n", "<leader>tT", [[<cmd>lua require('.functions').t_term()<cr>]], { desc = 'terminal'})
-vim.keymap.set("n", "<leader>tt", [[<cmd>lua require('.functions').terminal()<cr>]], { desc = 'terminal'})
-vim.keymap.set({ 'n', 'i' }, '<esc>', '<cmd>nohl<cr><cmd>NoiceDismiss<cr><esc>', { silent = true, desc = "wyłącza wyróżnianie szukanego tekstu" })
--- vim.keymap.set('i', 'kj', '<cmd>nohl<cr><cmd>NoiceDismiss<cr><esc>', { silent = true, desc = "wyłącza wyróżnianie szukanego tekstu" })
-vim.keymap.set('n', [[']], '<cmd>FzfLua marks<cr>', { desc = 'marks' })
-vim.keymap.set('n', [["]], '<cmd>FzfLua registers<cr>', { desc = 'rejestry' })
-vim.keymap.set('n', '<bs>', [[<cmd>lua require('functions').write_file()<cr>]])
-vim.keymap.set("n", [[<leader>q]], function()
-    require('functions').write_file()
-    vim.cmd[[q]]
-end, { desc = "Zapisuje zmiany i wychodzi" })
-vim.keymap.set('n', '<localleader>r', '<cmd>restart<cr>', { desc = 'restart NVim' })
-vim.keymap.set('n', '<localleader>w', '<cmd>set wrap!<cr>', { desc = 'toggle wrap' })
-vim.keymap.set('n', '<localleader><localleader>', 'ciw', { desc = 'ciw' })
-vim.keymap.set('n', '<localleader>c', 'ciw', { desc = 'ciw' })
-vim.keymap.set('n', '<localleader>d', 'diw', { desc = 'diw' })
-vim.keymap.set('n', '<localleader>y', 'yiw', { desc = 'yiw' })
-vim.keymap.set('n', [[<leader>v]], [[<cmd>lua require('functions').config_files()<cr>]], { desc = 'nvim configs' })
-vim.keymap.set('n', 'U', '<c-r>', { desc = 'redo' })
--- zamiana zn / zm
-vim.keymap.set('n', 'qq', '<cmd>qa<cr>', { desc = 'wychodzi z nvim' })
-vim.keymap.set("n", [[<s-enter>]], "mzO<esc>`z", { desc = "dodaje pustą linię powyżej bieżącej" })
-vim.keymap.set("n", [[<enter>]], "mzo<esc>`z", { desc = "dodaje pustą linię poniżej bieżącej" })
-vim.keymap.set({ 'n', 'v' }, 'gh', '0', { desc = "początek linii" })  -- ^
-vim.keymap.set({ 'n', 'v' }, 'gl', '$', { desc = "koniec linii" })    -- g_
-vim.keymap.set('n', '<tab>', '<C-^>', { desc = 'przełączanie się pomiędzy dwoma ostatnimi buforami' })
-vim.keymap.set("n", [[<s-tab>]], "<cmd>FzfLua buffers winopts.fullscreen=true<cr>", { desc = "pozwala wybrać bufor zlisty" })
-vim.keymap.set("n", [[<leader>b]], "<cmd>Neotree source=buffers reveal_force_cwd=true position=right action=focus toggle<cr>", { desc = "NeoTree otwarte bufory" })
-vim.keymap.set('n', 'H', '<cmd>bprevious<cr>', { desc = 'poprzedni bufor' })
-vim.keymap.set('n', 'L', '<cmd>bnext<cr>', { desc = 'następny bufor' })
-vim.keymap.set('n', [[<leader>d]], '<cmd>bdelete<cr>', { desc = 'usuwa bufor' })
-vim.keymap.set('n', [[<leader>cc]], '<cmd>close<cr>', { desc = 'zamyka okno' })
-vim.keymap.set("n", [[<leader>o]], "<cmd>only<cr>", { desc = 'pozostawia otwarte tylko aktywne okno' })
-vim.keymap.set({ 'n', 'v' }, ';', ':', { desc = 'tryb Command' })
 -- okna
-vim.keymap.set('n', [[<c-h>]], [[<c-w><c-h>]], { desc = 'przechodzi do okna po lewej' })
-vim.keymap.set('n', [[<c-l>]], [[<c-w><c-l>]], { desc = 'przechodzi do okna po prawej' })
-vim.keymap.set('n', [[<c-j>]], [[<c-w><c-j>]], { desc = 'przechodzi do okna niżej' })
-vim.keymap.set('n', [[<c-k>]], [[<c-w><c-k>]], { desc = 'przechodzi do okna wyżej' })
 -- zmiana wielkości okna <shift-alt-h,j,k,l>
 vim.keymap.set('n', '<s-m-h>', '<cmd>vertical resize -2<cr>')
 vim.keymap.set('n', '<s-m-j>', '<cmd>resize +2<cr>')
@@ -183,6 +174,12 @@ vim.keymap.set("n", "<leader>s.", function()
         },
     })
 end, { desc = "Ostatnio edytowane pliki" })
+vim.keymap.set('n', '<localleader>r', '<cmd>restart<cr>', { desc = 'restart NVim' })
+vim.keymap.set('n', '<localleader>w', '<cmd>set wrap!<cr>', { desc = 'toggle wrap' })
+vim.keymap.set('n', '<localleader><localleader>', 'ciw', { desc = 'ciw' })
+vim.keymap.set('n', '<localleader>c', 'ciw', { desc = 'ciw' })
+vim.keymap.set('n', '<localleader>d', 'diw', { desc = 'diw' })
+vim.keymap.set('n', '<localleader>y', 'yiw', { desc = 'yiw' })
 -- tworzy nowy punkt undo po wprowadzeniu jednego ze znaków { " ", ".", ",", "!", "?" }
 for _, key in ipairs({ " ", ".", ",", "!", "?" }) do
     vim.keymap.set("i", key, key .. "<c-g>u", { silent = true })
