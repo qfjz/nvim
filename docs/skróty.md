@@ -77,6 +77,8 @@
 | `mx`          | usuwa wszystkie znaczniki                                                               |
 | `vv`          | zaznacza linię pomijając puste znaki na początku linii i znak końca linii               |
 | `Leader-u`    | uruchamia okno `undotree`                                                               |
+| `zn`          | zamienia `zn` na `zm`                                                                   |
+| `zm`          | zamienia `zm` na `zn`                                                                   |
 
 ### LocalLeader
 
@@ -101,37 +103,17 @@
 | `gh`         | początek linii                                     |
 | `gl`         | koniec linii                                       |
 | `;`          | wchodzi do trybu COMMAND                           |
-| `s`           | wyszukiwanie za pomocą `flash.nvim`               |
+| `s`          | wyszukiwanie za pomocą `flash.nvim`                |
+| `J`          | przenosi zaznaczenie o jedną linię w dół           |
+| `K`          | przenosi zaznaczenie o jedną linię w górę          |
 
-```lua
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'przenosi zaznaczenie w dół' })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'przenosi zaznaczenie w górę' })
--- poruszanie się w trybie COMMAND
-vim.keymap.set('c', '<c-j>', '<down>')
-vim.keymap.set('c', '<c-k>', '<up>')
-vim.keymap.set('c', '<c-h>', '<left>')
-vim.keymap.set('c', '<c-l>', '<right>')
---
-vim.keymap.set("c", "<c-p>", [[<c-r>"]], { desc = "Wkleja w linii komend"})
--- tworzy nowy punkt undo po wprowadzeniu jednego ze znaków { " ", ".", ",", "!", "?" }
-for _, key in ipairs({ " ", ".", ",", "!", "?" }) do
-    vim.keymap.set("i", key, key .. "<c-g>u", { silent = true })
-end
--- Standardowe skróty klawiszowe
-vim.keymap.set('n', 'ge', 'ge', { desc = 'koniec poprzedniego wyrazu' })
-vim.keymap.set({ 'n', 'x' }, '<c-d>', '<c-d>zz')
-vim.keymap.set({ 'n', 'x' }, '<c-u>', '<c-u>zz')
-vim.keymap.set("n", [[gf]], [[<cmd>edit <cfile><cr>]], { desc = "otwiera plik pod kursorem" })
-vim.keymap.set('n', 'j', [[v:count == 0 ? 'gj' : 'j']], { expr = true })
-vim.keymap.set('n', 'k', [[v:count == 0 ? 'gk' : 'k']], { expr = true })
-vim.keymap.set("n", "zn", "zm", { noremap = true })
-vim.keymap.set("n", "zm", "zn", { noremap = true })
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set("n", "J", "mzJ`z", { desc = "pozostawia kursor po łączeniu linii" })
-vim.keymap.set({ 'n', 'x' }, 'gg', 'gg', { desc = 'początek pliku' })
-vim.keymap.set({ 'n', 'x' }, 'go', 'go', { desc = 'początek pliku' })
-vim.keymap.set({ 'n', 'x' }, 'G', 'G', { desc = 'koniec pliku' })
--- kiedy przeszukujemy historię komend, to możemy szybko zatwierdzić komendę za pomocą Ctrl-;
-vim.keymap.set('c', '<c-;>', [[<cr>]])
-```
+## Tryb COMMAND
+
+| Skrót        | Opis                                               |
+|--------------|----------------------------------------------------|
+| `Ctrl-j`     | kursor w dół                                       |
+| `Ctrl-k`     | kursor w górę                                      |
+| `Ctrl-h`     | kursor w lewo                                      |
+| `Ctrl-l`     | kursor w prawo                                     |
+| `Ctrl-p`     | wkleja w linii komend                              |
+| `Ctrl-;`     | zastępuje Enter                                    |
