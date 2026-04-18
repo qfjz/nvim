@@ -78,6 +78,17 @@
 | `vv`          | zaznacza linię pomijając puste znaki na początku linii i znak końca linii               |
 | `Leader-u`    | uruchamia okno `undotree`                                                               |
 
+### LocalLeader
+
+| Skrót                     | Opis                                                                          |
+|---------------------------|-------------------------------------------------------------------------------|
+| `LocalLeader-r`           | restart NVim                                                                  |
+| `LocalLeader-w`           | toggle wrap                                                                   |
+| `LocalLeader-LocalLeader` | zastępuje `ciw`                                                               |
+| `LocalLeader-c`           | zastępuje `ciw`                                                               |
+| `LocalLeader-d`           | zastępuje `diw`                                                               |
+| `LocalLeader-y`           | zastępuje `yiw`                                                               |
+
 ## Tryb VISUAL
 
 | Skrót        | Opis                                               |
@@ -95,12 +106,6 @@
 ```lua
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'przenosi zaznaczenie w dół' })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'przenosi zaznaczenie w górę' })
-vim.keymap.set('n', '<localleader>r', '<cmd>restart<cr>', { desc = 'restart NVim' })
-vim.keymap.set('n', '<localleader>w', '<cmd>set wrap!<cr>', { desc = 'toggle wrap' })
-vim.keymap.set('n', '<localleader><localleader>', 'ciw', { desc = 'ciw' })
-vim.keymap.set('n', '<localleader>c', 'ciw', { desc = 'ciw' })
-vim.keymap.set('n', '<localleader>d', 'diw', { desc = 'diw' })
-vim.keymap.set('n', '<localleader>y', 'yiw', { desc = 'yiw' })
 -- poruszanie się w trybie COMMAND
 vim.keymap.set('c', '<c-j>', '<down>')
 vim.keymap.set('c', '<c-k>', '<up>')
