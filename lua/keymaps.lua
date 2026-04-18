@@ -12,7 +12,7 @@ vim.keymap.set('v', [[//]], [[y/\V<C-r>=escape(@",'/\')<CR><CR>]], {
 vim.keymap.set('n', '<leader>ts0', '<cmd>set scrolloff=0<cr>', { desc = 'Scrolloff 0' })
 vim.keymap.set('n', '<leader>ts3', '<cmd>set scrolloff=3<cr>', { desc = 'Scrolloff 3' })
 vim.keymap.set('n', '<leader>ts9', '<cmd>set scrolloff=999<cr>', { desc = 'Scrolloff 999' })
-vim.keymap.set('n', '<leader>ts', function() vim.opt.spell = true; vim.opt.spelllang='pl' end, { desc = 'sprawdzanie pisownii' })
+vim.keymap.set('n', '<leader>tss', function() vim.opt.spell = true; vim.opt.spelllang='pl' end, { desc = 'sprawdzanie pisownii' })
 -- kiedy przeszukujemy historię komend, to możemy szybko zatwierdzić komendę za pomocą Ctrl-;
 vim.keymap.set('c', '<c-;>', [[<cr>]])
 vim.keymap.set('n', '<leader>s.', function()
