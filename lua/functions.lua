@@ -551,21 +551,8 @@ end
 function M.komendy()
     -- lista par: { "nazwa w menu", funkcja_lub_komenda }
     local menu_items = {
-        { "skróty klawiszowe scratchpad", function() require('functions').keymaps('scratchpad') end },
-        { "skróty klawiszowe tasks", function() require('functions').keymaps('tasks') end },
-        { "skróty klawiszowe inne", function() require('functions').keymaps('inne') end },
         { "kolorki", M.kolory },
-        { "obsidian search", M.obsidian_files },
-        { "dodaj zadanie priv", function() require('functions').new_task("~/todo.md") end },
-        { "dodaj zadanie (wybór pliku)", function() require('functions').choose_tasks_file() end },
-        { 'ostatni scratchpad', function() require('functions').last_scratchpad() end },
-        { 'usuń pluginy', function() require('functions').pack_rm() end },
-        { 'dodaj nowe zadanie do wybranego pliku', function() require('functions').choose_tasks_file() end },
-        { 'dodaj nowe zadanie w pliku ~/todo.md', function() require('functions').new_task("~/todo.md") end },
-        { 'toggle relativenumber', function() vim.cmd('set relativenumber!') end },
         { 'toggle number', function() vim.cmd('set number!') end },
-        { 'enable whichkey', M.enable_which_key },
-        { 'set transparent', M.set_transparent },
     }
     -- 1. wyciągamy same nazwy do wyświetlenia (zachowując kolejność z menu_items)
     local lista_wyswietlana = {}
