@@ -185,14 +185,6 @@ vim.keymap.set('n', '<leader>u', function()
 end, { desc = 'UndoTree' })
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'przenosi zaznaczenie w dół' })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'przenosi zaznaczenie w górę' })
-vim.keymap.set("n", "<leader>s.", function()
-    require('fzf-lua').oldfiles({
-        winopts = {
-            preview = { hidden = "nohidden" },
-            fullscreen = true,
-        },
-    })
-end, { desc = "Ostatnio edytowane pliki" })
 -- tworzy nowy punkt undo po wprowadzeniu jednego ze znaków { " ", ".", ",", "!", "?" }
 for _, key in ipairs({ " ", ".", ",", "!", "?" }) do
     vim.keymap.set("i", key, key .. "<c-g>u", { silent = true })
