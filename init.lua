@@ -29,6 +29,7 @@ require('config.blink')
 require('config.lualine')
 require('config.lsp')
 require('config.autopairs')
+require('config.pomo')
 
 require('toggleterm').setup()
 require('mason').setup()
