@@ -553,6 +553,7 @@ function M.komendy()
     local menu_items = {
         { "kolorki", M.kolory },
         { 'toggle number', function() vim.cmd('set number!') end },
+        { 'toggle relativenumber', function() vim.cmd('set relativenumber!') end },
     }
     -- 1. wyciągamy same nazwy do wyświetlenia (zachowując kolejność z menu_items)
     local lista_wyswietlana = {}

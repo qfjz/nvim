@@ -79,6 +79,7 @@
 | `Leader-u`    | uruchamia okno `undotree`                                                               |
 | `zn`          | zamienia `zn` na `zm`                                                                   |
 | `zm`          | zamienia `zm` na `zn`                                                                   |
+| `Leader-xx`   | przeładowuje plik lua                                                                   |
 
 ### LocalLeader
 

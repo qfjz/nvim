@@ -207,3 +207,7 @@ vim.keymap.set({ 'n', 'x' }, 'gg', 'gg', { desc = 'początek pliku' })
 vim.keymap.set({ 'n', 'x' }, 'go', 'go', { desc = 'początek pliku' })
 vim.keymap.set({ 'n', 'x' }, 'G', 'G', { desc = 'koniec pliku' })
 vim.keymap.set('n', '<leader>k', [[<cmd>lua require('.functions').komendy()<cr>]], { desc = 'menu komend' })
+vim.keymap.set('n', '<leader>xx', function()
+    vim.cmd[[luafile %]]
+    vim.notify('przeładowałem plik ' .. vim.fn.expand('%:p'))
+end,  { desc = 'luafile current file' })
