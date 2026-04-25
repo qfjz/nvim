@@ -118,3 +118,18 @@
 | `Ctrl-l`     | kursor w prawo                                     |
 | `Ctrl-p`     | wkleja w linii komend                              |
 | `Ctrl-;`     | zastępuje Enter                                    |
+
+## Neotree buffers
+
+| Skrót | Opis                             |
+|-------|----------------------------------|
+| `P`   | otwiera podgląd bufora           |
+| `q`   | zamyka okno                      |
+
+## Neotree menadżer plików
+
+| Skrót | Opis                             |
+|-------|----------------------------------|
+| `P`   | otwiera podgląd bufora           |
+| `q`   | zamyka okno                      |
+| `a`   | tworzy nowy plik / katalog       |

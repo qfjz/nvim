@@ -221,6 +221,17 @@ function M.fzf_files()
     })
 end
 
+function M.neotree_symlink()
+    local file_path = vim.api.nvim_buf_get_name(0)
+    if file_path ~= "" then
+        local resolved_path = vim.fn.resolve(file_path)
+        local dir_path = vim.fn.fnamemodify(resolved_path, ":h")
+        vim.cmd("Neotree dir=" .. dir_path .. " toggle")
+    else
+        print("Brak pliku w bieżącym buforze")
+    end
+end
+
 function M.create_floating_scratch(content)
     -- Get editor dimensions
     local width = vim.api.nvim_get_option_value("columns", {})
