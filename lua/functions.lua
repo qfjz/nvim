@@ -228,7 +228,7 @@ function M.neotree_symlink()
         local dir_path = vim.fn.fnamemodify(resolved_path, ":h")
         vim.cmd("Neotree dir=" .. dir_path .. " toggle")
     else
-        print("Brak pliku w bieżącym buforze")
+        vim.cmd('Neotree toggle')
     end
 end
 
