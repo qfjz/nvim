@@ -52,6 +52,23 @@ end
 
 -- zapisuje plik write_file()
 function M.write_file()
+    local bt = vim.bo.buftype
+    local ft = vim.bo.filetype
+    local ignore_buftype = {
+        nofile = true,
+        prompt = true,
+        terminal = true,
+    }
+    local ignore_filetype = {
+        ["neo-tree"] = true,
+        git = true,
+        gitcommit = true,
+        oil = true,
+    }
+    if ignore_buftype[bt] or ignore_filetype[ft] then
+        vim.notify("Pomijam zapis dla bufora typu: " .. ft .. " (" .. bt .. ")")
+        return
+    end
     for _, v in ipairs(vim.fn.getbufinfo("%")) do
         if v.name == "" then
             vim.notify("Bufor bez nazwy, plik nie zostanie zapisany.")
