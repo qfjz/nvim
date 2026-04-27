@@ -24,6 +24,7 @@ vim.pack.add({
     { src = 'https://github.com/tomasky/bookmarks.nvim' },
     { src = 'https://github.com/nvim-telescope/telescope.nvim' },
     { src = 'https://github.com/epwalsh/pomo.nvim' },
+    { src = 'https://github.com/jamessan/vim-gnupg' },
 })
 
 -- kolory

@@ -42,6 +42,17 @@ vim.cmd.packadd[[nvim.difftool]]
 
 vim.cmd.colorscheme[[catppuccin-mocha]]
 
+-- gnupg
+vim.g.GPGPreferSymmetric = 0
+vim.g.GPGUseAgent = 1
+vim.g.GPGPreferArmor = 1
+vim.g.GPGPreferSign = 1
+-- ID klucza pobiera ze zmienne systemowej $GPG_ID należy ustawić ją w swojej powłoce systemowej
+local gpg_id = os.getenv("GPG_ID")
+vim.g.GPGDefaultRecipients = { gpg_id }
+-- vim.g.GPGDefaultRecipients = { "2384028409853452304", gpg_id }
+vim.g.GPGFilePattern = "*{gpg,asc,gpg.md}"
+
 -- source ~/.config/nvim/lua/user-settings.lua
 local status_ok, _ = pcall(require, "user-settings")
 if not status_ok then
