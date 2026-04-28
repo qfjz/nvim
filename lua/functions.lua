@@ -584,6 +584,7 @@ function M.komendy()
         { 'enable whichkey', function()
             vim.pack.add({ { src = "https://github.com/folke/which-key.nvim" }, })
             require("which-key").setup()
+
         end },
     }
     -- 1. wyciągamy same nazwy do wyświetlenia (zachowując kolejność z menu_items)

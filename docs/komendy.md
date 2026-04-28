@@ -19,22 +19,22 @@
 
 Lista pomocnych komend dostarczanych przez pluginy
 
-| Komenda                   | Opis                                        |
-|---------------------------|---------------------------------------------|
-| BarbarDisable             | wyłączenie Barbar                           |
-| BarbarEnable              | wyłączenie Barbar                           |
-| BufferCloseAllButCurrent  | zamyka wszystkie bufory poza aktywnym       |
-| BufferOrderByBufferNumber | sortuje bufory po numerze                   |
-| BufferPick                | wybór bufora za pomocą jednego klawisza     |
-| BufferRestore             | otwiera wcześniej zamknięty bufor           |
-| FzfLua                    | zestaw komend FzfLua                        |
-| Gitsigns                  | zestaw komend Gitsigns                      |
-| InspectTree               | uruchamia TreeSitter w trybie interaktywnym |
-| Mason                     | instalacja LSP                              |
-| NoiceAll                  | wyświetla komunikaty                        |
-| Oil                       | uruchamia menadżer plików Oil               |
-| Open                      | otwiera plik w domyślnym programie          |
-| ShowkeysToggle            | wyświetlanie wduszanych klawiszy            |
-| Telescope                 | zestaw komend Telescope                     |
-| TimerStart                | uruchamia pomodoro                          |
-| TimerStop                 | zatrzymuje pomodoro                         |
+| Komenda                     | Opis                                        |
+|-----------------------------|---------------------------------------------|
+| `BarbarDisable`             | wyłączenie Barbar                           |
+| `BarbarEnable`              | wyłączenie Barbar                           |
+| `BufferCloseAllButCurrent`  | zamyka wszystkie bufory poza aktywnym       |
+| `BufferOrderByBufferNumber` | sortuje bufory po numerze                   |
+| `BufferPick`                | wybór bufora za pomocą jednego klawisza     |
+| `BufferRestore`             | otwiera wcześniej zamknięty bufor           |
+| `FzfLua`                    | zestaw komend FzfLua                        |
+| `Gitsigns`                  | zestaw komend Gitsigns                      |
+| `InspectTree`               | uruchamia TreeSitter w trybie interaktywnym |
+| `Mason`                     | instalacja LSP                              |
+| `NoiceAll`                  | wyświetla komunikaty                        |
+| `Oil`                       | uruchamia menadżer plików Oil               |
+| `Open`                      | otwiera plik w domyślnym programie          |
+| `ShowkeysToggle`            | wyświetlanie wduszanych klawiszy            |
+| `Telescope`                 | zestaw komend Telescope                     |
+| `TimerStart`                | uruchamia pomodoro                          |
+| `TimerStop`                 | zatrzymuje pomodoro                         |
