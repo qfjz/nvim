@@ -63,7 +63,6 @@ function M.write_file()
         ["neo-tree"] = true,
         git = true,
         gitcommit = true,
-        oil = true,
     }
     if ignore_buftype[bt] or ignore_filetype[ft] then
         vim.notify("Pomijam zapis dla bufora typu: " .. ft .. " (" .. bt .. ")")
