@@ -586,6 +586,8 @@ function M.komendy()
             require("which-key").setup()
 
         end },
+        { 'scratchpad - nowy plik', function() require('functions').scratchpad() end },
+        { 'scratchpad - wybór istniejącego pliku', function() require('functions').select_scratchpad() end }
     }
     -- 1. wyciągamy same nazwy do wyświetlenia (zachowując kolejność z menu_items)
     local lista_wyswietlana = {}
