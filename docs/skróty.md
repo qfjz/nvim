@@ -80,17 +80,19 @@
 | `zn`          | zamienia `zn` na `zm`                                                                   |
 | `zm`          | zamienia `zm` na `zn`                                                                   |
 | `Leader-xx`   | przeładowuje plik lua                                                                   |
+| `Leader-st`   | dodaje nowe zadanie do pliku ~/todo.md                                                  |
+| `Leader-sn`   | dodaje nowe zadanie do wybranego pliku                                                  |
 
 ### LocalLeader
 
-| Skrót                     | Opis                                                                          |
-|---------------------------|-------------------------------------------------------------------------------|
-| `LocalLeader-r`           | restart NVim                                                                  |
-| `LocalLeader-w`           | toggle wrap                                                                   |
-| `LocalLeader-LocalLeader` | zastępuje `ciw`                                                               |
-| `LocalLeader-c`           | zastępuje `ciw`                                                               |
-| `LocalLeader-d`           | zastępuje `diw`                                                               |
-| `LocalLeader-y`           | zastępuje `yiw`                                                               |
+| Skrót                     | Opis              |
+|---------------------------|-------------------|
+| `LocalLeader-r`           | restart NVim      |
+| `LocalLeader-w`           | toggle wrap       |
+| `LocalLeader-LocalLeader` | zastępuje `ciw`   |
+| `LocalLeader-c`           | zastępuje `ciw`   |
+| `LocalLeader-d`           | zastępuje `diw`   |
+| `LocalLeader-y`           | zastępuje `yiw`   |
 
 ## Tryb VISUAL
 
@@ -118,6 +120,12 @@
 | `Ctrl-l`     | kursor w prawo                                     |
 | `Ctrl-p`     | wkleja w linii komend                              |
 | `Ctrl-;`     | zastępuje Enter                                    |
+
+## Terminal
+
+| Skrót        | Opis                                               |
+|--------------|----------------------------------------------------|
+| `<esc><esc>` | wychodzi z trybu INSERT                            |
 
 ## Neotree buffers
 

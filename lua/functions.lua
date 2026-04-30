@@ -612,4 +612,97 @@ function M.komendy()
     })
 end
 
+function M.new_task(filepath)
+    filepath = vim.fs.normalize(filepath)
+    if vim.fn.filereadable(filepath) == 0 then
+        vim.notify("Plik nie istnieje lub nie można go odczytać: " .. filepath, vim.log.levels.WARN)
+        return
+    end
+    vim.ui.input({
+        prompt = "Nowe zadanie: ",
+    }, function(input)
+        if not input or input == "" then
+            vim.notify("Anulowano – nic nie dodano", vim.log.levels.INFO)
+            return
+        end
+        local current_date = os.date("%Y-%m-%d")
+        local new_task_line = "- [ ] ⏳ " .. current_date .. " " .. input
+        local lines = vim.fn.readfile(filepath)
+        local new_content = {}
+        local header_found = false
+        local tasks = {}
+        for _, line in ipairs(lines) do
+            local trimmed = vim.trim(line)
+            if trimmed:match("^%s*#+%s*[Zz]adania%s*$") then
+                header_found = true
+                table.insert(new_content, line)           -- nagłówek
+                table.insert(new_content, "")             -- jedna pusta linia
+                table.insert(new_content, new_task_line)  -- nowe zadanie
+                goto continue
+            end
+            if header_found then
+                if vim.trim(line) ~= "" then
+                    table.insert(tasks, line)
+                end
+            else
+                table.insert(new_content, line)
+            end
+            ::continue::
+        end
+        if header_found then
+            for _, task_line in ipairs(tasks) do
+                table.insert(new_content, task_line)
+            end
+        else
+            -- Brak nagłówka → dodajemy na końcu BEZ duplikowania treści
+            -- new_content zawiera już całą oryginalną zawartość, więc tylko dopisujemy
+            if #new_content > 0 and vim.trim(new_content[#new_content]) ~= "" then
+                table.insert(new_content, "")
+            end
+            table.insert(new_content, "# Zadania")
+            table.insert(new_content, "")
+            table.insert(new_content, new_task_line)
+        end
+        local ok, err = pcall(function()
+            vim.fn.writefile(new_content, filepath)
+        end)
+        if ok then
+            vim.notify("Dodano zadanie z datą " .. current_date, vim.log.levels.INFO)
+        else
+            vim.notify("Błąd zapisu pliku: " .. tostring(err), vim.log.levels.ERROR)
+        end
+    end)
+end
+
+function M.choose_tasks_file()
+    require('fzf-lua').files({
+        prompt = 'Wybierz plik do dodania zadania > ',
+        cmd   = 'fd --type f --follow --hidden --maxdepth 2 --no-ignore --glob "*.md"',
+        -- ↑ możesz zmienić rozszerzenia lub usunąć --hidden / --no-ignore
+        cwd   = vim.fn.expand('~/'),   -- ← zmień na swój katalog bazowy
+        actions = {
+            -- po naciśnięciu Enter na pliku
+            ['default'] = function(selected, opts)
+                if #selected == 0 then return end
+                local path_util = require('fzf-lua.path')
+                local entry = path_util.entry_to_file(selected[1], opts)
+                local full_path = entry.path
+                if full_path and not path_util.is_absolute(full_path) then
+                    full_path = vim.fs.joinpath(opts.cwd or vim.loop.cwd(), full_path)
+                end
+                vim.notify("Wybrano: " .. full_path)
+                require('functions').new_task(full_path)
+            end,
+        },
+        winopts = {
+            height   = 0.80,
+            width    = 0.90,
+            row      = 0.10,
+            col      = 0.05,
+            preview  = { hidden = 'nohidden' },   -- możesz zmienić na 'hidden'
+            title    = ' Dodaj zadanie do pliku ',
+        },
+    })
+end
+
 return M
