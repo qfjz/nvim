@@ -145,6 +145,7 @@ vim.keymap.set('t', [[<c-h>]], [[<c-\><c-n><c-w>h]])
 vim.keymap.set('t', [[<c-j>]], [[<c-\><c-n><c-w>j]])
 vim.keymap.set('t', [[<c-k>]], [[<c-\><c-n><c-w>k]])
 vim.keymap.set('t', [[<c-l>]], [[<c-\><c-n><c-w>l]])
+vim.keymap.set('t', [[<esc><esc>]], [[<c-\><c-n>]], { desc = 'wyjście z trybu INSERT' })
 --  QuickFix
 vim.keymap.set('n', [[<c-q>]], [[<cmd>copen<cr>]], { desc = 'Otwiera listę quickfix' })
 vim.keymap.set('n', ']q', vim.cmd.cnext, { desc = 'Przechodzi do następnego elementu na liście quickfix' })
