@@ -584,7 +584,6 @@ function M.komendy()
         { 'enable whichkey', function()
             vim.pack.add({ { src = "https://github.com/folke/which-key.nvim" }, })
             require("which-key").setup()
-
         end },
         { 'scratchpad - nowy plik', function() require('functions').scratchpad() end },
         { 'scratchpad - wybór istniejącego pliku', function() require('functions').select_scratchpad() end }
