@@ -583,10 +583,12 @@ function M.komendy()
         { 'toggle relativenumber', function() vim.cmd('set relativenumber!') end },
         { 'enable whichkey', function()
             vim.pack.add({ { src = "https://github.com/folke/which-key.nvim" }, })
-            require("which-key").setup()
+            require("which-key")
         end },
         { 'scratchpad - nowy plik', function() require('functions').scratchpad() end },
-        { 'scratchpad - wybór istniejącego pliku', function() require('functions').select_scratchpad() end }
+        { 'scratchpad - wybór istniejącego pliku', function() require('functions').select_scratchpad() end },
+        { 'pomo 1m', function() vim.cmd[[TimerStart 1m]] end, { desc = 'uruchamia timer na 1 minutę' }},
+        { 'pomo 3m', function() vim.cmd[[TimerStart 3m]] end, { desc = 'uruchamia timer na 3 minuty' }},
     }
     -- 1. wyciągamy same nazwy do wyświetlenia (zachowując kolejność z menu_items)
     local lista_wyswietlana = {}
