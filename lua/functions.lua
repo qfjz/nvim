@@ -589,6 +589,9 @@ function M.komendy()
         { 'scratchpad - wybór istniejącego pliku', function() require('functions').select_scratchpad() end },
         { 'pomo 1m', function() vim.cmd[[TimerStart 1m]] end, { desc = 'uruchamia timer na 1 minutę' }},
         { 'pomo 3m', function() vim.cmd[[TimerStart 3m]] end, { desc = 'uruchamia timer na 3 minuty' }},
+        { 'pomo 15m', function() vim.cmd[[TimerStart 15m]] end, { desc = 'uruchamia timer na 15 minut' }},
+        { 'pomo 30m', function() vim.cmd[[TimerStart 30m]] end, { desc = 'uruchamia timer na 30 minut' }},
+        { 'restart', function() vim.cmd[[Restart]] end, { desc = 'uruchamia ponownie Neovim' }},
     }
     -- 1. wyciągamy same nazwy do wyświetlenia (zachowując kolejność z menu_items)
     local lista_wyswietlana = {}
