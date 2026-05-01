@@ -66,5 +66,10 @@ vim.api.nvim_create_user_command('WhichKeyEnable', function()
     vim.pack.add({
         { src = "https://github.com/folke/which-key.nvim" },
     })
-    require("which-key").setup()
+    require("which-key")
 end, { desc = 'Uruchamia WhichKey' })
+
+vim.api.nvim_create_user_command('Restart', function()
+    vim.cmd[[mksession! ~/tmp/nvimsession]]
+    vim.cmd[[restart source ~/tmp/nvimsession | !rm ~/tmp/nvimsession]]
+end, { desc = 'Restart' })

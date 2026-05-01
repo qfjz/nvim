@@ -14,6 +14,7 @@
 | `ObsSP`          | wybór tymczasowego notatnika z katalogu Obsidian.md           |
 | `Kolory`         | zmiana schematu kolorystycznego                               |
 | `WhichKeyEnable` | uruchamia WhichKey                                            |
+| `Restart`        | restartuje Neovim i otwiera poprzednią sesję                  |
 
 ## Komendy oferowane przez pluginy
 
