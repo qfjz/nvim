@@ -814,4 +814,26 @@ function M.get_latest_modified_file(dir)
   return latest_file
 end
 
+-- wymaga ustawienia przezroczystości w terminalu
+function M.set_transparent()
+    local groups = {
+        'Normal',
+        'NormalNC',
+        'EndOfBuffer',
+        'NormalFloat',
+        'FloatBorder',
+        'SignColumn',
+        'StatusLine',
+        'StatusLineNC',
+        'TabLine',
+        'TabLineFill',
+        'TabLineSel',
+        'ColorColumn',
+    }
+    for _, g in ipairs(groups) do
+        vim.api.nvim_set_hl(0, g, { bg = 'NONE' })
+    end
+    vim.api.nvim_set_hl(0, 'TabLineFill', { bg = 'NONE', fg = '#767676' })
+end
+
 return M
