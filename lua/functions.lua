@@ -6,6 +6,7 @@ local BmDirs = os.getenv("BM_DIRS")     -- plik z ulubionymi katalogami ($HOME/.
 local BmFiles = os.getenv("BM_FILES")   -- plik z ulubionymi plikami ($HOME/.config/bmfiles)
 local SPDirENV = os.getenv("SPDir")     -- katalog z tymczasowymi notatkami ($HOME/Notes/SP)
 local OBS_SP = os.getenv("OBS_SP")      -- katalog z tymczasowymi notatkami w Obsidian.md ($HOME/Obsidian/SP)
+local Notes_Dir = os.getenv("NOTES_DIR")
 
 function M.config_files()
     -- local rg_cmd = "rg --files --follow -g '!plugin/' -g '*.lua'"
@@ -518,6 +519,15 @@ function M.select_scratchpad()
     })
 end
 
+function M.last_scratchpad()
+    local sp = OBS_SP or vim.fn.resolve(vim.fn.expand('$HOME/Obsidian/SP'))
+    local latest = require('functions').get_latest_modified_file(sp)
+    if latest then
+        local file = vim.fn.fnameescape(latest)
+        require('functions').scratchpad(file)
+    end
+end
+
 -- otwiera wybrany plik Scratchpad*.md jako normalny bufor
 function M.obsidian_scratchpad()
     local sp = OBS_SP or vim.fn.resolve(vim.fn.expand('$HOME/Obsidian/SP'))
@@ -587,6 +597,7 @@ function M.komendy()
         end },
         { 'scratchpad - nowy plik', function() require('functions').scratchpad() end },
         { 'scratchpad - wybór istniejącego pliku', function() require('functions').select_scratchpad() end },
+        { 'scratchpad - ostatnio modyfikowany plik', function() require('functions').last_scratchpad() end },
         { 'pomo 1m', function() vim.cmd[[TimerStart 1m]] end, { desc = 'uruchamia timer na 1 minutę' }},
         { 'pomo 3m', function() vim.cmd[[TimerStart 3m]] end, { desc = 'uruchamia timer na 3 minuty' }},
         { 'pomo 15m', function() vim.cmd[[TimerStart 15m]] end, { desc = 'uruchamia timer na 15 minut' }},
@@ -707,6 +718,50 @@ function M.choose_tasks_file()
             title    = ' Dodaj zadanie do pliku ',
         },
     })
+end
+
+function M.notes_files()
+    if Notes_Dir == nil then
+        Notes_Dir = vim.fn.resolve(vim.fn.expand('$HOME/Notes/'))
+    end
+    if vim.fn.isdirectory(Notes_Dir) == 0 then
+        vim.notify('Brak katalogu ' .. Notes_Dir,  4)
+        return
+    end
+    local rg_cmd = "fd -I -t f --follow -H -g '*.md' --strip-cwd-prefix -X eza -1 --sort=modified --reverse"
+    local cwd_dir = Notes_Dir
+    local prompt = " Notes > "
+    require"fzf-lua".files({
+        prompt = prompt,
+        cwd = cwd_dir,
+        cmd = rg_cmd,
+        winopts = {
+            preview = { hidden = "nohidden" },
+            title = " Notes ",
+            fullscreen = true,
+        }
+    })
+end
+
+--- Znajduje ostatnio modyfikowany plik w podanym katalogu
+--- @param dir string Ścieżka do katalogu (np. "~/tmp")
+--- @return string|nil ścieżka do pliku lub nil jeśli katalog pusty
+function M.get_latest_modified_file(dir)
+  dir = vim.fs.normalize(dir)  -- rozwinie '~' na prawidłową ścieżkę na przykład /home/user
+  local latest_file = nil
+  local latest_mtime = 0
+  -- Iterujemy po wszystkich plikach w katalogu
+  for name, type in vim.fs.dir(dir) do
+    if type == 'file' then
+      local path = vim.fs.joinpath(dir, name)
+      local stat = vim.loop.fs_stat(path)
+      if stat and stat.mtime.sec > latest_mtime then
+        latest_mtime = stat.mtime.sec
+        latest_file = path
+      end
+    end
+  end
+  return latest_file
 end
 
 return M
