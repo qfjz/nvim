@@ -7,6 +7,7 @@ local BmFiles = os.getenv("BM_FILES")   -- plik z ulubionymi plikami ($HOME/.con
 local SPDirENV = os.getenv("SPDir")     -- katalog z tymczasowymi notatkami ($HOME/Notes/SP)
 local OBS_SP = os.getenv("OBS_SP")      -- katalog z tymczasowymi notatkami w Obsidian.md ($HOME/Obsidian/SP)
 local Notes_Dir = os.getenv("NOTES_DIR")
+local QFJZ_Notes_Dir = os.getenv('QFJZ_Notes_Dir')
 
 function M.config_files()
     -- local rg_cmd = "rg --files --follow -g '!plugin/' -g '*.lua'"
@@ -490,6 +491,21 @@ function M.scratchpad(raw_args)
     vim.cmd("startinsert")
 end
 
+-- pozwala wybrać nazwę tymczasowej notatki
+function M.new_scratchpad()
+    local sp = SPDirENV or vim.fn.resolve(vim.fn.expand('$HOME/Notes/SP'))
+    vim.ui.input({
+        prompt = 'Nazwa notatki: ',
+        completion = 'file',
+        default = sp,
+    }, function(input)
+        if input then
+            -- Łączymy wpisaną nazwę z Twoimi stałymi parametrami
+            require('functions').scratchpad(input .. " 20 topleft")
+        end
+    end)
+end
+
 function M.select_scratchpad()
     local SP = SPDirENV or vim.fn.resolve(vim.fn.expand('$HOME/Notes/SP'))
     local sp_dir = vim.fn.expand(SP)
@@ -596,6 +612,7 @@ function M.komendy()
             require("which-key")
         end },
         { 'scratchpad - nowy plik', function() require('functions').scratchpad() end },
+        { 'scratchpad - nowy plik (podaj nazwę)', function() require('functions').new_scratchpad() end },
         { 'scratchpad - wybór istniejącego pliku', function() require('functions').select_scratchpad() end },
         { 'scratchpad - ostatnio modyfikowany plik', function() require('functions').last_scratchpad() end },
         { 'pomo 1m', function() vim.cmd[[TimerStart 1m]] end, { desc = 'uruchamia timer na 1 minutę' }},
@@ -603,6 +620,7 @@ function M.komendy()
         { 'pomo 15m', function() vim.cmd[[TimerStart 15m]] end, { desc = 'uruchamia timer na 15 minut' }},
         { 'pomo 30m', function() vim.cmd[[TimerStart 30m]] end, { desc = 'uruchamia timer na 30 minut' }},
         { 'restart', function() vim.cmd[[Restart]] end, { desc = 'uruchamia ponownie Neovim' }},
+        { 'QFJZ Notes', function() require('functions').fzf_md_files(QFJZ_Notes_Dir) end },
     }
     -- 1. wyciągamy same nazwy do wyświetlenia (zachowując kolejność z menu_items)
     local lista_wyswietlana = {}
@@ -740,6 +758,30 @@ function M.notes_files()
             title = " Notes ",
             fullscreen = true,
         }
+    })
+end
+
+-- przeszukiwanie plików Markdown w podanym katalogu
+function M.fzf_md_files(dir)
+    local expanded = dir and vim.fn.expand(dir) or ""
+    if not dir or vim.fn.isdirectory(expanded) == 0 then
+        local msg = dir and ('Katalog ' .. dir .. ' nie istnieje') or 'Nie podano katalogu'
+        vim.notify(msg, 4)
+        return
+    end
+    local cwd_dir = vim.fs.normalize(dir)
+    require('fzf-lua').files({
+        prompt       = "Search : ",
+        cmd          = "fd -I -t f --follow -H -g '*.md' --strip-cwd-prefix",
+        cwd          = cwd_dir,
+        cwd_prompt   = false,
+        cwd_header   = false,
+        winopts = {
+            preview    = { hidden = "nohidden" },
+            title      = " Search ",
+            fullscreen = true,
+        },
+        fzf_opts = { ['--exact'] = '', ['--no-sort'] = '' },
     })
 end
 
