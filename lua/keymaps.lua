@@ -41,9 +41,9 @@ vim.keymap.set("n", [[<leader>N]], function() vim.cmd[[Neotree reveal_force_cwd 
 -- Otwiera Neotree podążając za linkiem symbolicznym
 vim.keymap.set("n", [[<leader>n]], [[<cmd>lua require('functions').neotree_symlink()<cr>]] , { desc = 'Neotree (resolve symlink)' })
 vim.keymap.set('n', '<leader>tn', '<cmd>enew<cr>', { desc = 'nowy bufor' })
-vim.keymap.set('n', '<leader>tf', [[<cmd>lua require('functions').f_terminal()<cr>]], { desc = 'terminal'})
-vim.keymap.set("n", "<leader>tT", [[<cmd>lua require('functions').t_term()<cr>]], { desc = 'terminal'})
-vim.keymap.set("n", "<leader>tt", [[<cmd>lua require('functions').terminal()<cr>]], { desc = 'terminal'})
+vim.keymap.set('n', '<leader>tf', function() require('functions').f_terminal() end, { desc = 'terminal'})
+vim.keymap.set("n", "<leader>tT", function() require('functions').t_term() end, { desc = 'terminal'})
+vim.keymap.set("n", "<leader>tt", function() require('functions').terminal() end, { desc = 'terminal'})
 vim.keymap.set("n", "<leader>tg", function() require('functions').terminal_git() end, { desc = 'terminal git root'})
 vim.keymap.set({ 'n', 'i' }, '<esc>', '<cmd>nohl<cr><cmd>NoiceDismiss<cr><esc>', { silent = true, desc = "wyłącza wyróżnianie szukanego tekstu" })
 -- vim.keymap.set('i', 'kj', '<cmd>nohl<cr><cmd>NoiceDismiss<cr><esc>', { silent = true, desc = "wyłącza wyróżnianie szukanego tekstu" })
