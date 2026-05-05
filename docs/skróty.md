@@ -82,6 +82,7 @@
 | `Leader-xx`   | przeładowuje plik lua                                                                   |
 | `Leader-st`   | dodaje nowe zadanie do pliku ~/todo.md                                                  |
 | `Leader-sn`   | dodaje nowe zadanie do wybranego pliku                                                  |
+| `Leader-gd`   | tworzy katalog o nazie wyrazu pod kursorem                                              |
 
 ### LocalLeader
 
