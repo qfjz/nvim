@@ -836,4 +836,48 @@ function M.set_transparent()
     vim.api.nvim_set_hl(0, 'TabLineFill', { bg = 'NONE', fg = '#767676' })
 end
 
+-- gd w nowszej rozszerzonej wersji
+function M.gd()
+    local fidget = require("fidget")
+    local home = os.getenv("HOME")
+    local cfile = vim.fn.resolve(vim.fn.expand("<cfile>"))
+    local file_dir = vim.fn.substitute(cfile, "\\~", home, "")
+    if vim.fn.isdirectory(file_dir) == 1 then
+        -- katalog istnieje
+        -- Otwiera wyszukiwarkƒô plik√≥w
+        fidget.notify(file_dir, vim.log.levels.INFO, { annote = Filename, key = "GD" })
+        require('fzf-lua').files({
+            prompt = "Pliki",
+            cwd = file_dir,
+            winopts = {
+                preview = { hidden = "nohidden" },
+                title = " Wyszukiwarka plików ",
+                fullscreen = true,
+            }
+        })
+    else
+        if vim.fn.filereadable(file_dir) == 1 then
+            -- to jest plik
+            -- Otwiera plik
+            vim.cmd("edit " .. file_dir)
+        else
+            -- ścieżka nie istnieje, otwiera okno do podania katalogu do utworzenia
+            vim.ui.input({ prompt = "Podaj nazwę katalogu", default = file_dir .. "/", },
+                function(input)
+                    if not input then
+                        return
+                    end
+                    if input:gsub("^%s+", ""):gsub("%s+$", "") == "" then
+                        return vim.notify("Podaj nazwę katalogu")
+                    end
+                    local dir = vim.fs.dirname(input)
+                    if vim.fn.isdirectory(dir) == 0 then
+                        vim.fn.mkdir(dir, "p")
+                        fidget.notify("Utworzyłem katalog" .. " " .. dir, vim.log.levels.INFO, { annote = Filename, key = "GD" })
+                    end
+                end)
+        end
+    end
+end
+
 return M
