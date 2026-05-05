@@ -151,6 +151,7 @@ function M.f_terminal(cmd)
 end
 
 function M.terminal()
+    M.cdfd()
     vim.cmd.vnew()
     vim.cmd.term()
     vim.cmd.wincmd("J")
@@ -836,7 +837,7 @@ function M.set_transparent()
     vim.api.nvim_set_hl(0, 'TabLineFill', { bg = 'NONE', fg = '#767676' })
 end
 
--- gd w nowszej rozszerzonej wersji
+-- tworzy katalog o nazwie wyrazu pod kursorem, jeśli chcesz utworzyć podkatalog pamiętaj żeby dodać '/' na końcu
 function M.gd()
     local fidget = require("fidget")
     local home = os.getenv("HOME")
@@ -844,7 +845,7 @@ function M.gd()
     local file_dir = vim.fn.substitute(cfile, "\\~", home, "")
     if vim.fn.isdirectory(file_dir) == 1 then
         -- katalog istnieje
-        -- Otwiera wyszukiwarkƒô plik√≥w
+        -- Otwiera wyszukiwarkę plików
         fidget.notify(file_dir, vim.log.levels.INFO, { annote = Filename, key = "GD" })
         require('fzf-lua').files({
             prompt = "Pliki",
