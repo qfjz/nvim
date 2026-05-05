@@ -159,6 +159,23 @@ function M.terminal()
     vim.api.nvim_win_set_height(0, 9)
 end
 
+function M.cd_git_root()
+    local result = vim.fn.system("git rev-parse --is-inside-work-tree")
+    if vim.v.shell_error == 0 and result:find("true") then
+        local root_dir = vim.fn.system("git rev-parse --show-toplevel")
+        vim.cmd("cd " .. root_dir)
+    end
+end
+
+function M.terminal_git()
+    M.cd_git_root()
+    vim.cmd.vnew()
+    vim.cmd.term()
+    vim.cmd.wincmd("J")
+    vim.cmd('startinsert')
+    vim.api.nvim_win_set_height(0, 9)
+end
+
 -- otwiera terminal podążając za linkiem symbolicznym otwartego pliku
 function M.t_term()
     local file_path = vim.api.nvim_buf_get_name(0)

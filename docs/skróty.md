@@ -34,6 +34,7 @@
 | `Leader-tf`   | uruchamia funkcję `f_terminal()`                                                        |
 | `Leader-tt`   | uruchamia funkcję `terminal()`                                                          |
 | `Leader-tT`   | uruchamia funkcję `t_term()`                                                            |
+| `Leader-tg`   | uruchamia funkcję `cd_git_root`                                                         |
 | `'`           | uruchamia `FzfLua marks`                                                                |
 | `"`           | uruchamia `FzfLua registers`                                                            |
 | `Leader-v`    | uruchamia funkcję `config_files()`                                                      |
