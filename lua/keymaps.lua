@@ -13,8 +13,6 @@ vim.keymap.set('n', '<leader>ts0', '<cmd>set scrolloff=0<cr>', { desc = 'Scrollo
 vim.keymap.set('n', '<leader>ts3', '<cmd>set scrolloff=3<cr>', { desc = 'Scrolloff 3' })
 vim.keymap.set('n', '<leader>ts9', '<cmd>set scrolloff=999<cr>', { desc = 'Scrolloff 999' })
 vim.keymap.set('n', '<leader>tss', function() vim.opt.spell = true; vim.opt.spelllang='pl' end, { desc = 'sprawdzanie pisownii' })
--- kiedy przeszukujemy historię komend, to możemy szybko zatwierdzić komendę za pomocą Ctrl-;
-vim.keymap.set('c', '<c-;>', [[<cr>]])
 vim.keymap.set('n', '<leader>s.', function()
     require('fzf-lua').oldfiles({
         winopts = {
@@ -140,7 +138,9 @@ vim.keymap.set('c', '<c-k>', '<up>')
 vim.keymap.set('c', '<c-h>', '<left>')
 vim.keymap.set('c', '<c-l>', '<right>')
 --
-vim.keymap.set("c", "<c-p>", [[<c-r>"]], { desc = "Wkleja w linii komend"})
+vim.keymap.set('c', '<c-p>', [[<c-r>"]], { desc = 'Wkleja w linii komend'})
+-- kiedy przeszukujemy historię komend, to możemy szybko zatwierdzić komendę za pomocą Ctrl-;
+vim.keymap.set('c', '<c-;>', [[<cr>]])
 -- terminal
 vim.keymap.set('t', [[<c-h>]], [[<c-\><c-n><c-w>h]])
 vim.keymap.set('t', [[<c-j>]], [[<c-\><c-n><c-w>j]])
@@ -151,28 +151,31 @@ vim.keymap.set('t', [[<esc><esc>]], [[<c-\><c-n>]], { desc = 'wyjście z trybu I
 vim.keymap.set('n', [[<c-q>]], [[<cmd>copen<cr>]], { desc = 'Otwiera listę quickfix' })
 vim.keymap.set('n', ']q', vim.cmd.cnext, { desc = 'Przechodzi do następnego elementu na liście quickfix' })
 vim.keymap.set('n', '[q', vim.cmd.cprev, { desc = 'Przechodzi do poprzedniego elementu na liście quickfix' })
+vim.keymap.set('n', '<leader>cdf', function()
+    require('functions').cdfd()
+end, { desc = 'przechodzi do katalogu w którym znajduje się edytowany plik' })
 -- Bookmarks
-vim.keymap.set("n", "<leader>cdd", function()
-    require("functions").CD()
-end, { desc = "Przechodzi do wybranego katalogu z pliku bmdirs" })
-vim.keymap.set("n", "<leader>cde", function()
-    require("functions").CDE()
-end, { desc = "Przechodzi do wybranego katalogu z pliku bmdirs i otwiera katalog w menadżerze plików" })
-vim.keymap.set("n", "<leader>cds", function()
-    require("functions").CDS()
-end, { desc = "Otwiera wyszukiwanie fzf-lua.files w wybranym katalogu z bmdirs" })
+vim.keymap.set('n', '<leader>cdd', function()
+    require('functions').CD()
+end, { desc = 'Przechodzi do wybranego katalogu z pliku bmdirs' })
+vim.keymap.set('n', '<leader>cde', function()
+    require('functions').CDE()
+end, { desc = 'Przechodzi do wybranego katalogu z pliku bmdirs i otwiera katalog w menadżerze plików' })
+vim.keymap.set('n', '<leader>cds', function()
+    require('functions').CDS()
+end, { desc = 'Otwiera wyszukiwanie fzf-lua.files w wybranym katalogu z bmdirs' })
 -- marks
 -- vim.keymap.set('n', 'mm', 'mm', { desc = 'ustawia znacznik m' })
 -- vim.keymap.set('n', 'M', '`m', { desc = 'przejście do znacznika m' })
-local bm = require "bookmarks"
-vim.keymap.set("n","mm",bm.bookmark_toggle)     -- add or remove bookmark at current line
-vim.keymap.set("n","mi",bm.bookmark_ann)        -- add or edit mark annotation at current line
-vim.keymap.set("n","mc",bm.bookmark_clean)      -- clean all marks in local buffer
-vim.keymap.set("n","mn",bm.bookmark_next)       -- jump to next mark in local buffer
-vim.keymap.set("n","mp",bm.bookmark_prev)       -- jump to previous mark in local buffer
-vim.keymap.set("n","ml",bm.bookmark_list)       -- show marked file list in quickfix window
-vim.keymap.set("n","mx",bm.bookmark_clear_all)  -- removes all bookmarks
-vim.keymap.set("n", "vv", "^vg_", { desc = "Zaznacza linię pomijając puste znaki na początku i znak końca linii" })
+local bm = require('bookmarks')
+vim.keymap.set('n','mm',bm.bookmark_toggle)     -- add or remove bookmark at current line
+vim.keymap.set('n','mi',bm.bookmark_ann)        -- add or edit mark annotation at current line
+vim.keymap.set('n','mc',bm.bookmark_clean)      -- clean all marks in local buffer
+vim.keymap.set('n','mn',bm.bookmark_next)       -- jump to next mark in local buffer
+vim.keymap.set('n','mp',bm.bookmark_prev)       -- jump to previous mark in local buffer
+vim.keymap.set('n','ml',bm.bookmark_list)       -- show marked file list in quickfix window
+vim.keymap.set('n','mx',bm.bookmark_clear_all)  -- removes all bookmarks
+vim.keymap.set('n', 'vv', "^vg_", { desc = "Zaznacza linię pomijając puste znaki na początku i znak końca linii" })
 vim.keymap.set('n', '<leader>u', function()
     vim.cmd.packadd[[nvim.undotree]]
     require('undotree').open()

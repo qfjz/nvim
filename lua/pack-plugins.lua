@@ -1,6 +1,7 @@
 vim.pack.add({
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
     { src = 'https://github.com/folke/flash.nvim' },
+    { src = 'https://github.com/folke/snacks.nvim' },
     { src = 'https://github.com/stevearc/oil.nvim' },
     { src = 'https://github.com/nvim-neo-tree/neo-tree.nvim' },
     { src = "https://github.com/ibhagwan/fzf-lua" },

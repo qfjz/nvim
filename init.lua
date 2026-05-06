@@ -36,6 +36,7 @@ require('mason').setup()
 require('nvim-treesitter').setup()
 require('bookmarks').setup()
 require('telescope').setup()
+require('snacks').setup()
 
 vim.cmd.packadd[[nvim.difftool]]
 -- vim.cmd.packadd[[nvim.undotree]]

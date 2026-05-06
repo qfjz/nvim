@@ -73,3 +73,5 @@ vim.api.nvim_create_user_command('Restart', function()
     vim.cmd[[mksession! ~/tmp/nvimsession]]
     vim.cmd[[restart source ~/tmp/nvimsession | !rm ~/tmp/nvimsession]]
 end, { desc = 'Restart' })
+
+vim.api.nvim_create_user_command('Messages', [[NoiceAll]], {})
