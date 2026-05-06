@@ -32,27 +32,27 @@ vim.keymap.set({ 'n', 'x' }, '<leader>p', '"+p')
 vim.keymap.set({ 'n', 'x' }, '<leader>P', '"+P')
 vim.keymap.set('n', '<leader>tg', function() require('functions').live_grep() end, { desc = 'Live Grep' })
 vim.keymap.set('n', '<leader>th', '<cmd>FzfLua helptags<cr>', { desc = 'Pomoc' })
-vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "Menadżer plików Oil" })
+vim.keymap.set('n', '<leader>e', require('oil').open, { desc = 'Menadżer plików Oil' })
 vim.keymap.set('n', '<leader>f', function() require('functions').fzf_files() end, { desc = 'FZF Files' })
 vim.keymap.set('n', '<leader>if', function() require('functions').file_info() end, { desc = 'FileInfo'})
-vim.keymap.set("n", [[<leader>N]], function() vim.cmd[[Neotree reveal_force_cwd toggle]] end, { desc = "Neotree" })
+vim.keymap.set('n', [[<leader>N]], function() vim.cmd[[Neotree reveal_force_cwd toggle]] end, { desc = 'Neotree' })
 -- Otwiera Neotree podążając za linkiem symbolicznym
-vim.keymap.set("n", [[<leader>n]], function() require('functions').neotree_symlink() end, { desc = 'Neotree (resolve symlink)' })
+vim.keymap.set('n', [[<leader>n]], function() require('functions').neotree_symlink() end, { desc = 'Neotree (resolve symlink)' })
 vim.keymap.set('n', '<leader>tn', '<cmd>enew<cr>', { desc = 'nowy bufor' })
 vim.keymap.set('n', '<leader>tf', function() require('functions').f_terminal() end, { desc = 'terminal'})
-vim.keymap.set("n", "<leader>tT", function() require('functions').t_term() end, { desc = 'terminal'})
-vim.keymap.set("n", "<leader>tt", function() require('functions').terminal() end, { desc = 'terminal'})
-vim.keymap.set("n", "<leader>tg", function() require('functions').terminal_git() end, { desc = 'terminal git root'})
-vim.keymap.set({ 'n', 'i' }, '<esc>', '<cmd>nohl<cr><cmd>NoiceDismiss<cr><esc>', { silent = true, desc = "wyłącza wyróżnianie szukanego tekstu" })
--- vim.keymap.set('i', 'kj', '<cmd>nohl<cr><cmd>NoiceDismiss<cr><esc>', { silent = true, desc = "wyłącza wyróżnianie szukanego tekstu" })
+vim.keymap.set('n', '<leader>tT', function() require('functions').t_term() end, { desc = 'terminal'})
+vim.keymap.set('n', '<leader>tt', function() require('functions').terminal() end, { desc = 'terminal'})
+vim.keymap.set('n', '<leader>tg', function() require('functions').terminal_git() end, { desc = 'terminal git root'})
+vim.keymap.set({ 'n', 'i' }, '<esc>', '<cmd>nohl<cr><cmd>NoiceDismiss<cr><esc>', { silent = true, desc = 'wyłącza wyróżnianie szukanego tekstu' })
+-- vim.keymap.set('i', 'kj', '<cmd>nohl<cr><cmd>NoiceDismiss<cr><esc>', { silent = true, desc = 'wyłącza wyróżnianie szukanego tekstu' })
 vim.keymap.set('n', [[']], '<cmd>FzfLua marks<cr>', { desc = 'marks' })
 vim.keymap.set('n', [["]], '<cmd>FzfLua registers<cr>', { desc = 'rejestry' })
 vim.keymap.set('n', '<leader>w', function() require('functions').write_file() end, { desc = 'zapisuje plik' })
 vim.keymap.set('n', '<bs>', function() require('functions').write_file() end)
-vim.keymap.set("n", [[<leader>q]], function()
+vim.keymap.set('n', [[<leader>q]], function()
     require('functions').write_file()
     vim.cmd[[q]]
-end, { desc = "Zapisuje zmiany i wychodzi" })
+end, { desc = 'Zapisuje zmiany i wychodzi' })
 vim.keymap.set('n', '<localleader>r', '<cmd>restart<cr>', { desc = 'restart NVim' })
 vim.keymap.set('n', '<localleader>w', '<cmd>set wrap!<cr>', { desc = 'toggle wrap' })
 vim.keymap.set('n', '<localleader><localleader>', 'ciw', { desc = 'ciw' })
@@ -63,13 +63,13 @@ vim.keymap.set('n', '<localleader>v', 'viw', { desc = 'viw' })
 vim.keymap.set('n', [[<leader>v]], function() require('functions').config_files() end, { desc = 'nvim configs' })
 vim.keymap.set('n', 'U', '<c-r>', { desc = 'redo' })
 vim.keymap.set('n', 'qq', '<cmd>qa<cr>', { desc = 'wychodzi z nvim' })
-vim.keymap.set("n", [[<s-enter>]], "mzO<esc>`z", { desc = "dodaje pustą linię powyżej bieżącej" })
-vim.keymap.set("n", [[<enter>]], "mzo<esc>`z", { desc = "dodaje pustą linię poniżej bieżącej" })
-vim.keymap.set({ 'n', 'v' }, 'gh', '0', { desc = "początek linii" })  -- ^
-vim.keymap.set({ 'n', 'v' }, 'gl', '$', { desc = "koniec linii" })    -- g_
+vim.keymap.set('n', [[<s-enter>]], 'mzO<esc>`z', { desc = 'dodaje pustą linię powyżej bieżącej' })
+vim.keymap.set('n', [[<enter>]], 'mzo<esc>`z', { desc = 'dodaje pustą linię poniżej bieżącej' })
+vim.keymap.set({ 'n', 'v' }, 'gh', '0', { desc = 'początek linii' })  -- ^
+vim.keymap.set({ 'n', 'v' }, 'gl', '$', { desc = 'koniec linii' })    -- g_
 vim.keymap.set('n', '<tab>', '<C-^>', { desc = 'przełączanie się pomiędzy dwoma ostatnimi buforami' })
-vim.keymap.set("n", [[<s-tab>]], "<cmd>FzfLua buffers winopts.fullscreen=true<cr>", { desc = "pozwala wybrać bufor z listy" })
-vim.keymap.set("n", [[<leader>b]], "<cmd>Neotree source=buffers reveal_force_cwd=true position=right action=focus toggle<cr>", { desc = "NeoTree otwarte bufory" })
+vim.keymap.set('n', [[<s-tab>]], '<cmd>FzfLua buffers winopts.fullscreen=true<cr>', { desc = 'pozwala wybrać bufor z listy' })
+vim.keymap.set('n', [[<leader>b]], '<cmd>Neotree source=buffers reveal_force_cwd=true position=right action=focus toggle<cr>', { desc = 'NeoTree otwarte bufory' })
 vim.keymap.set('n', 'H', '<cmd>bprevious<cr>', { desc = 'poprzedni bufor' })
 vim.keymap.set('n', 'L', '<cmd>bnext<cr>', { desc = 'następny bufor' })
 vim.keymap.set('n', [[<leader>d]], '<cmd>bdelete<cr>', { desc = 'usuwa bufor' })
@@ -103,25 +103,25 @@ vim.keymap.set('n', '<leader>sp', function()
     end
 end, { silent = true, desc = 'dzieli okno w poziomie' })
 -- plugin flash.nvim wyszukiwanie za pomocą "s"
-vim.keymap.set({ "n", "o", "x" }, "s", function()
-    require("flash").jump({
+vim.keymap.set({ 'n', 'o', 'x' }, 's', function()
+    require('flash').jump({
         search = {
             -- forward = true,
             wrap = true,
             multi_window = false,
             mode = function(str)
-                if str == " " then
+                if str == ' ' then
                     return str
                 end
                 -- wyszukuje tylko poczƒÖtku wyrazu
-                return "\\<" .. str
+                return '\\<' .. str
             end,
         },
     })
 end)
 -- plugin flash.nvim Remote Flash
-vim.keymap.set("o", "R", function()
-    require("flash").remote()
+vim.keymap.set('o', 'R', function()
+    require('flash').remote()
 end)
 vim.keymap.set({'o', 'n', 'x'}, 'S', function()
     require('flash').treesitter()
@@ -175,13 +175,13 @@ vim.keymap.set('n','mn',bm.bookmark_next)       -- jump to next mark in local bu
 vim.keymap.set('n','mp',bm.bookmark_prev)       -- jump to previous mark in local buffer
 vim.keymap.set('n','ml',bm.bookmark_list)       -- show marked file list in quickfix window
 vim.keymap.set('n','mx',bm.bookmark_clear_all)  -- removes all bookmarks
-vim.keymap.set('n', 'vv', "^vg_", { desc = "Zaznacza linię pomijając puste znaki na początku i znak końca linii" })
+vim.keymap.set('n', 'vv', '^vg_', { desc = 'Zaznacza linię pomijając puste znaki na początku i znak końca linii' })
 vim.keymap.set('n', '<leader>u', function()
     vim.cmd.packadd[[nvim.undotree]]
     require('undotree').open()
 end, { desc = 'UndoTree' })
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'przenosi zaznaczenie w dół' })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'przenosi zaznaczenie w górę' })
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'przenosi zaznaczenie w dół' })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'przenosi zaznaczenie w górę' })
 -- tworzy nowy punkt undo po wprowadzeniu jednego ze znaków { " ", ".", ",", "!", "?" }
 for _, key in ipairs({ " ", ".", ",", "!", "?" }) do
     vim.keymap.set("i", key, key .. "<c-g>u", { silent = true })
