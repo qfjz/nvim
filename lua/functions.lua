@@ -627,6 +627,8 @@ function M.komendy()
         { 'QFJZ Notes', function() require('functions').fzf_md_files(QFJZ_Notes_Dir, 0) end },
         { 'QFJZ Notes - ostatnio modyfikowane', function() require('functions').fzf_md_files(QFJZ_Notes_Dir, 1) end },
         { 'open in Neovide', function() M.open_in_neovide() end, { desc = 'otwiera plik w Neovide' }},
+        { 'Neovide settings', function() M.neovide_settings() end, { desc = 'ustawienia Neovide' }},
+        { 'ShowkeysToggle', function() vim.cmd[[ShowkeysToggle]] end, { desc = 'pokazuje wciskane klawisze' }},
     }
     -- 1. wyciągamy same nazwy do wyświetlenia (zachowując kolejność z menu_items)
     local lista_wyswietlana = {}
@@ -906,6 +908,11 @@ function M.keymaps(category_name)
             { "<tab>", "przełącza się pomiędzy dwoma ostatnio otwieranymi plikami" },
             { "qq", "opuść Neovim" },
             { "<localleader>r", "restart Neovim" },
+            { '<leader>co', 'pozostawia otwarte tylko aktywne okno'},
+            { '<leader>cc', 'zamyka okno'},
+            { '<leader>o', 'Snacks zoom'},
+            { ';', 'wejście do trybu COMMAND'},
+            { ':', 'historia komend'},
         }
     }
     if not category_name or (not data[category_name] and category_name ~= "wszystkie") then
@@ -1008,6 +1015,43 @@ function M.open_in_neovide()
     else
         print("No file is currently open")
     end
+end
+
+function M.neovide_settings()
+    if not vim.g.neovide then
+        vim.notify("To nie jest Neovide")
+        return
+    end
+    local menu_items = {
+        { 'Neovide version', function() vim.notify(vim.g.neovide_version) end },
+        { 'Ustawia przezroczystość na 0.2', function() vim.cmd[[lua vim.g.neovide_opacity = 0.2]] end },
+        { 'Ustawia przezroczystość na 0.7', function() vim.cmd[[lua vim.g.neovide_opacity = 0.7]] end },
+        { 'Ustawia przezroczystość na 1', function() vim.cmd[[lua vim.g.neovide_opacity = 1]] end },
+        { 'Zmień odstęp pomiędzy liniami na 0', function() vim.cmd('lua vim.opt.linespace = 0') end },
+        { 'Zmień odstęp pomiędzy liniami na 10', function() vim.cmd('lua vim.opt.linespace = 10') end },
+        { 'Zmień rozmiar czcionki na 12', function() vim.cmd[[lua vim.o.guifont = "ComicShannsMono Nerd Font Mono:h12"]] end },
+        { 'Zmień rozmiar czcionki na 18', function() vim.cmd[[lua vim.o.guifont = "ComicShannsMono Nerd Font Mono:h18"]] end },
+        { 'Zmień rozmiar czcionki na 21', function() vim.cmd[[lua vim.o.guifont = "ComicShannsMono Nerd Font Mono:h21"]] end },
+    }
+    local lista_wyswietlana = {}
+    for _, item in ipairs(menu_items) do
+        table.insert(lista_wyswietlana, item[1])
+    end
+    require("fzf-lua").fzf_exec(lista_wyswietlana, {
+        prompt = " wyszukaj > ",
+        winopts = { title = " komendy ", fullscreen = false },
+        actions = {
+            ["default"] = function(selected)
+                local choice = selected[1]
+                for _, item in ipairs(menu_items) do
+                    if item[1] == choice then
+                        item[2]()
+                        break
+                    end
+                end
+            end
+        }
+    })
 end
 
 return M
