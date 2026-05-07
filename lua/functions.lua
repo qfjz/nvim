@@ -188,23 +188,6 @@ function M.t_term()
     end
 end
 
--- wyświetla informacje o pliku
-function M.file_info()
-    local git_root = ''
-    local filename=vim.fn.resolve(vim.fn.expand("%:p"))
-    vim.fn.setreg([[*]], filename, 'c')
-    local result = vim.fn.system("git rev-parse --is-inside-work-tree")
-    if vim.v.shell_error == 0 and result:find("true") then
-        git_root = (vim.fn.system("git rev-parse --show-toplevel"))
-    end
-    local msg = ""
-    msg = msg .. filename .. "\nMod: " .. vim.fn.strftime("%F %T",vim.fn.getftime(filename)) .. "\nGit: "  .. git_root
-    vim.notify(msg, "info", {
-        timeout = 6000,
-        title = "Informacje o pliku",
-    })
-end
-
 -- funkcja do wywoływania autouzupełniania
 function M.auto_complete()
     if vim.fn.pumvisible() == 1 then
@@ -638,6 +621,9 @@ function M.komendy()
         { 'pomo 15m', function() vim.cmd[[TimerStart 15m]] end, { desc = 'uruchamia timer na 15 minut' }},
         { 'pomo 30m', function() vim.cmd[[TimerStart 30m]] end, { desc = 'uruchamia timer na 30 minut' }},
         { 'restart', function() vim.cmd[[Restart]] end, { desc = 'uruchamia ponownie Neovim' }},
+        { 'copy file name', function() M.copy_filename() end, { desc = 'kopiuje nazwę pliku do schowka' }},
+        { 'file info', function() M.file_info() end, { desc = 'wyświetla informacje o pliku' }},
+        { 'keymaps', function() M.keymaps() end, { desc = 'wyświetla skróty klawiszowe' }},
         { 'QFJZ Notes', function() require('functions').fzf_md_files(QFJZ_Notes_Dir, 0) end },
         { 'QFJZ Notes - ostatnio modyfikowane', function() require('functions').fzf_md_files(QFJZ_Notes_Dir, 1) end },
     }
@@ -896,6 +882,119 @@ function M.gd()
                 end)
         end
     end
+end
+
+-- kopiuje nazwę pliku do schowka systemowego
+function M.copy_filename()
+    local filename = vim.fn.resolve(vim.fn.expand("%:p"))
+    vim.fn.setreg([[*]], filename, '1')
+    -- vim.fn.setreg([[+]], filename, 1)
+end
+
+function M.keymaps(category_name)
+    local fzf = require('fzf-lua')
+    local data = {
+        tasks = {
+            { "<leader>sn", "dodaj nowe zadanie do wybranego pliku" },
+            { "<leader>st", "dodaj nowe zadanie w pliku ~/todo.md (new_task)" },
+        },
+        scratchpad = {
+            { "<leader>ss", "wyszukiwarka plików SP (select_scratchpad)" },
+        },
+        inne = {
+            { "<tab>", "przełącza się pomiędzy dwoma ostatnio otwieranymi plikami" },
+            { "qq", "opuść Neovim" },
+            { "<localleader>r", "restart Neovim" },
+        }
+    }
+    if not category_name or (not data[category_name] and category_name ~= "wszystkie") then
+        category_name = "wszystkie"
+    end
+    local selected_list = {}
+    if category_name == "wszystkie" then
+        for _, list in pairs(data) do
+            for _, item in ipairs(list) do
+                table.insert(selected_list, item)
+            end
+        end
+    else
+        selected_list = data[category_name]
+    end
+    local entries = {}
+    for _, item in ipairs(selected_list) do
+        table.insert(entries, string.format("%-27s | %s", item[1], item[2]))
+    end
+    fzf.fzf_exec(entries, {
+        prompt = "Skróty (" .. category_name .. ")> ",
+        fzf_opts = {
+            ["--extended"] = true,
+        },
+        actions = {
+            ["default"] = function(selected)
+                print("Wybrano: " .. selected[1])
+            end
+        },
+        winopts = {
+            height = 0.8,
+            width = 0.9,
+            row = 0.5,
+        }
+    })
+end
+
+function M.file_info()
+    require("functions").cdfd('ziuta')
+    local root_dir
+    local msg = ''
+    local result = vim.fn.system("git rev-parse --is-inside-work-tree")
+    if vim.v.shell_error == 0 and result:find("true") then
+        root_dir = vim.fn.system("git rev-parse --show-toplevel")
+    end
+    local filename=vim.fn.resolve(vim.fn.expand("%:p"))
+    msg = msg .. " Nazwa: " .. filename .. " \n Mod: " .. vim.fn.strftime("%F %T",vim.fn.getftime(filename)) .. "\n Size: " ..  require("functions").file_size() .. ", TL# " .. require("functions").total_lines() .. "\n Git: " .. root_dir
+    if vim.fn.empty(msg) == 1 then
+        vim.notify('Brak informacji o pliku', vim.log.levels.WARN)
+      return
+    end
+    local buf = vim.api.nvim_create_buf(false, true)
+    local lines = vim.split(msg, '\n')
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+    vim.api.nvim_set_option_value('buftype', 'nofile', { buf = buf })
+    vim.api.nvim_set_option_value('bufhidden', 'wipe', { buf = buf })
+    vim.api.nvim_set_option_value('modifiable', false, { buf = buf })
+    local width = math.min(66, vim.o.columns - 4)
+    local height = math.min(6, vim.o.lines - 4)
+    vim.api.nvim_open_win(buf, true, {
+        relative = 'editor',
+        width = width,
+        height = height,
+        col = (vim.o.columns - width) / 2,
+        row = (vim.o.lines - height) / 2,
+        style = 'minimal',
+        border = 'single',
+    })
+    vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = buf, nowait = true })
+    vim.keymap.set("n", "<cr>", "<cmd>close<CR>", { buffer = buf, nowait = true })
+end
+
+function M.file_size()
+    local file = vim.fn.resolve(vim.fn.expand("%:p"))
+    local size = vim.fn.getfsize(file)
+    if size <= 0 then
+        return ""
+    end
+    local sufixes = { "b", "k", "m", "g" }
+    local i = 1
+    while size > 1024 do
+        size = size / 1024
+        i = i + 1
+    end
+    return string.format("%.1f%s", size, sufixes[i])
+end
+
+function M.total_lines()
+    local tl = vim.fn.line("$")
+    return tl
 end
 
 return M
