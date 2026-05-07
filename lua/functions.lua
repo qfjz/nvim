@@ -626,6 +626,7 @@ function M.komendy()
         { 'keymaps', function() M.keymaps() end, { desc = 'wyświetla skróty klawiszowe' }},
         { 'QFJZ Notes', function() require('functions').fzf_md_files(QFJZ_Notes_Dir, 0) end },
         { 'QFJZ Notes - ostatnio modyfikowane', function() require('functions').fzf_md_files(QFJZ_Notes_Dir, 1) end },
+        { 'open in Neovide', function() M.open_in_neovide() end, { desc = 'otwiera plik w Neovide' }},
     }
     -- 1. wyciągamy same nazwy do wyświetlenia (zachowując kolejność z menu_items)
     local lista_wyswietlana = {}
@@ -995,6 +996,18 @@ end
 function M.total_lines()
     local tl = vim.fn.line("$")
     return tl
+end
+
+-- MacOS
+function M.open_in_neovide()
+    local file_path = vim.fn.expand("%:p")
+    if file_path ~= "" then
+        local neovide_bin = vim.fn.trim(vim.fn.system([[ find $(brew --prefix 2>/dev/null || echo /opt/homebrew)/Cellar/neovide -name neovide -type f -perm +111 -print -quit 2>/dev/null ]]))
+        vim.fn.system({neovide_bin, file_path})
+        print("Opened file in Neovide: " .. file_path)
+    else
+        print("No file is currently open")
+    end
 end
 
 return M

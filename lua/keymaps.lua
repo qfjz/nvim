@@ -76,6 +76,7 @@ vim.keymap.set('n', [[<leader>d]], '<cmd>bdelete<cr>', { desc = 'usuwa bufor' })
 vim.keymap.set('n', [[<leader>cc]], '<cmd>close<cr>', { desc = 'zamyka okno' })
 vim.keymap.set("n", [[<leader>o]], "<cmd>only<cr>", { desc = 'pozostawia otwarte tylko aktywne okno' })
 vim.keymap.set({ 'n', 'v' }, ';', ':', { desc = 'tryb Command' })
+vim.keymap.set({ 'n', 'v' }, ':', [[<cmd>FzfLua  command_history<cr>]], { desc = 'Historia Komend' })
 -- okna
 vim.keymap.set('n', [[<c-h>]], [[<c-w><c-h>]], { desc = 'przechodzi do okna po lewej' })
 vim.keymap.set('n', [[<c-l>]], [[<c-w><c-l>]], { desc = 'przechodzi do okna po prawej' })

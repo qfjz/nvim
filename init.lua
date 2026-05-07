@@ -30,13 +30,13 @@ require('config.lualine')
 require('config.lsp')
 require('config.autopairs')
 require('config.pomo')
+require('config.snacks')
 
 require('toggleterm').setup()
 require('mason').setup()
 require('nvim-treesitter').setup()
 require('bookmarks').setup()
 require('telescope').setup()
-require('snacks').setup()
 
 vim.cmd.packadd[[nvim.difftool]]
 -- vim.cmd.packadd[[nvim.undotree]]
