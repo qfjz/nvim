@@ -629,6 +629,8 @@ function M.komendy()
         { 'open in Neovide', function() M.open_in_neovide() end, { desc = 'otwiera plik w Neovide' }},
         { 'Neovide settings', function() M.neovide_settings() end, { desc = 'ustawienia Neovide' }},
         { 'ShowkeysToggle', function() vim.cmd[[ShowkeysToggle]] end, { desc = 'pokazuje wciskane klawisze' }},
+        { 'sortowanie buforów po numerze', function() vim.cmd[[BufferOrderByBufferNumber]] end, { desc = 'sortowanie buforów po numerze' }},
+        { 'sortowanie buforów po katalogu', function() vim.cmd[[BufferOrderByDirectory]] end, { desc = 'sortowanie buforów po katalogu' }},
     }
     -- 1. wyciągamy same nazwy do wyświetlenia (zachowując kolejność z menu_items)
     local lista_wyswietlana = {}
