@@ -191,7 +191,7 @@ local opts = {
                     -- [motion:match("%l") and motion:upper() or motion:lower()] = "prev",
                 }
             end,
-            search = { wrap = true },
+            search = { wrap = false },
             highlight = { backdrop = true },
             jump = { register = false },
         },
