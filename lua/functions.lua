@@ -608,6 +608,7 @@ function M.komendy()
         { "kolorki", M.kolory },
         { 'toggle number', function() vim.cmd('set number!') end },
         { 'toggle relativenumber', function() vim.cmd('set relativenumber!') end },
+        { 'toggle lines wrap', function() vim.cmd('set wrap!')end },
         { 'enable whichkey', function()
             vim.pack.add({ { src = "https://github.com/folke/which-key.nvim" }, })
             require("which-key")
@@ -631,6 +632,7 @@ function M.komendy()
         { 'ShowkeysToggle', function() vim.cmd[[ShowkeysToggle]] end, { desc = 'pokazuje wciskane klawisze' }},
         { 'sortowanie buforów po numerze', function() vim.cmd[[BufferOrderByBufferNumber]] end, { desc = 'sortowanie buforów po numerze' }},
         { 'sortowanie buforów po katalogu', function() vim.cmd[[BufferOrderByDirectory]] end, { desc = 'sortowanie buforów po katalogu' }},
+        { 'zamknij wszystkie bufory poza bieżącym', function() vim.cmd[[BufferCloseAllButCurrent]] end, { desc = 'sortowanie buforów po katalogu' }},
     }
     -- 1. wyciągamy same nazwy do wyświetlenia (zachowując kolejność z menu_items)
     local lista_wyswietlana = {}
