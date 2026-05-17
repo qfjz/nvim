@@ -70,6 +70,7 @@ vim.keymap.set({ 'n', 'v' }, 'gl', '$', { desc = 'koniec linii' })    -- g_
 vim.keymap.set('n', '<tab>', '<C-^>', { desc = 'przełączanie się pomiędzy dwoma ostatnimi buforami' })
 vim.keymap.set('n', [[<s-tab>]], '<cmd>FzfLua buffers winopts.fullscreen=true<cr>', { desc = 'pozwala wybrać bufor z listy' })
 vim.keymap.set('n', [[<leader>b]], '<cmd>Neotree source=buffers reveal_force_cwd=true position=right action=focus toggle<cr>', { desc = 'NeoTree otwarte bufory' })
+-- vim.keymap.set('n', [[<leader>b]], '<cmd>BufferPick<cr>', { desc = 'Wybór bufora za pomocą litery' })
 vim.keymap.set('n', 'H', '<cmd>BufferPrevious<cr>', { desc = 'poprzedni bufor' })
 vim.keymap.set('n', 'L', '<cmd>BufferNext<cr>', { desc = 'następny bufor' })
 vim.keymap.set('n', [[<leader>d]], '<cmd>bdelete<cr>', { desc = 'usuwa bufor' })
