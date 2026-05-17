@@ -227,3 +227,5 @@ vim.keymap.set('n', '<leader>ss', function() require('functions').select_scratch
 -- ABBR
 -- vim.keymap.set('ca', 'bn', 'BufferNext')
 -- vim.keymap.set('ca', 'bp', 'BufferPrevious')
+vim.keymap.set('ca', 'enc', '!gpg -a -q -e -')
+vim.keymap.set('ca', 'dec', '!gpg -q --no-tty -d')
