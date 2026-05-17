@@ -167,6 +167,10 @@ end, { desc = 'Przechodzi do wybranego katalogu z pliku bmdirs i otwiera katalog
 vim.keymap.set('n', '<leader>cds', function()
     require('functions').CDS()
 end, { desc = 'Otwiera wyszukiwanie fzf-lua.files w wybranym katalogu z bmdirs' })
+vim.keymap.set('n', '<leader>cdg', function()
+    require('functions').cd_git_root()
+    require('functions').fzf_files()
+end, { desc = 'Otwiera wyszukiwanie plików w bieżącym repozytorium Git' })
 -- marks
 -- vim.keymap.set('n', 'mm', 'mm', { desc = 'ustawia znacznik m' })
 -- vim.keymap.set('n', 'M', '`m', { desc = 'przejście do znacznika m' })

@@ -9,6 +9,24 @@ local OBS_SP = os.getenv("OBS_SP")      -- katalog z tymczasowymi notatkami w Ob
 local Notes_Dir = os.getenv("NOTES_DIR")
 local QFJZ_Notes_Dir = os.getenv('QFJZ_Notes_Dir')
 
+-- Funkcje
+--
+-- config_files() - pliki konfiguracyjne Neovim
+-- write_file()
+-- cdfd() przechodzi do katalogu w którym znajduje się edytowany plik, potrafi podążać za linkami symbolicznymi
+-- f_terminal(cmd) floating terminal
+-- terminal()
+-- cd_git_root() - przechodzi do głównego katalogu repozytorium Git
+-- terminal_git() - otwiera termina w głównym katalogu repozytorium Git
+-- t_term() otwiera terminal podążając za linkiem symbolicznym otwartego pliku
+
+-- Funkcje pomocnicze
+--
+-- input_filename()
+-- trim()
+-- mk_dir()
+-- auto_complete()
+
 function M.config_files()
     -- local rg_cmd = "rg --files --follow -g '!plugin/' -g '*.lua'"
     local rg_cmd = "fd -I -t f -H -g '*.lua' | xargs eza --sort=modified --reverse"
@@ -160,10 +178,13 @@ function M.terminal()
 end
 
 function M.cd_git_root()
+    M.cdfd('ziuta')  -- przechodzi do katalogu w którym znajduje się otwarty plik
     local result = vim.fn.system("git rev-parse --is-inside-work-tree")
+    local root_dir
     if vim.v.shell_error == 0 and result:find("true") then
-        local root_dir = vim.fn.system("git rev-parse --show-toplevel")
+        root_dir = vim.fn.system("git rev-parse --show-toplevel")
         vim.cmd("cd " .. root_dir)
+        return root_dir
     end
 end
 
@@ -227,7 +248,7 @@ function M.live_grep()
 end
 
 function M.fzf_files()
-    local rg_cmd = "rg --files --hidden --follow"
+    local rg_cmd = "rg --files --hidden --follow -g '!.git/'"
     require"fzf-lua".files({
         cmd = rg_cmd,
         winopts = {
@@ -778,7 +799,8 @@ end
 -- jeśli drugi parametr to 1 jako pierwsze wyświetla pliki ostatnio modyfikowane
 function M.fzf_md_files(dir, mode)
     local expanded = dir and vim.fn.expand(dir) or ""
-    if not dir or vim.fn.isdirectory(expanded) == 0 then
+    -- if not dir or vim.fn.isdirectory(expanded) == 0 then
+    if not dir or vim.fn.isdirectory(expanded) == nil then
         local msg = dir and ('Katalog ' .. dir .. ' nie istnieje') or 'Nie podano katalogu'
         vim.notify(msg, 4)
         return
