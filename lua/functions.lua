@@ -1064,6 +1064,8 @@ function M.snacks()
         { 'Snacks Files', function() Snacks.picker.files() end },
         { 'Snacks Colorschemes', function() Snacks.picker.colorschemes() end },
         { 'Snacks Grep', function() Snacks.picker.grep() end },
+        { 'Snacks Buffers', function() Snacks.picker.buffers() end },
+        { 'Snacks Commands', function() Snacks.picker.commands() end },
     }
     local lista_wyswietlana = {}
     for _, item in ipairs(menu_items) do
@@ -1085,4 +1087,5 @@ function M.snacks()
         }
     })
 end
+
 return M
