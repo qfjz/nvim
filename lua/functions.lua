@@ -19,6 +19,8 @@ local QFJZ_Notes_Dir = os.getenv('QFJZ_Notes_Dir')
 -- cd_git_root() - przechodzi do głównego katalogu repozytorium Git
 -- terminal_git() - otwiera termina w głównym katalogu repozytorium Git
 -- t_term() otwiera terminal podążając za linkiem symbolicznym otwartego pliku
+-- live_grep()
+-- fzf_files()
 
 -- Funkcje pomocnicze
 --
