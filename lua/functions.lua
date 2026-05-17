@@ -21,6 +21,19 @@ local QFJZ_Notes_Dir = os.getenv('QFJZ_Notes_Dir')
 -- t_term() otwiera terminal podążając za linkiem symbolicznym otwartego pliku
 -- live_grep()
 -- fzf_files()
+-- neotree_symlink()
+-- create_floating_scratch(content)
+-- CD()
+-- CDE() - otwiera menadżer plików w wybranej lokalizacji
+-- CDS() - otwiera wyszukiwanie fzf-lua.files w wybranym katalogu z bmdirs
+-- EditCDDirs() - edycja pliku BmDirs
+-- AddCDDir() - dodaje bieżący katalog do pliku bmdirs
+-- AddBmFile() - dodaje edytowany plik do bmfiles
+-- BmFiles() - pokazuje okno wyboru ulubionych plików
+-- EditBmFiles() - edycja pliku bmfiles
+-- scratchpad(raw_args)
+-- new_scratchpad() - pozwala wybrać nazwę tymczasowej notatki
+-- select_scratchpad()
 
 -- Funkcje pomocnicze
 --
