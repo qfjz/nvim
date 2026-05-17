@@ -34,6 +34,16 @@ local QFJZ_Notes_Dir = os.getenv('QFJZ_Notes_Dir')
 -- scratchpad(raw_args)
 -- new_scratchpad() - pozwala wybrać nazwę tymczasowej notatki
 -- select_scratchpad()
+-- last_scratchpad()
+-- obsidian_scratchpad() - otwiera wybrany plik Scratchpad*.md jako normalny bufor
+-- kolory()
+-- komendy()
+-- new_task(filepath)
+-- choose_tasks_file()
+-- notes_files()
+-- fzf_md_files(dir, mode) - przeszukiwanie plików Markdown w podanym katalogu
+-- get_latest_modified_file(dir)
+-- set_transparent()
 
 -- Funkcje pomocnicze
 --
@@ -41,6 +51,7 @@ local QFJZ_Notes_Dir = os.getenv('QFJZ_Notes_Dir')
 -- trim()
 -- mk_dir()
 -- auto_complete()
+-- get_current_colorscheme() - pobiera obecny schemat kolorystyczny
 
 function M.config_files()
     -- local rg_cmd = "rg --files --follow -g '!plugin/' -g '*.lua'"
