@@ -629,6 +629,7 @@ function M.komendy()
         { 'QFJZ Notes - ostatnio modyfikowane', function() require('functions').fzf_md_files(QFJZ_Notes_Dir, 1) end },
         { 'open in Neovide', function() M.open_in_neovide() end, { desc = 'otwiera plik w Neovide' }},
         { 'Neovide settings', function() M.neovide_settings() end, { desc = 'ustawienia Neovide' }},
+        { 'Snacks', function() M.snacks() end, { desc = 'Snacks' }},
         { 'ShowkeysToggle', function() vim.cmd[[ShowkeysToggle]] end, { desc = 'pokazuje wciskane klawisze' }},
         { 'sortowanie buforów po numerze', function() vim.cmd[[BufferOrderByBufferNumber]] end, { desc = 'sortowanie buforów po numerze' }},
         { 'sortowanie buforów po katalogu', function() vim.cmd[[BufferOrderByDirectory]] end, { desc = 'sortowanie buforów po katalogu' }},
@@ -1058,4 +1059,30 @@ function M.neovide_settings()
     })
 end
 
+function M.snacks()
+    local menu_items = {
+        { 'Snacks Files', function() Snacks.picker.files() end },
+        { 'Snacks Colorschemes', function() Snacks.picker.colorschemes() end },
+        { 'Snacks Grep', function() Snacks.picker.grep() end },
+    }
+    local lista_wyswietlana = {}
+    for _, item in ipairs(menu_items) do
+        table.insert(lista_wyswietlana, item[1])
+    end
+    require("fzf-lua").fzf_exec(lista_wyswietlana, {
+        prompt = " wyszukaj > ",
+        winopts = { title = " komendy ", fullscreen = false },
+        actions = {
+            ["default"] = function(selected)
+                local choice = selected[1]
+                for _, item in ipairs(menu_items) do
+                    if item[1] == choice then
+                        item[2]()
+                        break
+                    end
+                end
+            end
+        }
+    })
+end
 return M

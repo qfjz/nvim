@@ -44,7 +44,7 @@ vim.cmd.packadd[[nvim.difftool]]
 
 vim.cmd.colorscheme[[catppuccin-mocha]]
 
-if neovide then
+if vim.g.neovide then
     vim.o.guifont = "ComicShannsMono Nerd Font Mono:h21"
 end
 
