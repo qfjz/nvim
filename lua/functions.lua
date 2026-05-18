@@ -47,6 +47,10 @@ local QFJZ_Notes_Dir = os.getenv('QFJZ_Notes_Dir')
 -- gd() tworzy katalog o nazwie wyrazu pod kursorem, jeśli chcesz utworzyć podkatalog pamiętaj żeby dodać '/' na końcu
 -- copy_filename()
 -- keymaps(category_name)
+-- file_info()
+-- open_in_neovide()
+-- neovide_settings()
+-- snacks() - podmenu komendy()
 
 -- Funkcje pomocnicze
 --
@@ -55,6 +59,8 @@ local QFJZ_Notes_Dir = os.getenv('QFJZ_Notes_Dir')
 -- mk_dir()
 -- auto_complete()
 -- get_current_colorscheme() - pobiera obecny schemat kolorystyczny
+-- file_size()
+-- total_lines()
 
 function M.config_files()
     -- local rg_cmd = "rg --files --follow -g '!plugin/' -g '*.lua'"
