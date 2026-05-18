@@ -44,6 +44,9 @@ local QFJZ_Notes_Dir = os.getenv('QFJZ_Notes_Dir')
 -- fzf_md_files(dir, mode) - przeszukiwanie plików Markdown w podanym katalogu
 -- get_latest_modified_file(dir)
 -- set_transparent()
+-- gd() tworzy katalog o nazwie wyrazu pod kursorem, jeśli chcesz utworzyć podkatalog pamiętaj żeby dodać '/' na końcu
+-- copy_filename()
+-- keymaps(category_name)
 
 -- Funkcje pomocnicze
 --
