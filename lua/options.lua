@@ -82,12 +82,7 @@ vim.opt.autowrite = false
 vim.opt.diffopt:append("vertical")
 vim.opt.diffopt:append("algorithm:patience")
 vim.opt.diffopt:append("linematch:60")
-local undodir = "~/.local/share/nvim/undodir"
-vim.opt.undodir = vim.fn.expand(undodir)
-local undodir_path = vim.fn.expand(undodir)
-if vim.fn.isdirectory(undodir_path) == 0 then
-    vim.fn.mkdir(undodir_path, "p")
-end
+vim.opt.undodir = vim.fn.stdpath('data') .. '/undodir'
 vim.opt.errorbells = false
 vim.opt.iskeyword:append("-,_,*")
 vim.opt.path:append("**")
