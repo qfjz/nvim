@@ -669,6 +669,7 @@ function M.komendy()
             vim.pack.add({ { src = "https://github.com/folke/which-key.nvim" }, })
             require("which-key")
         end },
+        { 'Obsidian/SP', function() require('functions').fzf_md_files(OBS_SP, 0) end },
         { 'scratchpad - nowy plik', function() require('functions').scratchpad() end },
         { 'scratchpad - nowy plik (podaj nazwę)', function() require('functions').new_scratchpad() end },
         { 'scratchpad - wybór istniejącego pliku', function() require('functions').select_scratchpad() end },
