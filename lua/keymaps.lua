@@ -230,3 +230,9 @@ vim.keymap.set('n', '<leader>ss', function() require('functions').select_scratch
 -- vim.keymap.set('ca', 'bp', 'BufferPrevious')
 vim.keymap.set('ca', 'enc', '!gpg -a -q -e -')
 vim.keymap.set('ca', 'dec', '!gpg -q --no-tty -d')
+-- Zaznacza wyraz pod kursorem i przechodzi do modyfikacji wszystkich znalezionych wyrazów
+vim.keymap.set("n", "<leader>sc", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Znajdź i zamień, wyraz pod kursorem" })
+-- W trybie VISUAL ('v') należy zacząć zaznaczanie od słowa, które chcemy zamienić
+vim.keymap.set("x", "<leader>sc", [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- Zamienia wyraz znajdujący się pod kursorem, wcześniej skopiowanym wyrazem, operacja na całym pliku
+vim.keymap.set("n", "<leader>S", [[:%s/\<<c-r><c-w>\>/<c-r>0/gI<cr>]])
