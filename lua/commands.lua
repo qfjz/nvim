@@ -93,7 +93,7 @@ vim.api.nvim_create_user_command('PackUpdate', function(opts)
     end
 end, { desc = 'Pack Update' })
 
-vim.api.nvim_create_user_command('MiniFiles', function(opts)
+vim.api.nvim_create_user_command('MiniFiles', function()
     MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
     MiniFiles.reveal_cmd()
 end, { desc = 'Mini Files Open' })
