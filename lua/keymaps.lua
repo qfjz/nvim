@@ -236,11 +236,13 @@ vim.keymap.set("n", "<leader>sc", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left>
 vim.keymap.set("x", "<leader>sc", [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- Zamienia wyraz znajdujący się pod kursorem, wcześniej skopiowanym wyrazem, operacja na całym pliku
 vim.keymap.set("n", "<leader>S", [[:%s/\<<c-r><c-w>\>/<c-r>0/gI<cr>]])
+-- następna pozycja w snippecie
 vim.keymap.set({"i", "s"}, "<C-l>", function()
     if require("luasnip").jumpable(1) then
         require("luasnip").jump(1)
     end
 end, {silent = true})
+-- poprzednia pozycja w snippecie
 vim.keymap.set({"i", "s"}, "<C-h>", function()
     if require("luasnip").jumpable(-1) then
         require("luasnip").jump(-1)
