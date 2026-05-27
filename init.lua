@@ -32,6 +32,8 @@ require('config.autopairs')
 require('config.pomo')
 require('config.snacks')
 require('config.fff')
+require('config.mini')
+require('config.luasnip')
 
 require('toggleterm').setup()
 require('mason').setup()

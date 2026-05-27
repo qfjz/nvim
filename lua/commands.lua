@@ -75,3 +75,25 @@ vim.api.nvim_create_user_command('Restart', function()
 end, { desc = 'Restart' })
 
 vim.api.nvim_create_user_command('Messages', [[NoiceAll]], {})
+
+vim.api.nvim_create_user_command('PackAdd', function(opts)
+    vim.pack.add(opts.fargs)
+end, { nargs = '+', desc = 'Dodaje plugin, należy podać pełny adres URL' })
+
+vim.api.nvim_create_user_command('PackDel', function(opts)
+    vim.pack.del(opts.fargs)
+end, { nargs = '+' })
+
+vim.api.nvim_create_user_command('PackUpdate', function(opts)
+    if opts.args:match('%S') then
+        local plugins = vim.split(opts.args, '%s+', { trimempty = true })
+        vim.pack(plugins)
+    else
+        vim.pack.update()
+    end
+end, { desc = 'Pack Update' })
+
+vim.api.nvim_create_user_command('MiniFiles', function(opts)
+    MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+    MiniFiles.reveal_cmd()
+end, { desc = 'Mini Files Open' })

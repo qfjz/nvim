@@ -16,6 +16,7 @@ vim.pack.add({
     { src = 'https://github.com/lewis6991/gitsigns.nvim' },
     { src = 'https://github.com/Saghen/blink.cmp', version = 'v1.10.2' },
     { src = 'https://github.com/L3MON4D3/LuaSnip' },
+    { src = 'https://github.com/rafamadriz/friendly-snippets' },
     { src = 'https://github.com/neovim/nvim-lspconfig' },
     { src = 'https://github.com/mason-org/mason.nvim' },
     { src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
@@ -28,6 +29,7 @@ vim.pack.add({
     { src = 'https://github.com/epwalsh/pomo.nvim' },
     { src = 'https://github.com/jamessan/vim-gnupg' },
     { src = 'https://github.com/j-hui/fidget.nvim' },
+    { src = 'https://github.com/nvim-mini/mini.nvim' },
 })
 
 -- kolory
