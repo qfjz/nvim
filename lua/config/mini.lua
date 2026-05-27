@@ -1,6 +1,6 @@
 require('mini.files').setup({
     mappings = {
-        close       = 'q',
+        close       = 'q', -- zamknięcie mini.files
         go_in       = '<cr>',
         go_in_plus  = 'L',
         go_out      = '_',
@@ -9,8 +9,8 @@ require('mini.files').setup({
         mark_set    = 'm',
         reset       = '<bs>',
         reveal_cwd  = '@',
-        show_help   = 'g?',
-        synchronize = '=',  -- potwierdzenie operacji usunięćia, utworzenia czy zmiany nazwy pliku
+        show_help   = 'g?', -- pomoc
+        synchronize = '=', -- potwierdzenie operacji usunięcia, utworzenia czy zmiany nazwy pliku
         trim_left   = '<',
         trim_right  = '>',
     },
