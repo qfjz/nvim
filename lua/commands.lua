@@ -97,3 +97,7 @@ vim.api.nvim_create_user_command('MiniFiles', function(opts)
     MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
     MiniFiles.reveal_cmd()
 end, { desc = 'Mini Files Open' })
+
+vim.api.nvim_create_user_command('BufFormat', function()
+    vim.lsp.buf.format()
+end, { desc = 'Formatowanie tekstu bufora' })
