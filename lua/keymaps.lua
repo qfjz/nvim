@@ -248,3 +248,5 @@ vim.keymap.set({"i", "s"}, "<C-h>", function()
         require("luasnip").jump(-1)
     end
 end, {silent = true})
+vim.keymap.set('v', '<Tab>', '>gv')
+vim.keymap.set('v', '<S-Tab>', '<gv')
