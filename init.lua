@@ -34,6 +34,7 @@ require('config.snacks')
 require('config.fff')
 require('config.mini')
 require('config.luasnip')
+require('config.render-markdown')
 
 require('toggleterm').setup()
 require('mason').setup()

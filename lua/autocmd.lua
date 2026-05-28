@@ -100,3 +100,29 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.api.nvim_buf_set_keymap(0, "n", "<leader>h", "<c-t>", { noremap = true })
     end,
 })
+
+-- Kolory dla rednder-markdown
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = vim.api.nvim_create_augroup("heading_colors", {}),
+    pattern = {
+        "*.md",
+    },
+    callback = function()
+        color_bg = 'Normal'
+        -- color_fg = '#1e1832'
+        color1_fg = '#ffffff'
+        color2_fg = '#37f499'
+        color3_fg = '#04d1f9'
+        color4_fg = '#987afb'
+        color5_fg = '#19dfcf'
+        color6_fg = '#1682ef'
+        vim.cmd(string.format([[highlight RenderMarkdownH1Bg cterm=bold gui=bold guibg=%s guifg=%s]], color_bg, color1_fg))
+        vim.cmd(string.format([[highlight RenderMarkdownH2Bg cterm=bold gui=bold guibg=%s guifg=%s]], color_bg, color2_fg))
+        vim.cmd(string.format([[highlight RenderMarkdownH3Bg cterm=bold gui=bold guibg=%s guifg=%s]], color_bg, color3_fg))
+        vim.cmd(string.format([[highlight RenderMarkdownH4Bg cterm=bold gui=bold guibg=%s guifg=%s]], color_bg, color4_fg))
+        vim.cmd(string.format([[highlight RenderMarkdownH5Bg cterm=bold gui=bold guibg=%s guifg=%s]], color_bg, color5_fg))
+        vim.cmd(string.format([[highlight RenderMarkdownH6Bg cterm=bold gui=bold guibg=%s guifg=%s]], color_bg, color6_fg))
+        vim.cmd(string.format([[highlight Folded cterm=bold gui=bold guibg=%s guifg=%s]], color_bg, color1_fg))
+    end,
+})
+

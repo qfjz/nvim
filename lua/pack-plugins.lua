@@ -30,6 +30,7 @@ vim.pack.add({
     { src = 'https://github.com/jamessan/vim-gnupg' },
     { src = 'https://github.com/j-hui/fidget.nvim' },
     { src = 'https://github.com/nvim-mini/mini.nvim' },
+    { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
 })
 
 -- kolory
