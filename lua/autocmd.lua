@@ -108,14 +108,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
         "*.md",
     },
     callback = function()
-        color_bg = 'Normal'
-        -- color_fg = '#1e1832'
-        color1_fg = '#ffffff'
-        color2_fg = '#37f499'
-        color3_fg = '#04d1f9'
-        color4_fg = '#987afb'
-        color5_fg = '#19dfcf'
-        color6_fg = '#1682ef'
+        local color_bg = 'Normal'
+        -- local color_fg = '#1e1832'
+        local color1_fg = '#ffffff'
+        local color2_fg = '#37f499'
+        local color3_fg = '#04d1f9'
+        local color4_fg = '#987afb'
+        local color5_fg = '#19dfcf'
+        local color6_fg = '#1682ef'
         vim.cmd(string.format([[highlight RenderMarkdownH1Bg cterm=bold gui=bold guibg=%s guifg=%s]], color_bg, color1_fg))
         vim.cmd(string.format([[highlight RenderMarkdownH2Bg cterm=bold gui=bold guibg=%s guifg=%s]], color_bg, color2_fg))
         vim.cmd(string.format([[highlight RenderMarkdownH3Bg cterm=bold gui=bold guibg=%s guifg=%s]], color_bg, color3_fg))
@@ -125,4 +125,3 @@ vim.api.nvim_create_autocmd("BufEnter", {
         vim.cmd(string.format([[highlight Folded cterm=bold gui=bold guibg=%s guifg=%s]], color_bg, color1_fg))
     end,
 })
-
