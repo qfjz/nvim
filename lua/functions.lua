@@ -867,21 +867,21 @@ end
 --- @param dir string Ścieżka do katalogu (np. "~/tmp")
 --- @return string|nil ścieżka do pliku lub nil jeśli katalog pusty
 function M.get_latest_modified_file(dir)
-  dir = vim.fs.normalize(dir)  -- rozwinie '~' na prawidłową ścieżkę na przykład /home/user
-  local latest_file = nil
-  local latest_mtime = 0
-  -- Iterujemy po wszystkich plikach w katalogu
-  for name, type in vim.fs.dir(dir) do
-    if type == 'file' then
-      local path = vim.fs.joinpath(dir, name)
-      local stat = vim.loop.fs_stat(path)
-      if stat and stat.mtime.sec > latest_mtime then
-        latest_mtime = stat.mtime.sec
-        latest_file = path
-      end
+    dir = vim.fs.normalize(dir)  -- rozwinie '~' na prawidłową ścieżkę na przykład /home/user
+    local latest_file = nil
+    local latest_mtime = 0
+    -- Iterujemy po wszystkich plikach w katalogu
+    for name, type in vim.fs.dir(dir) do
+        if type == 'file' then
+            local path = vim.fs.joinpath(dir, name)
+            local stat = vim.loop.fs_stat(path)
+            if stat and stat.mtime.sec > latest_mtime then
+                latest_mtime = stat.mtime.sec
+                latest_file = path
+            end
+        end
     end
-  end
-  return latest_file
+    return latest_file
 end
 
 -- wymaga ustawienia przezroczystości w terminalu
@@ -961,22 +961,35 @@ function M.keymaps(category_name)
     local fzf = require('fzf-lua')
     local data = {
         tasks = {
-            { "<leader>sn", "dodaj nowe zadanie do wybranego pliku" },
-            { "<leader>st", "dodaj nowe zadanie w pliku ~/todo.md (new_task)" },
+            { '<leader>sn', '[ TASKS ] dodaj nowe zadanie do wybranego pliku' },
+            { '<leader>st', '[ TASKS ] dodaj nowe zadanie w pliku ~/todo.md (new_task)' },
         },
         scratchpad = {
-            { "<leader>ss", "wyszukiwarka plików SP (select_scratchpad)" },
+            { '<leader>ss', '[ SP ] wyszukiwarka plików (select_scratchpad) - otwiera scratchpad' },
+            { '<leader><leader>', '[ SP ] wyszukiwanie plików - otwiera nowe okno'}
         },
         inne = {
-            { "<tab>", "przełącza się pomiędzy dwoma ostatnio otwieranymi plikami" },
-            { "qq", "opuść Neovim" },
-            { "<localleader>r", "restart Neovim" },
+            { '<tab>', 'przełącza się pomiędzy dwoma ostatnio otwieranymi plikami' },
+            { 'qq', 'opuść Neovim' },
+            { '<localleader>r', 'restart Neovim' },
+            { '<localleader>c', "usuwa zawartość pomiędzy znakami ''" },
+            { '<localleader>,', 'usuwa wyraz pod kursore (ciw)' },
             { '<leader>co', 'pozostawia otwarte tylko aktywne okno'},
             { '<leader>cc', 'zamyka okno'},
             { '<leader>o', 'Snacks zoom'},
             { ';', 'wejście do trybu COMMAND'},
             { ':', 'historia komend'},
-        }
+            { '<leader>cdd', '[ CD ] przechodzi do wybranego katalogu z pliku bmdirs' },
+            { '<leader>cde', '[ CD ] przechodzi do wybranego katalogu z pliku bmdirs i otwiera katalog w menadżerze plików' },
+            { '<leader>cdf', '[ CD ] przechodzi do katalogu w którym znajduje się edytowany plik' },
+            { '<leader>cdg', '[ CD ] otwiera wyszukiwanie plików w bieżącym repozytorium Git' },
+            { '<leader>cds', '[ CD ] otwiera wyszukiwanie fzf-lua.files w wybranym katalogu z bmdirs' },
+            { 'gcp', 'dodaje komentarz w linii wyżej' },
+            { 'gcn', 'dodaje komentarz w linii niżej' },
+        },
+        visual = {
+            { 'o', '[ VISUAL ] przechodzi do zaznaczania w odwrotnym kierunku' },
+        },
     }
     if not category_name or (not data[category_name] and category_name ~= "wszystkie") then
         category_name = "wszystkie"
@@ -993,7 +1006,7 @@ function M.keymaps(category_name)
     end
     local entries = {}
     for _, item in ipairs(selected_list) do
-        table.insert(entries, string.format("%-27s | %s", item[1], item[2]))
+        table.insert(entries, string.format("%-16s | %s", item[1], item[2]))
     end
     fzf.fzf_exec(entries, {
         prompt = "Skróty (" .. category_name .. ")> ",
