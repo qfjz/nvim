@@ -233,7 +233,7 @@ vim.keymap.set('n', '<leader><leader>', function() require('functions').fzf_md_f
 -- vim.keymap.set('ca', 'bn', 'BufferNext')
 -- vim.keymap.set('ca', 'bp', 'BufferPrevious')
 vim.keymap.set('ca', 'enc', '!gpg -a -q -e -', { desc = ':enc - szyfrowanie zaznaczenia' })
-vim.keymap.set('ca', 'dec', '!gpg -q --no-tty -d' { desc = ':dec - deszyfrowanie zaznaczenia' })
+vim.keymap.set('ca', 'dec', '!gpg -q --no-tty -d', { desc = ':dec - deszyfrowanie zaznaczenia' })
 -- Zaznacza wyraz pod kursorem i przechodzi do modyfikacji wszystkich znalezionych wyrazów
 vim.keymap.set("n", "<leader>sc", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Znajdź i zamień, wyraz pod kursorem" })
 -- W trybie VISUAL ('v') należy zacząć zaznaczanie od słowa, które chcemy zamienić
