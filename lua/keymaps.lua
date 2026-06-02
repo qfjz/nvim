@@ -119,7 +119,7 @@ vim.keymap.set({ 'n', 'o', 'x' }, 's', function()
                 if str == ' ' then
                     return str
                 end
-                -- wyszukuje tylko poczƒÖtku wyrazu
+                -- wyszukuje tylko początku wyrazu
                 return '\\<' .. str
             end,
         },

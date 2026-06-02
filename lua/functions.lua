@@ -1058,6 +1058,7 @@ function M.file_info()
         border = 'single',
     })
     vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = buf, nowait = true })
+    vim.keymap.set("n", "<esc>", "<cmd>close<CR>", { buffer = buf, nowait = true })
     vim.keymap.set("n", "<cr>", "<cmd>close<CR>", { buffer = buf, nowait = true })
 end
 
