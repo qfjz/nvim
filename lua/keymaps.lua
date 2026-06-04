@@ -3,6 +3,12 @@ vim.keymap.set({ 'n', 'x' }, 'zh', '%', { desc = 'porusza się pomiędzy począt
 -- wyłączenie Super-Alt-[r,p] / CMD-Option-[r,p]
 vim.keymap.set({ 'n', 'i' }, '<M-D-r>', '<nop>')
 vim.keymap.set({ 'n', 'i' }, '<M-D-p>', '<nop>')
+-- MacOS
+vim.keymap.set('i', '§', '`', { noremap = true, silent = true })
+vim.keymap.set('i', '£', '~', { noremap = true, silent = true })
+vim.keymap.set('n', '<D-j>', '<cmd>Gitsign next_hunk<cr>')
+vim.keymap.set('n', '<D-k>', '<cmd>Gitsign prev_hunk<cr>')
+-- Git
 vim.keymap.set({'n', 'x'}, '<m-j>', '<cmd>Gitsign next_hunk<cr>', { desc = 'następna zmiana' })
 vim.keymap.set({'n', 'x'}, '<m-k>', '<cmd>Gitsign prev_hunk<cr>', { desc = 'poprzednia zmiana' })
 vim.keymap.set('v', [[//]], [[y/\V<C-r>=escape(@",'/\')<CR><CR>]], {
@@ -55,6 +61,9 @@ vim.keymap.set('n', [[<leader>q]], function()
     require('functions').write_file()
     vim.cmd[[q]]
 end, { desc = 'Zapisuje zmiany i wychodzi' })
+vim.keymap.set('n', '<localleader>q', '<cmd>quit<cr>')
+vim.keymap.set('n', '<localleader>s', '<cmd>luafile ./%<cr>')
+vim.keymap.set('n', '<localleader>e', '<cmd>set number!<cr>')
 vim.keymap.set('n', '<localleader>r', '<cmd>Restart<cr>', { desc = 'restart NVim' })
 vim.keymap.set('n', '<localleader>w', '<cmd>set wrap!<cr>', { desc = 'toggle wrap' })
 vim.keymap.set('n', '<localleader>,', 'ciw', { desc = 'ciw' })
