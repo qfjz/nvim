@@ -209,9 +209,19 @@ end
 vim.keymap.set('n', 'ge', 'ge', { desc = 'koniec poprzedniego wyrazu' })
 vim.keymap.set({ 'n', 'x' }, '<c-d>', '<c-d>zz')
 vim.keymap.set({ 'n', 'x' }, '<c-u>', '<c-u>zz')
+<<<<<<< Updated upstream
 vim.keymap.set({ 'n', 'x' }, '{', '{zz')
 vim.keymap.set({ 'n', 'x' }, '}', '}zz')
 vim.keymap.set('n', [[gf]], [[<cmd>edit <cfile><cr>]], { desc = 'otwiera plik pod kursorem' })
+||||||| Stash base
+vim.keymap.set({ 'n', 'x' }, '{', '{zz')
+vim.keymap.set({ 'n', 'x' }, '}', '}zz')
+vim.keymap.set("n", [[gf]], [[<cmd>edit <cfile><cr>]], { desc = "otwiera plik pod kursorem" })
+=======
+-- vim.keymap.set({ 'n', 'x' }, '{', '{zz')
+-- vim.keymap.set({ 'n', 'x' }, '}', '}zz')
+vim.keymap.set("n", [[gf]], [[<cmd>edit <cfile><cr>]], { desc = "otwiera plik pod kursorem" })
+>>>>>>> Stashed changes
 vim.keymap.set('n', [[<leader>gd]], function() require('functions').gd() end, { desc= 'tworzy katalog o nazwie wyrazu pod kursorem' })
 vim.keymap.set('n', 'j', [[v:count == 0 ? 'gj' : 'j']], { expr = true })
 vim.keymap.set('n', 'k', [[v:count == 0 ? 'gk' : 'k']], { expr = true })
