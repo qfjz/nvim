@@ -87,8 +87,8 @@ vim.keymap.set('n', 'H', '<cmd>BufferPrevious<cr>', { desc = 'poprzedni bufor' }
 vim.keymap.set('n', 'L', '<cmd>BufferNext<cr>', { desc = 'następny bufor' })
 vim.keymap.set('n', [[<leader>d]], '<cmd>bdelete<cr>', { desc = 'usuwa bufor' })
 vim.keymap.set('n', [[<leader>cc]], '<cmd>close<cr>', { desc = 'zamyka okno' })
-vim.keymap.set("n", [[<leader>co]], "<cmd>only<cr>", { desc = 'pozostawia otwarte tylko aktywne okno' })
-vim.keymap.set("n", [[<leader>o]], function() Snacks.zen.zoom() end, { desc = 'Snacks Zoom' })
+vim.keymap.set('n', [[<leader>co]], '<cmd>only<cr>', { desc = 'pozostawia otwarte tylko aktywne okno' })
+vim.keymap.set('n', [[<leader>o]], function() Snacks.zen.zoom() end, { desc = 'Snacks Zoom' })
 vim.keymap.set({ 'n', 'v' }, ';', ':', { desc = 'tryb Command' })
 vim.keymap.set({ 'n', 'v' }, ':', [[<cmd>FzfLua  command_history<cr>]], { desc = 'Historia Komend' })
 -- okna
@@ -202,8 +202,8 @@ end, { desc = 'UndoTree' })
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'przenosi zaznaczenie w dół' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'przenosi zaznaczenie w górę' })
 -- tworzy nowy punkt undo po wprowadzeniu jednego ze znaków { " ", ".", ",", "!", "?" }
-for _, key in ipairs({ " ", ".", ",", "!", "?" }) do
-    vim.keymap.set("i", key, key .. "<c-g>u", { silent = true })
+for _, key in ipairs({ ' ', '.', ',', '!', '?' }) do
+    vim.keymap.set('i', key, key .. '<c-g>u', { silent = true })
 end
 -- Standardowe skróty klawiszowe
 vim.keymap.set('n', 'ge', 'ge', { desc = 'koniec poprzedniego wyrazu' })
@@ -211,20 +211,20 @@ vim.keymap.set({ 'n', 'x' }, '<c-d>', '<c-d>zz')
 vim.keymap.set({ 'n', 'x' }, '<c-u>', '<c-u>zz')
 vim.keymap.set({ 'n', 'x' }, '{', '{zz')
 vim.keymap.set({ 'n', 'x' }, '}', '}zz')
-vim.keymap.set("n", [[gf]], [[<cmd>edit <cfile><cr>]], { desc = "otwiera plik pod kursorem" })
+vim.keymap.set('n', [[gf]], [[<cmd>edit <cfile><cr>]], { desc = 'otwiera plik pod kursorem' })
 vim.keymap.set('n', [[<leader>gd]], function() require('functions').gd() end, { desc= 'tworzy katalog o nazwie wyrazu pod kursorem' })
 vim.keymap.set('n', 'j', [[v:count == 0 ? 'gj' : 'j']], { expr = true })
 vim.keymap.set('n', 'k', [[v:count == 0 ? 'gk' : 'k']], { expr = true })
 -- zamiana zn / zm
-vim.keymap.set("n", "zn", "zm", { noremap = true })
-vim.keymap.set("n", "zm", "zn", { noremap = true })
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set("n", "J", "mzJ`z", { desc = "pozostawia kursor po łączeniu linii" })
+vim.keymap.set('n', 'zn', 'zm', { noremap = true })
+vim.keymap.set('n', 'zm', 'zn', { noremap = true })
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'pozostawia kursor po łączeniu linii' })
 vim.keymap.set({ 'n', 'x' }, 'gg', 'gg', { desc = 'początek pliku' })
 vim.keymap.set({ 'n', 'x' }, 'go', 'go', { desc = 'początek pliku' })
 vim.keymap.set({ 'n', 'x' }, 'G', 'G', { desc = 'koniec pliku' })
-vim.keymap.set('n', '<leader>k', function() require('.functions').komendy() end, { desc = 'menu komend' })
+vim.keymap.set('n', '<leader>k', function() require('functions').komendy() end, { desc = 'menu komend' })
 vim.keymap.set('n', '<leader>xx', function()
     vim.cmd[[luafile %]]
     vim.notify('przeładowałem plik ' .. vim.fn.expand('%:p'))
@@ -244,21 +244,21 @@ vim.keymap.set('n', '<leader><leader>', function() require('functions').fzf_md_f
 vim.keymap.set('ca', 'enc', '!gpg -a -q -e -', { desc = ':enc - szyfrowanie zaznaczenia' })
 vim.keymap.set('ca', 'dec', '!gpg -q --no-tty -d', { desc = ':dec - deszyfrowanie zaznaczenia' })
 -- Zaznacza wyraz pod kursorem i przechodzi do modyfikacji wszystkich znalezionych wyrazów
-vim.keymap.set("n", "<leader>sc", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Znajdź i zamień, wyraz pod kursorem" })
+vim.keymap.set('n', '<leader>sc', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Znajdź i zamień, wyraz pod kursorem" })
 -- W trybie VISUAL ('v') należy zacząć zaznaczanie od słowa, które chcemy zamienić
-vim.keymap.set("x", "<leader>sc", [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set('x', '<leader>sc', [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- Zamienia wyraz znajdujący się pod kursorem, wcześniej skopiowanym wyrazem, operacja na całym pliku
-vim.keymap.set("n", "<leader>S", [[:%s/\<<c-r><c-w>\>/<c-r>0/gI<cr>]])
+vim.keymap.set('n', '<leader>S', [[:%s/\<<c-r><c-w>\>/<c-r>0/gI<cr>]])
 -- następna pozycja w snippecie
-vim.keymap.set({"i", "s"}, "<C-l>", function()
-    if require("luasnip").jumpable(1) then
-        require("luasnip").jump(1)
+vim.keymap.set({'i', 's'}, '<C-l>', function()
+    if require('luasnip').jumpable(1) then
+        require('luasnip').jump(1)
     end
 end, {silent = true})
 -- poprzednia pozycja w snippecie
-vim.keymap.set({"i", "s"}, "<C-h>", function()
-    if require("luasnip").jumpable(-1) then
-        require("luasnip").jump(-1)
+vim.keymap.set({'i', 's'}, '<C-h>', function()
+    if require('luasnip').jumpable(-1) then
+        require('luasnip').jump(-1)
     end
 end, {silent = true})
 vim.keymap.set('v', '<Tab>', '>gv')
