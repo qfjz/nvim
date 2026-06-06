@@ -67,7 +67,7 @@ vim.keymap.set('n', '<localleader>e', '<cmd>set number!<cr>')
 vim.keymap.set('n', '<localleader>r', '<cmd>Restart<cr>', { desc = 'restart NVim' })
 vim.keymap.set('n', '<localleader>w', '<cmd>set wrap!<cr>', { desc = 'toggle wrap' })
 vim.keymap.set('n', '<localleader>,', 'ciw', { desc = 'ciw' })
-vim.keymap.set('n', '<localleader>c', "ci'", { desc = "ci'" })
+vim.keymap.set('n', '<localleader>c', 'ci\'', { desc = 'ci\'' })
 vim.keymap.set('n', '<localleader>d', 'diw', { desc = 'diw' })
 vim.keymap.set('n', '<localleader>y', 'yiw', { desc = 'yiw' })
 vim.keymap.set('n', '<localleader>v', 'viw', { desc = 'viw' })
@@ -117,7 +117,7 @@ vim.keymap.set('n', '<leader>sp', function()
         vim.cmd('split')
     end
 end, { silent = true, desc = 'dzieli okno w poziomie' })
--- plugin flash.nvim wyszukiwanie za pomocą "s"
+-- plugin flash.nvim wyszukiwanie za pomocą 's'
 vim.keymap.set({ 'n', 'o', 'x' }, 's', function()
     require('flash').jump({
         search = {
@@ -199,9 +199,9 @@ vim.keymap.set('n', '<leader>u', function()
     vim.cmd.packadd[[nvim.undotree]]
     require('undotree').open()
 end, { desc = 'UndoTree' })
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'przenosi zaznaczenie w dół' })
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'przenosi zaznaczenie w górę' })
--- tworzy nowy punkt undo po wprowadzeniu jednego ze znaków { " ", ".", ",", "!", "?" }
+vim.keymap.set('v', 'J', [[:m '>+1<CR>gv=gv]], { desc = 'przenosi zaznaczenie w dół' })
+vim.keymap.set('v', 'K', [[:m '<-2<CR>gv=gv]], { desc = 'przenosi zaznaczenie w górę' })
+-- tworzy nowy punkt undo po wprowadzeniu jednego ze znaków { ' ', '.', ',', '!', '?' }
 for _, key in ipairs({ ' ', '.', ',', '!', '?' }) do
     vim.keymap.set('i', key, key .. '<c-g>u', { silent = true })
 end
@@ -211,7 +211,7 @@ vim.keymap.set({ 'n', 'x' }, '<c-d>', '<c-d>zz')
 vim.keymap.set({ 'n', 'x' }, '<c-u>', '<c-u>zz')
 vim.keymap.set({ 'n', 'x' }, '{', '{zz')
 vim.keymap.set({ 'n', 'x' }, '}', '}zz')
-vim.keymap.set("n", [[gf]], [[<cmd>edit <cfile><cr>]], { desc = "otwiera plik pod kursorem" })
+vim.keymap.set('n', [[gf]], [[<cmd>edit <cfile><cr>]], { desc = 'otwiera plik pod kursorem' })
 vim.keymap.set('n', [[<leader>gd]], function() require('functions').gd() end, { desc= 'tworzy katalog o nazwie wyrazu pod kursorem' })
 vim.keymap.set('n', 'j', [[v:count == 0 ? 'gj' : 'j']], { expr = true })
 vim.keymap.set('n', 'k', [[v:count == 0 ? 'gk' : 'k']], { expr = true })
@@ -236,7 +236,7 @@ vim.keymap.set('n', '<leader>sn', function()
     require('functions').choose_tasks_file()
 end, { desc = 'dodaj nowe zadanie do wybranego pliku' })
 vim.keymap.set('n', '<leader>ss', function() require('functions').select_scratchpad() end, {})
-local OBS_SP = os.getenv("OBS_SP")
+local OBS_SP = os.getenv('OBS_SP')
 vim.keymap.set('n', '<leader><leader>', function() require('functions').fzf_md_files(OBS_SP, 0) end, {})
 -- ABBR
 -- vim.keymap.set('ca', 'bn', 'BufferNext')
@@ -244,7 +244,7 @@ vim.keymap.set('n', '<leader><leader>', function() require('functions').fzf_md_f
 vim.keymap.set('ca', 'enc', '!gpg -a -q -e -', { desc = ':enc - szyfrowanie zaznaczenia' })
 vim.keymap.set('ca', 'dec', '!gpg -q --no-tty -d', { desc = ':dec - deszyfrowanie zaznaczenia' })
 -- Zaznacza wyraz pod kursorem i przechodzi do modyfikacji wszystkich znalezionych wyrazów
-vim.keymap.set('n', '<leader>sc', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Znajdź i zamień, wyraz pod kursorem" })
+vim.keymap.set('n', '<leader>sc', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Znajdź i zamień, wyraz pod kursorem' })
 -- W trybie VISUAL ('v') należy zacząć zaznaczanie od słowa, które chcemy zamienić
 vim.keymap.set('x', '<leader>sc', [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- Zamienia wyraz znajdujący się pod kursorem, wcześniej skopiowanym wyrazem, operacja na całym pliku
