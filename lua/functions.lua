@@ -669,11 +669,13 @@ function M.komendy()
             vim.pack.add({ { src = "https://github.com/folke/which-key.nvim" }, })
             require("which-key")
         end },
-        { 'Obsidian/SP', function() require('functions').fzf_md_files(OBS_SP, 0) end },
+        { 'Obsidian/SP wybór pliku sp-*.md', function() require('functions').fzf_md_files(OBS_SP, 0) end },
         { 'scratchpad - nowy plik', function() require('functions').scratchpad() end },
         { 'scratchpad - nowy plik (podaj nazwę)', function() require('functions').new_scratchpad() end },
         { 'scratchpad - wybór istniejącego pliku', function() require('functions').select_scratchpad() end },
         { 'scratchpad - ostatnio modyfikowany plik', function() require('functions').last_scratchpad() end },
+        { 'scratchpad - pływające okno Scratchpad.md', function() require('functions').floating_obsidian_scratchpad() end },
+ 
         { 'pomo 1m', function() vim.cmd[[TimerStart 1m]] end, { desc = 'uruchamia timer na 1 minutę' }},
         { 'pomo 3m', function() vim.cmd[[TimerStart 3m]] end, { desc = 'uruchamia timer na 3 minuty' }},
         { 'pomo 15m', function() vim.cmd[[TimerStart 15m]] end, { desc = 'uruchamia timer na 15 minut' }},
@@ -1157,6 +1159,26 @@ function M.snacks()
                 end
             end
         }
+    })
+end
+
+function M.floating_obsidian_scratchpad()
+    Snacks.win({
+        file = vim.fn.expand("~/Documents/Obsidian-Sync/SP/Scratchpad.md"),
+        width = 0.7,
+        height = 0.7,
+        wo = {
+            spell = true,
+            wrap = false,
+            signcolumn = "yes",
+            statuscolumn = " ",
+            conceallevel = 3,
+        },
+        bo = {
+            modifiable = true,
+            readonly = false,
+            buftype = "",
+        },
     })
 end
 
