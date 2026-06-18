@@ -693,6 +693,7 @@ function M.komendy()
         { 'sortowanie buforów po numerze', function() vim.cmd[[BufferOrderByBufferNumber]] end, { desc = 'sortowanie buforów po numerze' }},
         { 'sortowanie buforów po katalogu', function() vim.cmd[[BufferOrderByDirectory]] end, { desc = 'sortowanie buforów po katalogu' }},
         { 'zamknij wszystkie bufory poza bieżącym', function() vim.cmd[[BufferCloseAllButCurrent]] end, { desc = 'sortowanie buforów po katalogu' }},
+        { 'chmod +x ./%', function() vim.cmd[[!chmod +x ./%]] end, { desc = 'zmienia plik na wykonywalny' }},
     }
     -- 1. wyciągamy same nazwy do wyświetlenia (zachowując kolejność z menu_items)
     local lista_wyswietlana = {}
