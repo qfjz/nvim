@@ -675,7 +675,9 @@ function M.komendy()
         { 'scratchpad - wybór istniejącego pliku', function() require('functions').select_scratchpad() end },
         { 'scratchpad - ostatnio modyfikowany plik', function() require('functions').last_scratchpad() end },
         { 'scratchpad - pływające okno Scratchpad.md', function() require('functions').floating_obsidian_scratchpad() end },
- 
+        { 'bmfiles - dodanie bieżącego pliku (AddBmFile)', function() require('functions').AddBmFile() end },
+        { 'bmfiles - lista plików (BmFiles)', function() require('functions').BmFiles() end },
+        { 'bmfiles - edycja listy plików (EditBmFiles)', function() require('functions').EditBmFiles() end },
         { 'pomo 1m', function() vim.cmd[[TimerStart 1m]] end, { desc = 'uruchamia timer na 1 minutę' }},
         { 'pomo 3m', function() vim.cmd[[TimerStart 3m]] end, { desc = 'uruchamia timer na 3 minuty' }},
         { 'pomo 15m', function() vim.cmd[[TimerStart 15m]] end, { desc = 'uruchamia timer na 15 minut' }},
