@@ -125,3 +125,21 @@ vim.api.nvim_create_autocmd("BufEnter", {
         vim.cmd(string.format([[highlight Folded cterm=bold gui=bold guibg=%s guifg=%s]], color_bg, color1_fg))
     end,
 })
+
+-- folds
+vim.api.nvim_create_autocmd("BufUnload", {
+    group = vim.api.nvim_create_augroup("user_cmds", { clear = true }),
+    pattern = "*.*,*file*",
+    desc = "save view (folds), when closing file",
+    callback = function()
+        vim.opt_local.viewoptions = "folds"
+        vim.cmd[[mkview]]
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileReadPre", {
+    group = vim.api.nvim_create_augroup("user_cmds", { clear = true }),
+    pattern = "*.*,*file*",
+    desc = "load view (folds), when opening file",
+    command = "silent! loadview",
+})

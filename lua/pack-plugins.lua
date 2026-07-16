@@ -31,6 +31,8 @@ vim.pack.add({
     { src = 'https://github.com/j-hui/fidget.nvim' },
     { src = 'https://github.com/nvim-mini/mini.nvim' },
     { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
+    { src = 'https://github.com/nvzone/timerly' },
+    { src = 'https://github.com/nvzone/volt' },
 })
 
 -- kolory
@@ -45,6 +47,7 @@ vim.pack.add({
     { src = 'https://github.com/AlexvZyl/nordic.nvim' },
     { src = 'https://github.com/ribru17/bamboo.nvim' },
     { src = 'https://github.com/maxmx03/solarized.nvim' },
+    { src = 'https://github.com/rjshkhr/shadow.nvim' },
 })
 
 local enable_which_key = vim.env.NVIM_WK == "1"

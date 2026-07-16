@@ -639,6 +639,7 @@ function M.kolory()
         'nordic',
         'rose-pine-main',
         'rose-pine-moon',
+        'shadow',
         'tokyonight-moon',
         'tokyonight-storm',
     }
