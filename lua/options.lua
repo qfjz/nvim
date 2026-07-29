@@ -11,6 +11,7 @@ vim.opt.expandtab = true
 vim.opt.smarttab = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.inccommand = 'split'
 vim.opt.termguicolors = true
 vim.opt.background = 'dark'
 vim.opt.signcolumn = 'yes'
@@ -51,7 +52,6 @@ vim.opt.fillchars = { eob = " " }
 vim.opt.textwidth = 100
 vim.opt.colorcolumn = '+1'
 vim.opt.path:append '**'
-
 vim.opt.cmdheight = 0
 vim.opt.spelllang = { "pl" }
 vim.opt.smartindent = true
