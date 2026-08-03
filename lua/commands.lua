@@ -70,6 +70,9 @@ vim.api.nvim_create_user_command('WhichKeyEnable', function()
 end, { desc = 'Uruchamia WhichKey' })
 
 vim.api.nvim_create_user_command('Restart', function()
+    if vim.fn.isdirectory('~/tmp') == 0 then
+        vim.fn.mkdir('~/tmp', "p")
+    end
     vim.cmd[[mksession! ~/tmp/nvimsession]]
     vim.cmd[[restart source ~/tmp/nvimsession | !rm ~/tmp/nvimsession]]
 end, { desc = 'Restart' })

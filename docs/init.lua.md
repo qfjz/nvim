@@ -1,0 +1,88 @@
+# init.lua
+
+To jest pierwsza linia pliku init.lua
+
+```code
+-- qfjz/nvim
+```
+
+Włączam obsługę komuniakatów w języku angielskim
+
+```code
+-- Ustawienie języka Neovim
+vim.cmd[[silent! language en_US.utf-8]]
+```
+
+Konfiguracja kliwszy Leader
+
+```code
+-- Ustawienie klawisza Leader
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+```
+
+Tutaj dajmy jedną linię przerwy pomiędzy paragrafami
+
+```code
+
+-- config.WinBar
+vim.g.projects_dir = vim.env.HOME .. '/workspace/git'
+vim.g.personal_projects_dir = vim.g.projects_dir .. 'qfjz'
+vim.g.work_projects_dir = vim.env.HOME .. '/workspace/git/work'
+
+require('options')
+require('pack-plugins')
+require('catppuccin-gruvbox')
+require('keymaps')
+require('functions')
+require('winbar')
+require('autocmd')
+require('commands')
+
+require('config.oil')
+require('config.noice')
+require('config.flash')
+require('config.gitsigns')
+require('config.blink')
+require('config.lualine')
+require('config.lsp')
+require('config.autopairs')
+require('config.pomo')
+require('config.snacks')
+require('config.fff')
+require('config.mini')
+require('config.luasnip')
+require('config.render-markdown')
+
+require('toggleterm').setup()
+require('mason').setup()
+require('nvim-treesitter').setup()
+require('bookmarks').setup()
+require('telescope').setup()
+
+vim.cmd.packadd[[nvim.difftool]]
+-- vim.cmd.packadd[[nvim.undotree]]
+
+vim.cmd.colorscheme[[catppuccin-mocha]]
+
+if vim.g.neovide then
+    vim.o.guifont = "ComicShannsMono Nerd Font Mono:h21"
+end
+
+-- gnupg
+vim.g.GPGPreferSymmetric = 0
+vim.g.GPGUseAgent = 1
+vim.g.GPGPreferArmor = 1
+vim.g.GPGPreferSign = 1
+-- ID klucza pobiera ze zmienne systemowej $GPG_ID należy ustawić ją w swojej powłoce systemowej
+local gpg_id = os.getenv("GPG_ID")
+vim.g.GPGDefaultRecipients = { gpg_id }
+-- vim.g.GPGDefaultRecipients = { "2384028409853452304", gpg_id }
+vim.g.GPGFilePattern = "*{gpg,asc,gpg.md}"
+
+-- source ~/.config/nvim/lua/user-settings.lua
+local status_ok, _ = pcall(require, "user-settings")
+if not status_ok then
+    return
+end
+```
