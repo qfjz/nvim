@@ -216,9 +216,6 @@ vim.keymap.set('n', [[gf]], [[<cmd>edit <cfile><cr>]], { desc = 'otwiera plik po
 vim.keymap.set('n', [[<leader>gd]], function() require('functions').gd() end, { desc= 'tworzy katalog o nazwie wyrazu pod kursorem' })
 vim.keymap.set('n', 'j', [[v:count == 0 ? 'gj' : 'j']], { expr = true })
 vim.keymap.set('n', 'k', [[v:count == 0 ? 'gk' : 'k']], { expr = true })
--- zamiana zn / zm
-vim.keymap.set('n', 'zn', 'zm', { noremap = true })
-vim.keymap.set('n', 'zm', 'zn', { noremap = true })
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'pozostawia kursor po łączeniu linii' })

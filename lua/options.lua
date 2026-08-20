@@ -48,7 +48,7 @@ for _, pattern in ipairs(patterns) do
     end
 end
 vim.opt.wildignore = wildignore
-vim.opt.fillchars = { eob = " " }
+vim.opt.fillchars = { eob = " ", fold = " " }
 vim.opt.textwidth = 100
 vim.opt.colorcolumn = '+1'
 vim.opt.path:append '**'
@@ -68,6 +68,7 @@ vim.opt.pumblend = 10
 vim.opt.winblend = 0
 vim.opt.conceallevel = 0
 vim.opt.concealcursor = ""
+vim.opt.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' 󰁂 '.(v:foldend-v:foldstart+1).' lines']]
 vim.opt.lazyredraw = false
 vim.opt.redrawtime = 10000
 vim.opt.maxmempattern = 20000
@@ -96,6 +97,7 @@ vim.opt.wildignorecase = true
 vim.opt.foldmethod = "manual"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
+-- Konfiguracja Clipboard OSC52 - SSH
 if vim.loop.os_uname().sysname == 'OpenBSD' then
     -- OpenBSD
     vim.opt.clipboard = 'unnamedplus'
