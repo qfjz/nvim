@@ -78,7 +78,7 @@ vim.api.nvim_create_user_command('Restart', function()
     vim.cmd[[restart source ~/tmp/nvimsession | !rm ~/tmp/nvimsession]]
 end, { desc = 'Restart' })
 
-vim.api.nvim_create_user_command('Messages', [[NoiceAll]], {})
+vim.api.nvim_create_user_command('Messages', [[NoiceAll]], { desc = 'Pokaż wszystkie wiadomości (Noice)' })
 
 vim.api.nvim_create_user_command('PackAdd', function(opts)
     vim.pack.add(opts.fargs)
@@ -86,7 +86,7 @@ end, { nargs = '+', desc = 'Dodaje plugin, należy podać pełny adres URL' })
 
 vim.api.nvim_create_user_command('PackDel', function(opts)
     vim.pack.del(opts.fargs)
-end, { nargs = '+' })
+end, { nargs = '+', desc = 'Usuwa plugin z pakietów' })
 
 vim.api.nvim_create_user_command('PackUpdate', function(opts)
     if opts.args:match('%S') then

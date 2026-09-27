@@ -6,7 +6,6 @@ local autocmd = vim.api.nvim_create_autocmd
 -- wyłącza parametry `cro`, nie wstawia automatycznie komentarza w kolejnej linii
 vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
     pattern = "*",
-    desc = "Wyłącza auto-komentarzenie (cro) i sprawdza zmiany na dysku",
     callback = function()
         vim.cmd[[setlocal formatoptions-=cro]]
         vim.cmd[[checktime]]
@@ -15,7 +14,6 @@ vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
 
 autocmd({ "RecordingLeave", }, {
     group = augroup("NotifyMacroStop", { clear = true }),
-    desc = "Powiadomienie po zakończeniu nagrywania makro",
     callback = function()
         local msg = "Zakończyłem nagrywać makro " .. "[" .. vim.fn.reg_recording() .. "]"
         vim.notify(msg, "info", {
@@ -26,7 +24,6 @@ autocmd({ "RecordingLeave", }, {
 
 autocmd("FileType", {
     pattern = { 'oil', 'nvim-undotree' },
-    desc = "Wyłącza numerację i znaki w pasku dla okien oil/undotree",
     callback = function()
         vim.opt_local.number = false
         vim.opt_local.relativenumber = false
@@ -35,8 +32,7 @@ autocmd("FileType", {
 })
 
 autocmd('TermOpen', {
-    group = augroup('startinsert', { clear = true }),
-    desc = "Wejdź w tryb insert po otwarciu terminalu",
+    group = augroup('startinsert', {}),
     callback = function()
         vim.cmd.startinsert()
     end,
@@ -44,8 +40,6 @@ autocmd('TermOpen', {
 
 -- zapisanie pozycji kursora
 autocmd('BufReadPost', {
-    group = augroup('restore_cursor', { clear = true }),
-    desc = 'Przywróć pozycję kursora',
     callback = function()
         local mark = vim.api.nvim_buf_get_mark(0, '"')
         local lcount = vim.api.nvim_buf_line_count(0)
@@ -55,31 +49,8 @@ autocmd('BufReadPost', {
     end,
 })
 
--- Powiadomienie gdy plik zostanie zmodyfikowany na dysku (checktime)
-vim.o.autoread = true
-vim.o.updatetime = 1000
-
-autocmd('CursorHold', {
-    pattern = '*',
-    desc = 'Sprawdź zmiany pliku na dysku',
-    command = 'checktime',
-})
-
-autocmd('FileChangedShellPost', {
-    group = augroup('file_check_notify', { clear = true }),
-    pattern = '*',
-    desc = 'Odświeżono plik po zmianie na dysku',
-    callback = function(event)
-        local bufname = vim.fn.fnamemodify(vim.fn.bufname(event.buf), ':~:.')
-        vim.notify('Plik zmieniony na dysku: ' .. bufname, vim.log.levels.INFO, {
-            title = 'Uwaga',
-        })
-    end,
-})
-
 autocmd('FileType', {
-    group = augroup('close_with_q', { clear = true }),
-    desc = "Ukrywa buflisted i mapuje q na bd dla scratch/help/qf/undotree",
+    group = augroup('close_with_q', {}),
     pattern = {
         'scratch',
         'help',

@@ -346,6 +346,41 @@ function M.create_floating_scratch(content)
     vim.api.nvim_buf_set_keymap(buf, "n", "u", "<c-u>", { nowait = true, noremap = true, silent = true })
 end
 
+-- Wybiera katalog z systemu plików (fd) i przechodzi do niego
+function M.cdd()
+    local opts = {}
+    opts.prompt = "Katalog > "
+    opts.winopts = { title = " Wybierz katalog " }
+    opts.actions = {
+        ["default"] = function(selected)
+            if not selected or not selected[1] then
+                return
+            end
+            local dir = vim.fn.expand(selected[1])
+            dir = vim.uv.fs_realpath(dir) or dir
+            if vim.fn.isdirectory(dir) == 1 then
+                vim.cmd("cd " .. dir)
+                vim.notify("CD: " .. dir, vim.log.levels.INFO)
+            else
+                vim.notify("Nie znaleziono katalogu: " .. dir, vim.log.levels.WARN)
+            end
+        end
+    }
+    local handle = io.popen("fd -t d -H -L -g '' -d 2 2>/dev/null | head -200")
+    local dirs = {}
+    if handle then
+        for line in handle:lines() do
+            table.insert(dirs, line)
+        end
+        handle:close()
+    end
+    if #dirs == 0 then
+        vim.notify("Brak katalogów do wyświetlenia", vim.log.levels.WARN)
+        return
+    end
+    require"fzf-lua".fzf_exec(dirs, opts)
+end
+
 -- Standardowo zmienna $BM_DIRS zaweira nazwę pliku w której znajdują się często odwiedzane katalogi
 -- Zazwyaczaj jest to plik $HOME/.config/bmdirs
 function M.CD()
