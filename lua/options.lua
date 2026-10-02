@@ -116,3 +116,25 @@ if os.getenv 'SSH_CLIENT' ~= nil then
         },
     }
 end
+-- Neovide
+if vim.g.neovide then
+    vim.o.guifont = "ComicShannsMono Nerd Font Mono:h21"
+end
+-- GnuPG
+vim.g.GPGPreferSymmetric = 0
+vim.g.GPGUseAgent = 1
+vim.g.GPGPreferArmor = 1
+vim.g.GPGPreferSign = 1
+-- ID klucza pobiera ze zmienne systemowej $GPG_ID należy ustawić ją w swojej powłoce systemowej
+local gpg_id = os.getenv("GPG_ID")
+if gpg_id then
+    vim.g.GPGDefaultRecipients = { gpg_id }
+else
+    vim.g.GPGDefaultRecipients = {}
+end
+-- vim.g.GPGDefaultRecipients = { "2384028409853452304", gpg_id }
+vim.g.GPGFilePattern = "*{gpg,asc,gpg.md}"
+-- WinBar
+vim.g.projects_dir = vim.env.HOME .. '/workspace/git'
+vim.g.personal_projects_dir = vim.g.projects_dir .. '/qfjz'
+vim.g.work_projects_dir = vim.env.HOME .. '/workspace/git/work'
