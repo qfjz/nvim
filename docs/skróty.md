@@ -143,3 +143,10 @@
 | `P`   | otwiera podgląd bufora           |
 | `q`   | zamyka okno                      |
 | `a`   | tworzy nowy plik / katalog       |
+
+## Mini Surround
+
+| Skrót   | Opis                           |
+|---------|--------------------------------|
+| `saiw'` | dodanie `'` z obu stron wyrazu |
+| `sa'`   | dodanie `'` w trybie VISUAL    |
