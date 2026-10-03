@@ -11,8 +11,8 @@ vim.keymap.set('i', '£', '~', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x'}, '<m-j>', '<cmd>Gitsign next_hunk<cr>', { desc = 'następna zmiana' })
 vim.keymap.set({'n', 'x'}, '<m-k>', '<cmd>Gitsign prev_hunk<cr>', { desc = 'poprzednia zmiana' })
 -- CMD + j/k
-vim.keymap.set('n', '<D-j>', '<cmd>Gitsign next_hunk<cr>')
-vim.keymap.set('n', '<D-k>', '<cmd>Gitsign prev_hunk<cr>')
+-- vim.keymap.set('n', '<D-j>', '<cmd>Gitsign next_hunk<cr>')
+-- vim.keymap.set('n', '<D-k>', '<cmd>Gitsign prev_hunk<cr>')
 -- Wyszukaj zaznaczonego tekstu
 vim.keymap.set('v', [[//]], [[y/\V<C-r>=escape(@",'/\')<CR><CR>]], {
     silent = true,
