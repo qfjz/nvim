@@ -2,6 +2,7 @@
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
+local api = vim.api
 
 -- wyłącza parametry `cro`, nie wstawia automatycznie komentarza w kolejnej linii
 vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
@@ -55,14 +56,17 @@ autocmd('BufReadPost', {
     end,
 })
 
--- Powiadomienie gdy plik zostanie zmodyfikowany na dysku (checktime)
-vim.o.autoread = true
-vim.o.updatetime = 1000
+-- Pomijanie buforów wirtualnych (Oil, fugitive, help, terminal, itp.)
+local function is_real_file()
+    return vim.bo.buftype == "" and vim.fn.expand("%:p") ~= ""
+end
 
-autocmd('CursorHold', {
-    pattern = '*',
-    desc = 'Sprawdź zmiany pliku na dysku',
-    command = 'checktime',
+-- Automatycznie przeładowuje bufor jeśli zostanie zmodyfikowany
+autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+    callback = function()
+        if not is_real_file() or vim.fn.mode() == "c" then return end
+        vim.cmd[[checktime]]
+    end
 })
 
 autocmd('FileChangedShellPost', {
@@ -74,6 +78,33 @@ autocmd('FileChangedShellPost', {
         vim.notify('Plik zmieniony na dysku: ' .. bufname, vim.log.levels.INFO, {
             title = 'Uwaga',
         })
+    end,
+})
+
+-- Jeśli bufor jest pusty można go zamknąć za pmocą klawisza 'q'
+autocmd("BufEnter", {
+    pattern = "*",
+    callback = function()
+        -- Sprawdzamy, czy bufor jest pusty i niezmodyfikowany
+        if api.nvim_buf_line_count(0) == 1 and
+            api.nvim_buf_get_lines(0, 0, 1, false)[1] == "" and
+            not vim.bo.modified then
+            -- Sprawdzamy, czy to ostatni bufor
+            local bufs = api.nvim_list_bufs()
+            local loaded_bufs = 0
+            for _, buf in ipairs(bufs) do
+                if api.nvim_buf_is_loaded(buf) and vim.fn.getbufvar(buf, "buflisted") then
+                    loaded_bufs = loaded_bufs + 1
+                end
+            end
+            -- Jeśli jest tylko jeden załadowany i wymieniony bufor, mapuj q na :qa
+            if loaded_bufs == 1 then
+                vim.keymap.set('n', 'q', '<cmd>qa<cr>', { buffer = true, silent = true, nowait = true })
+            else
+                -- W przeciwnym razie mapuj q na :bd
+                vim.keymap.set('n', 'q', '<cmd>bd<cr>', { buffer = true, silent = true, nowait = true })
+            end
+        end
     end,
 })
 
