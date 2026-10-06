@@ -18,3 +18,4 @@ Ficzery:
     - `u` -> `<c-u>`
     - `<leader>l` -> `<c-]>`
     - `<leader>h` -> `<c-t>`
+- własne kolorowanie składni dla pluginu rednder-markdown
