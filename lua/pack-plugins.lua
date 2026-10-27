@@ -33,6 +33,7 @@ vim.pack.add({
     { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
     { src = 'https://github.com/nvzone/timerly' },
     { src = 'https://github.com/nvzone/volt' },
+    { src = 'https://github.com/brenoprata10/nvim-highlight-colors' },
 })
 
 -- kolory
