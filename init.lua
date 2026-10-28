@@ -40,7 +40,8 @@ require('telescope').setup()
 vim.cmd('packadd nvim.difftool')
 -- vim.cmd.packadd[[nvim.undotree]]
 
-vim.cmd('colorscheme catppuccin-mocha')
+vim.cmd('colorscheme catppuccin-latte')
+-- vim.cmd('colorscheme catppuccin-mocha')
 
 -- source ~/.config/nvim/lua/user-settings.lua
 local status_ok, _ = pcall(require, "user-settings")
