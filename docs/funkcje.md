@@ -4,7 +4,7 @@
 |-----------------|----------------------------------------------------------------|
 | `config_files`  | wyszukiwanie plików konfiguracyjnych                           |
 | `write_file`    | zapisuje plik                                                  |
-| `cfd`           | przechodzi do katalogu w którym znajduje się edytowany plik    |
+| `cdfd`          | przechodzi do katalogu w którym znajduje się edytowany plik    |
 | `f_terminal`    | otwiera pływający terminal                                     |
 | `terminal`      | otwiera terminal                                               |
 | `t_term`        | otwiera termianal podążając za linkiem symbolicznym            | 
